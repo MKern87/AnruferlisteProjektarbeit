@@ -22,8 +22,8 @@ const Stammdaten = () => {
             <button className="border shadow shadow-black text-sm border-b-slate-400 border-r-slate-400 bg-slate-300 px-2">Optionen</button>
           </div>
 
-          <div className="grid grid-cols-6 w-full h-auto bg-slate-200 py-2">
-            <div className="w-1/2 grid-cols-1">
+          <div className="grid grid-cols-12 w-full h-auto bg-slate-200 py-4">
+            <div className="col-span-1 flex flex-col items-start">
             <button className="border shadow shadow-black border-b-black border-r-black h-6 bg-slate-300 text-sm px-2">aktualisieren</button>
               <span className="h-8 text-sm">
                 <input className="h-8" type="checkbox" />Auto Aktual.
@@ -31,67 +31,70 @@ const Stammdaten = () => {
             <button className="h-6 border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black px-2">zurücksetzen</button>
             </div>
 
-          <div className="grid-cols-1 h-16 border bg-slate-200 border-black mx-2">
+          <div className="col-span-3 border bg-slate-200 border-black mx-2">
             <span className="mx-4 text-sm">Textsuche</span>
             <input className="border border-black rounded w-full mx-2" />
-            <div className="w-1/2 border border-black">Kunden Item
-              <div className=" items-center">
+            <div className="border border-black">Kunden filtern
+              <div className="flex flex-row items-start justify-start">
+                <label for="default-radio-1">
                 <input type="radio" className="w-4 h-4 text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-1">Ja</label>
-              </div>
-              <div className=" items-center">
+                Ja</label>
+                <label for="default-radio-2">
                 <input checked type="radio" className="w-4 h-4 text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-2">Nein</label>
+                Nein </label>
               </div>
             </div>
-            <div className="w-1/2 border border-black">Kategorie Item
-              <div className=" items-center">
+            <div className="border border-black">Kategorie filtern
+              <div className="flex flex-row items-start justify-start">
+                <label for="default-radio-1">
                 <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-1">Ja</label>
-              </div>
-              <div className=" items-center">
+                Ja</label>
+                <label for="default-radio-2">
                 <input checked type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-2">Nein</label>
+                Nein</label>
               </div>
             </div>
           </div>
 
-            <div className="grid-cols-1">Stammdaten
-              <span>Mitarbeiter
+            <div className="col-span-3 border border-black">
+              <p className="text-sm">Stammdaten</p>
+              <span className="text-sm">Mitarbeiter
                 <input className="items-center justify-items-center h-8" />
                 <input className="items-center justify-items-center h-8" type="checkbox" />Alle
               </span>
-              <span>Art
+              <span className="text-sm">
+              <p className="text-sm mt-4">Art:</p>
                 <input className="items-center justify-items-center h-8" />
                 <input className="items-center justify-items-center h-8" type="checkbox" />Alle
               </span>
             </div>
 
-            <div className="grid-cols-1">Datum
+            <div className="col-span-2">Datum
               <span>Von: <input /></span>
               <span>Bis: <input /></span>
               <input className="items-center justify-items-center h-8" type="checkbox" />aktuelle Berichte
             </div>
 
-            <div className="grid-cols-1">Rückruf
-            <div className=" items-center">
+            <div className="col-span-2">Rückruf
+              <div className="flex flex-row items-start justify-start">
+                <label for="default-radio-1">
+                <input type="radio" className="text-blue-600 focus:ring-blue-500" />
+                Ja</label>
+                <label for="default-radio-2">
+                <input type="radio" className="text-blue-600 focus:ring-blue-500" />
+                Nein</label>
+              </div>
+            <div className="flex flex-row items-start justify-start">
+              <label for="default-radio-3">
               <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-              <label for="default-radio-1">Ja</label>
-            </div>
-            <div className=" items-center">
-              <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-              <label for="default-radio-2">Nein</label>
-            </div>
-            <div className=" items-center">
-              <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-              <label for="default-radio-3">Alle</label>
-            </div>
+              Alle </label>
               <span>Mitarbeiter</span>
               <input className="items-center justify-items-center h-8" />
               <input className="items-center justify-items-center h-8" type="checkbox" />Alle
             </div>
+            </div>
 
-            <div className="grid-cols-1">Erledigt
+            <div className="col-span-1">Erledigt
               <div className=" items-center">
                 <input type="radio" className="text-blue-600 focus:ring-blue-500" />
                 <label for="default-radio-1">Ja</label>
