@@ -2,18 +2,18 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import Dropdown from 'react-dropdown'
+import Dropdown from '../dropdown/Dropdown'
 
 const Stammdaten = () => {
 
   const mitarbeiter = [
 
-    'Bernd',
-    'Dom', 
-    'Marco', 
-    'Ben'
+    { value: "Bernd", label: "Bernd" },
+    { value: "Dom", label: "Dom" },
+    { value: "Marco", label: "Marco" },
+    { value: "Ben", label: "Ben" }
   ];
-  const [defaultMitarbeiter, setDefaultMitarbeiter] = useState([]);
+  
 
   return(
     <div className="w-full h-auto grid grid-cols-4 bg-slate-100 absolute m-2">
@@ -78,7 +78,7 @@ const Stammdaten = () => {
             <div className="col-span-3 w-10/12 border border-black">
               <p className="mx-4 text-sm">Stammdaten</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Mitarbeiter:
-                <Dropdown className="items-center justify-items-center ml-2 bg-white px-4 border border-black rounded" options={mitarbeiter} value={defaultMitarbeiter} onChange={setDefaultMitarbeiter} />  
+                  <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
