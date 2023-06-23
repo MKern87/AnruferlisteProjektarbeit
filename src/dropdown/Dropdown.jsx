@@ -130,7 +130,7 @@ const Dropdown = ({
   };
 
   return (
-    <div className="text-left border border-solid relative">
+    <div className="text-left border border-solid relative border-black ml-2 rounded-sm bg-slate-100 cursor-pointer">
       <div ref={inputRef} onClick={handleInputClick} className="p-1 flex items-center justify-between">
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
@@ -140,7 +140,7 @@ const Dropdown = ({
         </div>
       </div>
       {showMenu && (
-        <div className="absolute translate-y-1 w-full border border-solid overflow-auto max-h-36 bg-white z-50">
+        <div className="absolute translate-y-1 w-full border border-solid border-black rounded overflow-auto max-h-36 bg-white z-50">
           {isSearchable && (
             <div className="search-box">
               <input onChange={onSearch} value={searchValue} ref={searchRef} />
