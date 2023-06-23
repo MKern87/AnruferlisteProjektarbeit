@@ -13,6 +13,16 @@ const Stammdaten = () => {
     { value: "Marco", label: "Marco" },
     { value: "Ben", label: "Ben" }
   ];
+
+  const art = [
+    { value: "Telefon", label: "Telefon" },
+    { value: "Telefax", label: "Telefax" },
+    { value: "E-Mail", label: "E-Mail" }
+  ]
+
+  function aktualisieren() {
+    window.location.reload(false);
+  }
   
 
   return(
@@ -36,18 +46,22 @@ const Stammdaten = () => {
 
           <div className="grid grid-cols-12 w-full h-auto bg-slate-200 py-4">
             <div className="col-span-1 flex flex-col items-center ml-1">
-            <button className="border shadow shadow-black border-b-black border-r-black h-6 bg-slate-300 text-sm px-2">aktualisieren</button>
+            <button className="border shadow shadow-black border-b-black border-r-black bg-slate-300 text-sm p-[2px] px-2" onClick={aktualisieren}>
+              <p className='mb-1'>aktualisieren</p>
+            </button>
               <span className="flex flex-row my-2 text-sm">
                 <input type="checkbox" />
                 <p className="pl-1">Auto Aktual.</p>
               </span>
-            <button className="h border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black px-2">zurücksetzen</button>
+            <button className="h border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black p-[2px] px-2">
+              <p className='mb-1'>zurücksetzen</p>
+            </button>
             </div>
 
           <div className="col-span-3 border bg-slate-200 text-sm mx-2">
-            <div className="mb-2 h-12 border border-black px-2">
+            <div className="mb-2 pb-4 border border-black px-2">
             <span className="mx-4 text-sm">Textsuche</span>
-            <input className="w-full border border-black rounded" />
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-2 p-1" />
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black">
@@ -77,13 +91,15 @@ const Stammdaten = () => {
 
             <div className="col-span-3 w-10/12 border border-black">
               <p className="mx-4 text-sm">Stammdaten</p>
-              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Mitarbeiter:
+              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">
+                <p>Mitarbeiter:</p>
                   <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
-              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">Art:
-                <input className="items-center justify-items-center ml-14 border border-black rounded" />
+              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">
+                <p className='mr-12'>Art:</p>
+                <Dropdown options={art} placeHolder={"Tel/Fax/Mail"} onChange={(value) => console.log(value)} />
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
@@ -92,10 +108,10 @@ const Stammdaten = () => {
             <div className="col-span-2 border border-black w-full -ml-12">
               <p className="mx-4 text-sm">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
-                <input className="items-center justify-items-center ml-2 border border-black rounded" />
+                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" />
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2">Bis: 
-                <input className="items-center justify-items-center ml-4 border border-black rounded"/>
+                <input type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="flex flex-row my-2 text-sm justify-center">
                 <input type="checkbox" />
@@ -116,9 +132,9 @@ const Stammdaten = () => {
                 <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Alle </label>
               </div>
-                <span className="items-center ml-1 flex flex-row mt-4 mb-1">Mitarbeiter
-                  <input className="items-center justify-items-center ml-2 border border-black rounded" />
-                  </span>
+                <span className="items-center ml-1 flex flex-row mt-4 mb-1">Mitarbeiter:
+                  <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
+                </span>
                   <input className="items-center justify-items-center ml-20" type="checkbox" /> Alle
             </div>
 
