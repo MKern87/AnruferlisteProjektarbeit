@@ -26,25 +26,25 @@ const Stammdaten = () => {
   
 
   return(
-    <div className="w-full h-auto grid grid-cols-4 bg-slate-100 absolute m-2">
-      <div className="grid grid-cols-span-1">
+    <div className="w-full grid grid-cols-4 bg-slate-100 absolute m-2">
+      <div className="grid grid-cols-span-1 h-full">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
         <div className="flex">
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
-          <input className="inline border rounded" />
+          <input className="inline border border-black rounded-sm" />
         </div>
-        <p className="mt-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p className="mt-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
         </div>
-        <div className="w-full h-full col-start-2 col-span-3 pl-1">
+        <div className="w-full col-start-2 col-span-3 pl-1">
           <div className="flex w-full col-span-1">
             <h1 className="font-bold float-left mb-3">Tagesberichte</h1>
           </div>
 
           <div className="flex col-span-1">
-            <button className="border shadow shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100 px-2">Optionen</button>
+            <button className="border shadow shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100 p-[2px] ml-2 px-4">Optionen</button>
           </div>
 
-          <div className="grid grid-cols-12 w-full h-auto bg-slate-200 py-4">
+          <div className="grid grid-cols-12 w-full bg-slate-200 py-4">
             <div className="col-span-1 flex flex-col items-center ml-1">
             <button className="border shadow shadow-black border-b-black border-r-black bg-slate-300 text-sm p-[2px] px-2" onClick={aktualisieren}>
               <p className='mb-1'>aktualisieren</p>
@@ -53,21 +53,24 @@ const Stammdaten = () => {
                 <input type="checkbox" />
                 <p className="pl-1">Auto Aktual.</p>
               </span>
-            <button className="h border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black p-[2px] px-2">
+            <button className="border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black p-[2px] px-2">
               <p className='mb-1'>zurücksetzen</p>
             </button>
+            <span className="flex flex-row my-2 text-sm">
+                  <Dropdown options={mitarbeiter} placeHolder={"Export"} onChange={(value) => console.log(value)} />
+            </span>
             </div>
 
-          <div className="col-span-3 border bg-slate-200 text-sm mx-2">
+          <div className="col-span-3 h-full bg-slate-200 text-sm mx-2">
             <div className="mb-2 pb-4 border border-black px-2">
-            <span className="mx-4 text-sm">Textsuche</span>
+            <span className="ml-4 text-sm">Textsuche</span>
             <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-2 p-1" />
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black">
-              <p className="mb-2 ml-1">Kunden filtern</p>
-              <div className="flex flex-row items-start justify-start">
-                <label className="mr-4 ml-4 mb-1" for="default-radio-1">
+              <p className="mb-2 ml-2">Kunden filtern</p>
+              <div className="flex flex-row items-start justify-center">
+                <label className="mr-4 ml-4 mb-2" for="default-radio-1">
                 <input type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label for="default-radio-2">
@@ -76,8 +79,8 @@ const Stammdaten = () => {
               </div>
             </div>
             <div className="w-1/2 border border-black">
-              <p className="mb-2 ml-1">Kategorie filtern</p>
-              <div className="flex flex-row items-start justify-start">
+              <p className="mb-2 ml-2">Kategorie filtern</p>
+              <div className="flex flex-row items-start justify-center">
                 <label className="mr-4 ml-4 mb-1" for="default-radio-1">
                 <input type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
@@ -89,24 +92,24 @@ const Stammdaten = () => {
             </div>
           </div>
 
-            <div className="col-span-3 w-10/12 border border-black">
-              <p className="mx-4 text-sm">Stammdaten</p>
+            <div className="col-span-2 mr-2 h-full border border-black">
+              <p className="ml-4 text-sm">Stammdaten</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">
-                <p>Mitarbeiter:</p>
+                <p className='pr-1'>Mitarbeiter:</p>
                   <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">
-                <p className='mr-12'>Art:</p>
+                <p className='mr-12 pr-1'>Art:</p>
                 <Dropdown options={art} placeHolder={"Tel/Fax/Mail"} onChange={(value) => console.log(value)} />
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
             </div>
 
-            <div className="col-span-2 border border-black w-full -ml-12">
-              <p className="mx-4 text-sm">Datum</p>
+            <div className="col-span-2 mr-2 border border-black h-full">
+              <p className="ml-4 text-sm">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
                 <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" />
               </span>
@@ -119,9 +122,9 @@ const Stammdaten = () => {
               </span>
             </div>
 
-            <div className="col-span-2 border border-black w-full -ml-10 text-sm">
-              <p className="mx-4 mb-4">Rückruf</p>
-              <div className="flex flex-row items-stretch justify-items-stretch">
+            <div className="col-span-2 mr-2 border border-black h-full text-sm">
+              <p className="ml-4 mb-4">Rückruf</p>
+              <div className="flex flex-row items-stretch justify-center">
                 <label className="mr-6 ml-6" for="default-radio-1">
                 <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Ja </label>
@@ -132,14 +135,15 @@ const Stammdaten = () => {
                 <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Alle </label>
               </div>
-                <span className="items-center ml-1 flex flex-row mt-4 mb-1">Mitarbeiter:
+                <span className="items-center ml-1 flex flex-row mt-4 mb-1">
+                  <p className='pr-1'>Mitarbeiter:</p>
                   <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
                 </span>
                   <input className="items-center justify-items-center ml-20" type="checkbox" /> Alle
             </div>
 
-            <div className="col-span-1 border border-black w-full -ml-8 text-sm">
-              <p className="mx-4">Erledigt</p>
+            <div className="col-span-1 border border-black h-full text-sm">
+              <p className="ml-4">Erledigt</p>
               <div className="flex flex-col items-start ml-10 my-2">
                 <label className="my-1" for="default-radio-1">
                 <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
@@ -153,7 +157,53 @@ const Stammdaten = () => {
               </div>
               </div>
             </div>
+            <div className='h-full col-start-2 col-span-3 px-1 mr-2'>
+              <table className='text-sm border border-solid border-black'>
+                <tr className='bg-sky-200 items-center justify-items-center'>
+                  <th className='border border-solid border-black px-2'></th>
+                  <th className='border border-solid border-black px-2'>Kunde</th>
+                  <th className='border border-solid border-black px-2 w-1/3'>Text</th>
+                  <th className='border border-solid border-black px-2'>Art</th>
+                  <th className='border border-solid border-black px-2'>Mitarbeiter</th>
+                  <th className='border border-solid border-black px-2'>Kategorie</th>
+                  <th className='border border-solid border-black px-2'>Datum</th>
+                  <th className='border border-solid border-black px-2'>Rückruf</th>
+                  <th className='border border-solid border-black px-2'>Rückrufer</th>
+                  <th className='border border-solid border-black px-2'>DatumRückruf</th>
+                  <th className='border border-solid border-black px-2'>Erledigt</th>
+                </tr>
+                <tr className='bg-red-400'>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
+                  </td>
+                  <td className='border border-solid border-black'>Ruf eingehend</td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Sonstiges</td>
+                  <td className='border border-solid border-black'>11.11.1111</td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                </tr>
+                <tr className='bg-blue-400'>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+                  </td>
+                  <td className='border border-solid border-black'>Ruf eingehend</td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Sonstiges</td>
+                  <td className='border border-solid border-black'>11.11.1111</td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                </tr>
+              </table>
         </div>
+        </div>
+        
     </div>
   )
 }
