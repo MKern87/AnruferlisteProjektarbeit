@@ -74,3 +74,38 @@ $conn = sqlsrv_connect($serverName, $connection);
   
 
 ?>
+
+///////////////////////////////////////////////////////////////////////////////
+///                                                                         ///
+///                                                                         ///
+///////////////////////////////////////////////////////////////////////////////
+
+<?php
+include_once('connect.php');
+    
+
+$database = new Database();
+$db = $database->connect();
+
+$data = json_decode(file_get_contents("php://input"));
+
+$query='SELECT * from Mitarbeiter WHERE Aktiv = 1';
+if($stmt=$db->query($query)){
+    $rowCount=$stmt->rowCount();  
+    
+    if($rowCount>0){
+        echo json_encode(
+            array('message' => 'true')
+          );
+    }else{
+        echo json_encode(
+            array('message' => 'false')
+          ); 
+    }
+}else{
+    echo json_encode(
+        array('message' => 'false') 
+      );
+}
+
+?>
