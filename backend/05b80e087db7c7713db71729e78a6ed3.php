@@ -1,5 +1,29 @@
 <?php
 /*
+class Database {
+
+  private $server = "SERVER-DS-2016\MSSQLSERVER2016";
+  private $user = "bk";
+  private $psw = "burgerking";
+  private $dbName = "Schafhausentest";
+  private $conn;
+
+
+    public function connect() {
+      $this->conn = null;
+      try {
+      $this->conn = new PDO('sqlsrv:Server =' .$this->server.'; Database =' .$this->dbName, $this->user, $this->psw);
+      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      }catch(PDOException $e){
+      echo 'Connection Error:' . $e->getMessage();
+      }
+        return $this->conn;
+
+}
+}
+*/
+
+/*
 $server = "SERVER-DS-2016\MSSQLSERVER2016";
 $user = "bk";
 $psw = "burgerking";
