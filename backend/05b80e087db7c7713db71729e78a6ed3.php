@@ -2,26 +2,56 @@
 /*
 class Database {
 
-  private $server = "SERVER-DS-2016\MSSQLSERVER2016";
-  private $user = "bk";
-  private $psw = "burgerking";
-  private $dbName = "Schafhausentest";
-  private $conn;
+  public $server = "SERVER-DS-2016\MSSQLSERVER2016";
+  public $user = "bk";
+  public $psw = "burgerking";
+  public $dbName = "Schafhausentest";
+  public $conn;
 
 
-    public function connect() {
-      $this->conn = null;
-      try {
-      $this->conn = new PDO('sqlsrv:Server =' .$this->server.'; Database =' .$this->dbName, $this->user, $this->psw);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      }catch(PDOException $e){
-      echo 'Connection Error:' . $e->getMessage();
-      }
+  public function connect() {
+      $connection = array(
+        "Database" => $dbName,
+        "Uid" => $user,
+        "PWD" => $psw
+      );
+      $conn = sqlsrv_connect($server, $connection);
+      if($conn){        
+        $this->conn=$conn;
         return $this->conn;
+      }
+
+  }
+}
+
+<?
+
+HeaderZeilen
+
+include_once()
+
+$DB=new Database()
+
+Query
+
+return json
+*/
+
+/**
+
+class Query{
+
+    Filter als public festlegen
+    public = "LIKE"
+
+    
 
 }
-}
-*/
+
+ */
+
+
+
 
 /*
 $server = "SERVER-DS-2016\MSSQLSERVER2016";
@@ -53,25 +83,27 @@ if (count($rows)>0){
 //Verbindung mit Datenquelle beenden
 $conn = null;
 */
+///////////////////////////////
+//Verwendungh
+/////////////////////////
 
+class DB
+$serverName = "DESKTOP-VMSKIR0";
+$database = "Test";
+$uid = "";
+$pass = "";
 
-$serverName = "SERVER-DS-2016\MSSQLSERVER2016";
-$database = "Schafhausentest";
-$uid = "bk";
-$pass = "burgerking";
-
-$connection = [
+$connection = array(
   "Database" => $database,
   "Uid" => $uid,
   "PWD" => $pass
-];
+);
 
 $conn = sqlsrv_connect($serverName, $connection);
   if($conn == false)
     die(print_r( sqlsrv_errors(), true));
   else echo 'Connection success';
 
-  
 
 ?>
 
@@ -81,31 +113,31 @@ $conn = sqlsrv_connect($serverName, $connection);
 ///////////////////////////////////////////////////////////////////////////////
 
 <?php
-include_once('connect.php');
+// include_once('connect.php');
     
 
-$database = new Database();
-$db = $database->connect();
+// $database = new Database();
+// $db = $database->connect();
 
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
 
-$query='SELECT * from Mitarbeiter WHERE Aktiv = 1';
-if($stmt=$db->query($query)){
-    $rowCount=$stmt->rowCount();  
+// $query='SELECT * from Mitarbeiter WHERE Aktiv = 1';
+// if($stmt=$db->query($query)){
+//     $rowCount=$stmt->rowCount();  
     
-    if($rowCount>0){
-        echo json_encode(
-            array('message' => 'true')
-          );
-    }else{
-        echo json_encode(
-            array('message' => 'false')
-          ); 
-    }
-}else{
-    echo json_encode(
-        array('message' => 'false') 
-      );
-}
+//     if($rowCount>0){
+//         echo json_encode(
+//             array('message' => 'true')
+//           );
+//     }else{
+//         echo json_encode(
+//             array('message' => 'false')
+//           ); 
+//     }
+// }else{
+//     echo json_encode(
+//         array('message' => 'false') 
+//       );
+// }
 
 ?>
