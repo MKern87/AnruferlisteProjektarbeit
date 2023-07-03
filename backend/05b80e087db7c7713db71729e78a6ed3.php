@@ -24,8 +24,53 @@ class Database {
 }
 ?>
 //////////////////////////////////////
+<?php
+
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 
+//C:/xampp/htdocs/connect.php
+include_once('connect.php');
+
+$database = new Database();
+$db = $database->connect();
+
+$data = json_decode(file_get_contents("php://input"));
+
+$query='SELECT * from Mitarbeiter WHERE Aktiv = 1';
+
+if($stmt=$db->query($query)){
+    $rowCount=$stmt->rowCount();
+    if($rowCount>0){
+
+    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+        $mArbeiter=$row['Mitarbeiter'];
+
+    array_push($arr, array(
+          "Mitarbeiter"=>$mArbeiter,
+        ));
+    }
+    echo json_encode(
+        array('message' => 'true',
+        'darray' => $arr
+        )
+    );
+    exit();  
+    }
+    echo json_encode(
+        array('message' => 'true')
+        );
+    }else{
+        echo json_encode(
+        array('message' => 'false')
+        ); 
+    }
+
+?>
+/////////////////////////////////////////////////////
 
 /*
 class Database {
