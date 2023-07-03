@@ -1,28 +1,26 @@
 <?php
 //////////////////////////////////////////////
 class Database {
-    private $host = 'db5012284790.hosting-data.io';
-    private $db_name = 'dbs10334695';
-    private $username = 'dbu2334505';
-    private $password = 'Diagnoseneu#Diagnoseneu!';
-    private $conn;
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //
-    //      CONNECT METHOD
-    //      CREATE THE PDO INSTANCE TO THE DATABASE
-    //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public $server = "SERVER-DS-2016\MSSQLSERVER2016";
+    public $user = "bk";
+    public $psw = "burgerking";
+    public $dbName = "Schafhausentest";
+    public $conn;
+
     public function connect(){
-        $this->conn=null;
-        try{
-            $this->conn= new PDO('mysql:host='.$this->host .';dbname='.$this->db_name,$this->username,$this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-        }catch(PDOException $e){
-            echo 'Connection Error:' . $e->getMessage();
-        }
-        return $this->conn;
-    }
+      
+      $this->conn=null;
+      try{
+          $this->conn= new PDO('sqlsrv:server='.$this->server .';dbname='.$this->dbName,$this->user,$this->psw);
+          $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
+      }catch(PDOException $e){
+          echo 'Connection Error:' . $e->getMessage();
+      }
+      return $this->conn;
+
+  }
 }
 ?>
 //////////////////////////////////////
