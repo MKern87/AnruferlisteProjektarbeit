@@ -23,10 +23,31 @@ const Stammdaten = () => {
   function aktualisieren() {
     window.location.reload(false);
   }
+
+
+  const datenabruf = async() => {
+    const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            
+            
+        })
+    };
+    
+    const d = await fetch('http://localhost:5173/backend/05b80e087db7c7713db71729e78a6ed3.php', request);
+    let e = await d.json();
+    console.log(e);
+  }
+
+  
+    useEffect(()=>{
+      datenabruf();
+  }, [])
   
 
   return(
-    <div className="w-full grid grid-cols-4 bg-slate-100 absolute m-2">
+    <div className="w-full grid grid-cols-4 bg-gray-100 absolute m-2">
       <div className="grid grid-cols-span-1 h-full">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
         <div className="flex">
@@ -44,26 +65,26 @@ const Stammdaten = () => {
             <button className="border shadow shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100 p-[2px] ml-2 px-4">Optionen</button>
           </div>
 
-          <div className="grid grid-cols-12 w-full bg-slate-200 py-4">
-            <div className="col-span-1 flex flex-col items-center ml-1">
-            <button className="border shadow shadow-black border-b-black border-r-black bg-slate-300 text-sm p-[2px] px-2" onClick={aktualisieren}>
+          <div className="grid grid-cols-12 w-full bg-gray-200 py-4">
+            <div className="col-span-1 flex flex-col items-center ml-1 h-full">
+            <button className="border shadow shadow-black border-b-black border-r-black bg-gray-300 text-sm p-[2px] px-2" onClick={aktualisieren}>
               <p className='mb-1'>aktualisieren</p>
             </button>
               <span className="flex flex-row my-2 text-sm">
                 <input type="checkbox" />
                 <p className="pl-1">Auto Aktual.</p>
               </span>
-            <button className="border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black p-[2px] px-2">
+            <button className="border shadow shadow-black bg-gray-300 text-sm border-b-black border-r-black p-[2px] px-2 mb-1">
               <p className='mb-1'>zurücksetzen</p>
             </button>
-            <span className="flex flex-row my-2 text-sm">
+            <span className="flex flex-row mt-2 text-sm">
                   <Dropdown options={mitarbeiter} placeHolder={"Export"} onChange={(value) => console.log(value)} />
             </span>
             </div>
 
-          <div className="col-span-3 h-full bg-slate-200 text-sm mx-2">
-            <div className="mb-2 pb-4 border border-black px-2">
-            <span className="ml-4 text-sm">Textsuche</span>
+          <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
+            <div className="mb-2 border h-1/2 border-black px-2">
+            <p className="ml-4 text-sm">Textsuche</p>
             <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-2 p-1" />
             </div>
             <div className="flex flex-row">
@@ -159,6 +180,7 @@ const Stammdaten = () => {
             </div>
             <div className='h-full col-start-2 col-span-3 px-1 mr-2'>
               <table className='text-sm border border-solid border-black'>
+                <thead>
                 <tr className='bg-sky-200 items-center justify-items-center'>
                   <th className='border border-solid border-black px-2'></th>
                   <th className='border border-solid border-black px-2'>Kunde</th>
@@ -172,6 +194,8 @@ const Stammdaten = () => {
                   <th className='border border-solid border-black px-2'>DatumRückruf</th>
                   <th className='border border-solid border-black px-2'>Erledigt</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr className='bg-red-400'>
                   <td className='border border-solid border-black'></td>
                   <td className='border border-solid border-black'>Mustermann</td>
@@ -186,6 +210,8 @@ const Stammdaten = () => {
                   <td className='border border-solid border-black'></td>
                   <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
                 </tr>
+                </tbody>
+                <tbody>
                 <tr className='bg-blue-400'>
                   <td className='border border-solid border-black'></td>
                   <td className='border border-solid border-black'>Mustermann</td>
@@ -200,12 +226,13 @@ const Stammdaten = () => {
                   <td className='border border-solid border-black'></td>
                   <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
                 </tr>
+                </tbody>
               </table>
         </div>
         </div>
         
     </div>
   )
-}
 
+}
 export default Stammdaten
