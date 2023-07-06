@@ -1,38 +1,36 @@
 <?php
-//////////////////////////////////////////////
-class Database {
+class Database{
+  private     $Servername ='SERVER-DS-2016\MSSQLSERVER2016';
+  private     $connection= array(
+                      'Database' => 'Schafhausentest',
+                      'UID' => 'bk',
+                      'PWD' => 'burgerking'
+                  );    
+  public $conn;
 
-    public $server = "SERVER-DS-2016\MSSQLSERVER2016";
-    public $user = "bk";
-    public $psw = "burgerking";
-    public $dbName = "Schafhausentest";
-    public $conn;
+  public function connect(){
+      if($this->conn!=null){
 
-    public function connect(){
-      
-      $this->conn=null;
-      try{
-          $this->conn= new PDO('sqlsrv:server='.$this->server .';dbname='.$this->dbName,$this->user,$this->psw);
-          $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          
-      }catch(PDOException $e){
-          echo 'Connection Error:' . $e->getMessage();
+      }else{
+          $check=sqlsrv_connect($this->Servername, $this->connection);
+          if($check){
+              $this->conn=$check;
+              return $this->conn;
+          }else{
+              die(print_r(sqlsrv_errors(), true));
+          }
+
       }
-      return $this->conn;
-
   }
 }
-?>
-//////////////////////////////////////
-<?php
-
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+error_reporting(E_ALL);
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-
-//C:/xampp/htdocs/connect.php
 include_once('connect.php');
 
 $database = new Database();
@@ -40,177 +38,69 @@ $db = $database->connect();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$query='SELECT * from Mitarbeiter WHERE Aktiv = 1';
+//$skey = md5(htmlspecialchars(strip_tags($data->SK)));
+//$skey2 = md5(htmlspecialchars(strip_tags($data->SKA)));
+//$skey3 = md5(htmlspecialchars(strip_tags($data->SKB)));
 
-if($stmt=$db->query($query)){
+
+$mArbeiter;
+$id;
+$aktiv;
+$arr=array();
+
+$query='SELECT * FROM Mitarbeiter WHERE Aktiv = 1';
+
+$abruf= sqlsrv_query($db, $query);
+
+if($abruf==false){ //Kein abruf möglich
+        die(print("Error"));
+}else{
+        while($row=sqlsrv_fetch_array($abruf, SQLSRV_FETCH_ASSOC)){
+          $mArbeiter = $row['Mitarbeiter'];
+          $id = $row['Mitarbeiter_ID'];
+          $aktiv = $row['Aktiv'];
+        
+          array_push($arr,array(
+          'Mitarbeiter' => $mArbeiter,
+          'Mitarbeiter_ID' => $id,
+          'Aktiv' => $aktiv
+          ));   
+        }
+        sqlsrv_free_stmt($abruf); //löst den Abruf auf
+        sqlsrv_close($db); //Beendet die Verbindung
+        echo json_encode(array(
+            'data'=>$arr,
+        ));
+}
+/*
+    if($stmt=$db->query($query))
+    {
     $rowCount=$stmt->rowCount();
     if($rowCount>0){
+      while($row=$stmt->fetch(SQLSRV_FETCH_ASSOC)){
+      $mArbeiter = $row['Mitarbeiter'];
+      $aktiv = $row['Aktiv'];
 
-    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-        $mArbeiter=$row['Mitarbeiter'];
-
-    array_push($arr, array(
-          "Mitarbeiter"=>$mArbeiter,
-        ));
-    }
-    echo json_encode(
-        array('message' => 'true',
-        'darray' => $arr
-        )
-    );
-    exit();  
-    }
-    echo json_encode(
-        array('message' => 'true')
-        );
-    }else{
-        echo json_encode(
-        array('message' => 'false')
-        ); 
-    }
-
-?>
-/////////////////////////////////////////////////////
-
-/*
-class Database {
-
-  public $server = "SERVER-DS-2016\MSSQLSERVER2016";
-  public $user = "bk";
-  public $psw = "burgerking";
-  public $dbName = "Schafhausentest";
-  public $conn;
-
-
-  public function connect() {
-      $connection = array(
-        "Database" => $dbName,
-        "Uid" => $user,
-        "PWD" => $psw
-      );
-      $conn = sqlsrv_connect($server, $connection);
-      if($conn){        
-        $this->conn=$conn;
-        return $this->conn;
+      array_push($arr, array(
+        'Mitarbeiter' => $mArbeiter,
+        'Aktiv' => $aktiv
+      ));
       }
-
-  }
-}
-
-<?
-
-HeaderZeilen
-
-include_once()
-
-$DB=new Database()
-
-Query
-
-return json
+      echo json_encode(
+          array('message' => 'true',
+          'darray' => $arr
+          )
+      );
+      }else{
+        echo json_encode(
+            array('message' => "false")
+        );
+      }
+    }else{
+       echo json_encode(
+         array('message' => '144')
+     );
+      }
 */
-
-/**
-
-class Query{
-
-    Filter als public festlegen
-    public = "LIKE"
-
-    
-
-}
-
- */
-
-
-
-
-/*
-$server = "SERVER-DS-2016\MSSQLSERVER2016";
-$user = "bk";
-$psw = "burgerking";
-$dbName = "Schafhausentest";
-
-//verbinden mit Datenquelle($server, $user, $psw, $dbName)
-//test Verbindung
-try {
-  $conn = new PDO("sqlsrv:Server = $server; Database = $dbName", $user, $psw);
-}catch(PDOException $e){
-  echo $e->getMessage();
-}
-
-//SQL-Statement
-$sql = "select * from Mitarbeiter";
-
-//send SQL-Statement(req.)/empfangen(resive)Data
-$result = $conn->query($sql);
-
-//test auf Daten
-$rows=$result->fetchAll();
-echo count($rows)."<br>";
-if (count($rows)>0){
-  var_dump($rows);
-}
-
-//Verbindung mit Datenquelle beenden
-$conn = null;
-*/
-///////////////////////////////
-//Verwendungh
-/////////////////////////
-
-class DB
-$serverName = "DESKTOP-VMSKIR0";
-$database = "Test";
-$uid = "";
-$pass = "";
-
-$connection = array(
-  "Database" => $database,
-  "Uid" => $uid,
-  "PWD" => $pass
-);
-
-$conn = sqlsrv_connect($serverName, $connection);
-  if($conn == false)
-    die(print_r( sqlsrv_errors(), true));
-  else echo 'Connection success';
-
-
-?>
-
-///////////////////////////////////////////////////////////////////////////////
-///                                                                         ///
-///                                                                         ///
-///////////////////////////////////////////////////////////////////////////////
-
-<?php
-// include_once('connect.php');
-    
-
-// $database = new Database();
-// $db = $database->connect();
-
-// $data = json_decode(file_get_contents("php://input"));
-
-// $query='SELECT * from Mitarbeiter WHERE Aktiv = 1';
-// if($stmt=$db->query($query)){
-//     $rowCount=$stmt->rowCount();  
-    
-//     if($rowCount>0){
-//         echo json_encode(
-//             array('message' => 'true')
-//           );
-//     }else{
-//         echo json_encode(
-//             array('message' => 'false')
-//           ); 
-//     }
-// }else{
-//     echo json_encode(
-//         array('message' => 'false') 
-//       );
-// }
 
 ?>
