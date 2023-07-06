@@ -6,15 +6,16 @@ import Dropdown from '../dropdown/Dropdown'
 
 const Stammdaten = () => {
 
-  const [data, setData] = useState([]);
+  
 
   const mitarbeiter = [
 
-    { value: "Bernd", label: "Bernd" },
-    { value: "Dom", label: "Dom" },
-    { value: "Marco", label: "Marco" },
-    { value: "Ben", label: "Ben" }
+    {"Mitarbeiter":"Bernd"},
+    {"Mitarbeiter":"Ben"},
+    {"Mitarbeiter":"Test"},
+    {"Mitarbeiter":"Blabla"}
   ];
+  const [data, setData] = useState(mitarbeiter);
 
   const art = [
     { value: "Telefon", label: "Telefon" },
@@ -42,15 +43,29 @@ const Stammdaten = () => {
     let e = await d.json();
     console.log(e);
 
-    if (e.data.Mitarbeiter == "true") {
-      data
+    if (e.data.lenght > 0) {
+      setData(e.data)
     }
-    
   }
 
-    useEffect(()=>{
-      datenabruf();
-  }, [])
+  const Names = ({Name}) => {
+    //console.log(Name);
+    return (
+    <>
+      {
+        <>
+        {Name.map((item, index) => (
+          <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
+        ))}
+        </>
+      }
+    </>
+    )
+  }
+  
+  //useEffect(()=>{
+  //    datenabruf();
+  //}, [])
   
 
   return(
@@ -85,7 +100,17 @@ const Stammdaten = () => {
               <p className='mb-1'>zurücksetzen</p>
             </button>
             <span className="flex flex-row mt-2 text-sm">
-                  <Dropdown options={data} placeHolder={"Export"} onChange={(setData)} />
+                  <select id='Export'>
+                    {(mitarbeiter.length>0)?
+                    <>
+                    <Names Name={mitarbeiter}/>
+                    </>
+                    :
+                    <>
+                    <Names Name={mitarbeiter}/>
+                    </>
+                    }
+                  </select>
             </span>
             </div>
 
