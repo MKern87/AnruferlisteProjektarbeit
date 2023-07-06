@@ -6,6 +6,8 @@ import Dropdown from '../dropdown/Dropdown'
 
 const Stammdaten = () => {
 
+  const [data, setData] = useState([]);
+
   const mitarbeiter = [
 
     { value: "Bernd", label: "Bernd" },
@@ -30,17 +32,22 @@ const Stammdaten = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            
-            
+           
+        
+
         })
     };
     
-    const d = await fetch('http://localhost:5173/backend/05b80e087db7c7713db71729e78a6ed3.php', request);
+    const d = await fetch('http://localhost/05b80e087db7c7713db71729e78a6ed3.php/', request);
     let e = await d.json();
     console.log(e);
+
+    if (e.data.Mitarbeiter == "true") {
+      data
+    }
+    
   }
 
-  
     useEffect(()=>{
       datenabruf();
   }, [])
@@ -78,7 +85,7 @@ const Stammdaten = () => {
               <p className='mb-1'>zurücksetzen</p>
             </button>
             <span className="flex flex-row mt-2 text-sm">
-                  <Dropdown options={mitarbeiter} placeHolder={"Export"} onChange={(value) => console.log(value)} />
+                  <Dropdown options={data} placeHolder={"Export"} onChange={(setData)} />
             </span>
             </div>
 
