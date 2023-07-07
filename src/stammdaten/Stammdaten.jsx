@@ -6,22 +6,9 @@ import Dropdown from '../dropdown/Dropdown'
 
 const Stammdaten = () => {
 
+  const [data, setData] = useState([]);
+  const [artData, setArtData] = useState([]);
   
-
-  const mitarbeiter = [
-
-    {"Mitarbeiter":"Bernd"},
-    {"Mitarbeiter":"Ben"},
-    {"Mitarbeiter":"Test"},
-    {"Mitarbeiter":"Blabla"}
-  ];
-  const [data, setData] = useState(mitarbeiter);
-
-  const art = [
-    { value: "Telefon", label: "Telefon" },
-    { value: "Telefax", label: "Telefax" },
-    { value: "E-Mail", label: "E-Mail" }
-  ]
 
   function aktualisieren() {
     window.location.reload(false);
@@ -34,8 +21,6 @@ const Stammdaten = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
            
-        
-
         })
     };
     
@@ -43,9 +28,29 @@ const Stammdaten = () => {
     let e = await d.json();
     console.log(e);
 
-    if (e.data.lenght > 0) {
+    if (e.data.length>0) {
       setData(e.data)
     }
+
+  }
+
+    const datenabrufe = async() => {
+      const request = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+  
+          })
+      };
+      
+      const f = await fetch('http://localhost/art.php/', request);
+      let g = await f.json();
+      console.log(g);
+
+    if (g.ArtData.length>0) {
+      setArtData(g.ArtData)
+    }
+    
   }
 
   const Names = ({Name}) => {
@@ -62,10 +67,25 @@ const Stammdaten = () => {
     </>
     )
   }
-  
-  //useEffect(()=>{
-  //    datenabruf();
-  //}, [])
+
+  const Type = ({Art}) => {
+    return (
+      <>
+      {
+        <>
+        {Art.map((item, index) => (
+          <option key={item + index} value={item.Art}>{item.Art}</option>
+        ))}
+        </>
+      }
+      </>
+    )
+  }
+
+    useEffect(()=>{
+      datenabruf();
+      datenabrufe();
+  }, [])
   
 
   return(
@@ -100,14 +120,13 @@ const Stammdaten = () => {
               <p className='mb-1'>zurücksetzen</p>
             </button>
             <span className="flex flex-row mt-2 text-sm">
-                  <select id='Export'>
-                    {(mitarbeiter.length>0)?
+                  <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Export'>
+                    {(data.length>0)?
                     <>
-                    <Names Name={mitarbeiter}/>
+                    <Names Name={data}/>
                     </>
                     :
                     <>
-                    <Names Name={mitarbeiter}/>
                     </>
                     }
                   </select>
@@ -149,13 +168,31 @@ const Stammdaten = () => {
               <p className="ml-4 text-sm">Stammdaten</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">
                 <p className='pr-1'>Mitarbeiter:</p>
-                  <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
+                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
+                    {(data.length>0)?
+                    <>
+                    <Names Name={data}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">
                 <p className='mr-12 pr-1'>Art:</p>
-                <Dropdown options={art} placeHolder={"Tel/Fax/Mail"} onChange={(value) => console.log(value)} />
+                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
+                    {(artData.length>0)?
+                    <>
+                    <Type Art={artData}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
                 <input className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
@@ -190,7 +227,16 @@ const Stammdaten = () => {
               </div>
                 <span className="items-center ml-1 flex flex-row mt-4 mb-1">
                   <p className='pr-1'>Mitarbeiter:</p>
-                  <Dropdown options={mitarbeiter} placeHolder={"Mitarbeiter"} onChange={(value) => console.log(value)} />
+                  <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
+                    {(data.length>0)?
+                    <>
+                    <Names Name={data}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
                 </span>
                   <input className="items-center justify-items-center ml-20" type="checkbox" /> Alle
             </div>
