@@ -8,6 +8,17 @@ const Stammdaten = () => {
 
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
+
+  const menuItems = [
+    {
+      title: 'Stammdaten',
+      key: '/'
+    },
+    {
+      title: 'Eintrag',
+      key: '/Eintrag'
+    }
+  ]
   
 
   function aktualisieren() {
@@ -134,14 +145,14 @@ const Stammdaten = () => {
             </div>
 
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
-            <div className="mb-2 border h-1/2 border-black px-2">
-            <p className="ml-4 text-sm">Textsuche</p>
-            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-2 p-1" />
+            <div className="mb-2 relative border h-1/2 border-black px-2">
+            <p className="ml-2 text-sm absolute inset-x -mt-3 bg-gray-200 px-1 ">Textsuche</p>
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" />
             </div>
             <div className="flex flex-row">
-            <div className="w-1/2 border mr-2 border-black">
-              <p className="mb-2 ml-2">Kunden filtern</p>
-              <div className="flex flex-row items-start justify-center">
+            <div className="w-1/2 border mr-2 border-black relative mt-2">
+              <p className="mb-2 ml-2 absolute inset-x -mt-3 bg-gray-200 px-1">Kunden filtern</p>
+              <div className="flex flex-row items-start justify-center mt-4">
                 <label className="mr-4 ml-4 mb-2" for="default-radio-1">
                 <input type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
                 Ja</label>
@@ -150,9 +161,9 @@ const Stammdaten = () => {
                 Nein </label>
               </div>
             </div>
-            <div className="w-1/2 border border-black">
-              <p className="mb-2 ml-2">Kategorie filtern</p>
-              <div className="flex flex-row items-start justify-center">
+            <div className="w-1/2 border border-black relative mt-2">
+              <p className="mb-2 ml-2 absolute inset-x -mt-3 bg-gray-200 px-1">Kategorie filtern</p>
+              <div className="flex flex-row items-start justify-center mt-4">
                 <label className="mr-4 ml-4 mb-1" for="default-radio-1">
                 <input type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
@@ -164,9 +175,9 @@ const Stammdaten = () => {
             </div>
           </div>
 
-            <div className="col-span-2 mr-2 h-full border border-black">
-              <p className="ml-4 text-sm">Stammdaten</p>
-              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">
+            <div className="col-span-2 mr-2 h-full border border-black relative">
+              <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Stammdaten</p>
+              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-8">
                 <p className='pr-1'>Mitarbeiter:</p>
                 <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
                     {(data.length>0)?
@@ -198,8 +209,8 @@ const Stammdaten = () => {
               </span>
             </div>
 
-            <div className="col-span-2 mr-2 border border-black h-full">
-              <p className="ml-4 text-sm">Datum</p>
+            <div className="col-span-2 mr-2 border border-black h-full relative">
+              <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
                 <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" />
               </span>
@@ -212,9 +223,9 @@ const Stammdaten = () => {
               </span>
             </div>
 
-            <div className="col-span-2 mr-2 border border-black h-full text-sm">
-              <p className="ml-4 mb-4">Rückruf</p>
-              <div className="flex flex-row items-stretch justify-center">
+            <div className="col-span-2 mr-2 border border-black h-full text-sm relative">
+              <p className="ml-4 mb-4 absolute inset-x -mt-3 bg-gray-200 px-1">Rückruf</p>
+              <div className="flex flex-row items-stretch justify-center mt-6">
                 <label className="mr-6 ml-6" for="default-radio-1">
                 <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Ja </label>
@@ -238,12 +249,12 @@ const Stammdaten = () => {
                     }
                   </select>
                 </span>
-                  <input className="items-center justify-items-center ml-20" type="checkbox" /> Alle
+                  <input className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
             </div>
 
-            <div className="col-span-1 border border-black h-full text-sm">
-              <p className="ml-4">Erledigt</p>
-              <div className="flex flex-col items-start ml-10 my-2">
+            <div className="col-span-1 border border-black h-full text-sm relative">
+              <p className="ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Erledigt</p>
+              <div className="flex flex-col items-start ml-10 my-2 mt-5">
                 <label className="my-1" for="default-radio-1">
                 <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
