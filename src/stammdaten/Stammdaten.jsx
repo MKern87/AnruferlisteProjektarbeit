@@ -256,7 +256,7 @@ const Stammdaten = () => {
               </div>
               </div>
             </div>
-            <div className='h-full col-start-2 col-span-3 px-1 mr-2'>
+            <div className='h-full col-start-2 col-span-3 px-1 mr-2' >
               <table className='text-sm border border-solid border-black'>
                 <thead>
                 <tr className='bg-sky-200 items-center justify-items-center'>
