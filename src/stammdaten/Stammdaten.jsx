@@ -1,114 +1,316 @@
-import React from "react"
-import {FaArrowAltCircleRight} from 'react-icons/fa'
+import React from 'react'
+import { useEffect, useState } from 'react'
+import { FaArrowAltCircleRight } from 'react-icons/fa'
+import { TiArrowSortedDown } from 'react-icons/ti'
+import Dropdown from '../dropdown/Dropdown'
 
 const Stammdaten = () => {
 
+  const [data, setData] = useState([]);
+  const [artData, setArtData] = useState([]);
+  
+
+  function aktualisieren() {
+    window.location.reload(false);
+  }
+
+
+  const datenabruf = async() => {
+    const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+           
+        })
+    };
+    
+    const d = await fetch('http://localhost/05b80e087db7c7713db71729e78a6ed3.php/', request);
+    let e = await d.json();
+    console.log(e);
+
+    if (e.data.length>0) {
+      setData(e.data)
+    }
+
+  }
+
+    const datenabrufe = async() => {
+      const request = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+  
+          })
+      };
+      
+      const f = await fetch('http://localhost/art.php/', request);
+      let g = await f.json();
+      console.log(g);
+
+    if (g.ArtData.length>0) {
+      setArtData(g.ArtData)
+    }
+    
+  }
+
+  const Names = ({Name}) => {
+    //console.log(Name);
+    return (
+    <>
+      {
+        <>
+        {Name.map((item, index) => (
+          <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
+        ))}
+        </>
+      }
+    </>
+    )
+  }
+
+  const Type = ({Art}) => {
+    return (
+      <>
+      {
+        <>
+        {Art.map((item, index) => (
+          <option key={item + index} value={item.Art}>{item.Art}</option>
+        ))}
+        </>
+      }
+      </>
+    )
+  }
+
+    useEffect(()=>{
+      datenabruf();
+      datenabrufe();
+  }, [])
+  
+
   return(
-    <div className="w-full h-auto grid grid-cols-4 bg-slate-100 absolute m-2">
-      <div className="grid grid-cols-span-1">
+    <div className="w-full grid grid-cols-4 bg-gray-100 absolute m-2">
+      <div className="grid grid-cols-span-1 h-full">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
         <div className="flex">
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
-          <input className="inline border rounded" />
+          <input className="inline border border-black rounded-sm" />
         </div>
-        <p className="mt-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p className="mt-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
         </div>
-        <div className="w-full h-full col-start-2 col-span-3 pl-1">
+        <div className="w-full col-start-2 col-span-3 pl-1">
           <div className="flex w-full col-span-1">
             <h1 className="font-bold float-left mb-3">Tagesberichte</h1>
           </div>
 
           <div className="flex col-span-1">
-            <button className="border shadow shadow-black text-sm border-b-slate-400 border-r-slate-400 bg-slate-300 px-2">Optionen</button>
+            <button className="border shadow shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100 p-[2px] ml-2 px-4">Optionen</button>
           </div>
 
-          <div className="grid grid-cols-6 w-full h-auto bg-slate-200 py-2">
-            <div className="w-1/2 grid-cols-1">
-            <button className="border shadow shadow-black border-b-black border-r-black h-6 bg-slate-300 text-sm px-2">aktualisieren</button>
-              <span className="h-8 text-sm">
-                <input className="h-8" type="checkbox" />Auto Aktual.
+          <div className="grid grid-cols-12 w-full bg-gray-200 py-4">
+            <div className="col-span-1 flex flex-col items-center ml-1 h-full">
+            <button className="border shadow shadow-black border-b-black border-r-black bg-gray-300 text-sm p-[2px] px-2" onClick={aktualisieren}>
+              <p className='mb-1'>aktualisieren</p>
+            </button>
+              <span className="flex flex-row my-2 text-sm">
+                <input type="checkbox" />
+                <p className="pl-1">Auto Aktual.</p>
               </span>
-            <button className="h-6 border shadow shadow-black bg-slate-300 text-sm border-b-black border-r-black px-2">zurücksetzen</button>
+            <button className="border shadow shadow-black bg-gray-300 text-sm border-b-black border-r-black p-[2px] px-2 mb-1">
+              <p className='mb-1'>zurücksetzen</p>
+            </button>
+            <span className="flex flex-row mt-2 text-sm">
+                  <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Export'>
+                    {(data.length>0)?
+                    <>
+                    <Names Name={data}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
+            </span>
             </div>
 
-          <div className="grid-cols-1 h-16 border bg-slate-200 border-black mx-2">
-            <span className="mx-4 text-sm">Textsuche</span>
-            <input className="border border-black rounded w-full mx-2" />
-            <div className="w-1/2 border border-black">Kunden Item
-              <div className=" items-center">
-                <input type="radio" className="w-4 h-4 text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-1">Ja</label>
-              </div>
-              <div className=" items-center">
-                <input checked type="radio" className="w-4 h-4 text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-2">Nein</label>
+          <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
+            <div className="mb-2 border h-1/2 border-black px-2">
+            <p className="ml-4 text-sm">Textsuche</p>
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-2 p-1" />
+            </div>
+            <div className="flex flex-row">
+            <div className="w-1/2 border mr-2 border-black">
+              <p className="mb-2 ml-2">Kunden filtern</p>
+              <div className="flex flex-row items-start justify-center">
+                <label className="mr-4 ml-4 mb-2" for="default-radio-1">
+                <input type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
+                Ja</label>
+                <label for="default-radio-2">
+                <input checked type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
+                Nein </label>
               </div>
             </div>
-            <div className="w-1/2 border border-black">Kategorie Item
-              <div className=" items-center">
-                <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-1">Ja</label>
+            <div className="w-1/2 border border-black">
+              <p className="mb-2 ml-2">Kategorie filtern</p>
+              <div className="flex flex-row items-start justify-center">
+                <label className="mr-4 ml-4 mb-1" for="default-radio-1">
+                <input type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
+                Ja</label>
+                <label for="default-radio-2">
+                <input checked type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
+                Nein</label>
               </div>
-              <div className=" items-center">
-                <input checked type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-2">Nein</label>
-              </div>
+            </div>
             </div>
           </div>
 
-            <div className="grid-cols-1">Stammdaten
-              <span>Mitarbeiter
-                <input className="items-center justify-items-center h-8" />
-                <input className="items-center justify-items-center h-8" type="checkbox" />Alle
+            <div className="col-span-2 mr-2 h-full border border-black">
+              <p className="ml-4 text-sm">Stammdaten</p>
+              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">
+                <p className='pr-1'>Mitarbeiter:</p>
+                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
+                    {(data.length>0)?
+                    <>
+                    <Names Name={data}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
+                <input className="items-center justify-items-center ml-1" type="checkbox" />
+                <p className="pl-1">Alle</p>
               </span>
-              <span>Art
-                <input className="items-center justify-items-center h-8" />
-                <input className="items-center justify-items-center h-8" type="checkbox" />Alle
+              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">
+                <p className='mr-12 pr-1'>Art:</p>
+                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
+                    {(artData.length>0)?
+                    <>
+                    <Type Art={artData}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
+                <input className="items-center justify-items-center ml-1" type="checkbox" />
+                <p className="pl-1">Alle</p>
               </span>
             </div>
 
-            <div className="grid-cols-1">Datum
-              <span>Von: <input /></span>
-              <span>Bis: <input /></span>
-              <input className="items-center justify-items-center h-8" type="checkbox" />aktuelle Berichte
+            <div className="col-span-2 mr-2 border border-black h-full">
+              <p className="ml-4 text-sm">Datum</p>
+              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
+                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" />
+              </span>
+              <span className="text-sm items-center ml-1 flex flex-row my-2">Bis: 
+                <input type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
+              </span>
+              <span className="flex flex-row my-2 text-sm justify-center">
+                <input type="checkbox" />
+                <p className="pl-1">aktuelle Berichte</p>
+              </span>
             </div>
 
-            <div className="grid-cols-1">Rückruf
-            <div className=" items-center">
-              <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-              <label for="default-radio-1">Ja</label>
-            </div>
-            <div className=" items-center">
-              <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-              <label for="default-radio-2">Nein</label>
-            </div>
-            <div className=" items-center">
-              <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-              <label for="default-radio-3">Alle</label>
-            </div>
-              <span>Mitarbeiter</span>
-              <input className="items-center justify-items-center h-8" />
-              <input className="items-center justify-items-center h-8" type="checkbox" />Alle
+            <div className="col-span-2 mr-2 border border-black h-full text-sm">
+              <p className="ml-4 mb-4">Rückruf</p>
+              <div className="flex flex-row items-stretch justify-center">
+                <label className="mr-6 ml-6" for="default-radio-1">
+                <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                Ja </label>
+                <label className="mr-6" for="default-radio-2">
+                <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                Nein </label>
+                <label for="default-radio-3">
+                <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                Alle </label>
+              </div>
+                <span className="items-center ml-1 flex flex-row mt-4 mb-1">
+                  <p className='pr-1'>Mitarbeiter:</p>
+                  <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
+                    {(data.length>0)?
+                    <>
+                    <Names Name={data}/>
+                    </>
+                    :
+                    <>
+                    </>
+                    }
+                  </select>
+                </span>
+                  <input className="items-center justify-items-center ml-20" type="checkbox" /> Alle
             </div>
 
-            <div className="grid-cols-1">Erledigt
-              <div className=" items-center">
-                <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-1">Ja</label>
-              </div>
-              <div className=" items-center">
-                <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-2">Nein</label>
-              </div>
-              <div className=" items-center">
-                <input type="radio" className="text-blue-600 focus:ring-blue-500" />
-                <label for="default-radio-3">Alle</label>
+            <div className="col-span-1 border border-black h-full text-sm">
+              <p className="ml-4">Erledigt</p>
+              <div className="flex flex-col items-start ml-10 my-2">
+                <label className="my-1" for="default-radio-1">
+                <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
+                Ja</label>
+                <label className="my-1" for="default-radio-2">
+                <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
+                Nein</label>
+                <label className="my-1" for="default-radio-3">
+                <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
+                Alle</label>
               </div>
               </div>
             </div>
+            <div className='h-full col-start-2 col-span-3 px-1 mr-2'>
+              <table className='text-sm border border-solid border-black'>
+                <thead>
+                <tr className='bg-sky-200 items-center justify-items-center'>
+                  <th className='border border-solid border-black px-2'></th>
+                  <th className='border border-solid border-black px-2'>Kunde</th>
+                  <th className='border border-solid border-black px-2 w-1/3'>Text</th>
+                  <th className='border border-solid border-black px-2'>Art</th>
+                  <th className='border border-solid border-black px-2'>Mitarbeiter</th>
+                  <th className='border border-solid border-black px-2'>Kategorie</th>
+                  <th className='border border-solid border-black px-2'>Datum</th>
+                  <th className='border border-solid border-black px-2'>Rückruf</th>
+                  <th className='border border-solid border-black px-2'>Rückrufer</th>
+                  <th className='border border-solid border-black px-2'>DatumRückruf</th>
+                  <th className='border border-solid border-black px-2'>Erledigt</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr className='bg-red-400'>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
+                  </td>
+                  <td className='border border-solid border-black'>Ruf eingehend</td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Sonstiges</td>
+                  <td className='border border-solid border-black'>11.11.1111</td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr className='bg-blue-400'>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+                  </td>
+                  <td className='border border-solid border-black'>Ruf eingehend</td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'>Sonstiges</td>
+                  <td className='border border-solid border-black'>11.11.1111</td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black'>Mustermann</td>
+                  <td className='border border-solid border-black'></td>
+                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                </tr>
+                </tbody>
+              </table>
         </div>
+        </div>
+        
     </div>
   )
-}
 
+}
 export default Stammdaten
