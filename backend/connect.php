@@ -11,7 +11,8 @@ class Database{
                 private  $connection = array (
                     'Database' => 'Schafhausentest',
                     'UID' => '',
-                    'PWD' => ''
+                    'PWD' => '',
+                    "CharacterSet" => "UTF-8"
                   );
   public $conn;
 

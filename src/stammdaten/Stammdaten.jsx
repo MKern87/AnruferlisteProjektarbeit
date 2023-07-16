@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import Dropdown from '../dropdown/Dropdown'
+import RowColor from '../RowColor'
 
 const Stammdaten = () => {
 
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
+  const [tdata, setTdata] = useState([]);
 
   const menuItems = [
     {
@@ -21,9 +23,9 @@ const Stammdaten = () => {
   ]
   
 
-  function aktualisieren() {
-    window.location.reload(false);
-  }
+  //function aktualisieren() {
+  //  window.location.reload(false);
+  //}
 
 
   const datenabruf = async() => {
@@ -35,7 +37,7 @@ const Stammdaten = () => {
         })
     };
     
-    const d = await fetch('http://localhost/05b80e087db7c7713db71729e78a6ed3.php/', request);
+    const d = await fetch('http://localhost/Kundenliste/backend/05b80e087db7c7713db71729e78a6ed3.php', request);
     let e = await d.json();
     console.log(e);
 
@@ -54,7 +56,7 @@ const Stammdaten = () => {
           })
       };
       
-      const f = await fetch('http://localhost/art.php/', request);
+      const f = await fetch('http://localhost/Kundenliste/backend/art.php', request);
       let g = await f.json();
       console.log(g);
 
@@ -62,6 +64,24 @@ const Stammdaten = () => {
       setArtData(g.ArtData)
     }
     
+  }
+
+  const databruf = async() => {
+    const request = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+
+      })
+    };
+
+    const h = await fetch ('http://localhost/Kundenliste/backend/tagesbericht.php', request);
+    let i = await h.json();
+    console.log(i);
+
+    if (i.tdata.length>0) {
+      setTdata(i.tdata)
+    }
   }
 
   const Names = ({Name}) => {
@@ -96,6 +116,7 @@ const Stammdaten = () => {
     useEffect(()=>{
       datenabruf();
       datenabrufe();
+      databruf();
   }, [])
   
 
@@ -126,11 +147,11 @@ const Stammdaten = () => {
 
           <div className="grid grid-cols-12 w-full bg-gray-200 py-4">
             <div className="col-span-1 flex flex-col items-center ml-1 h-full">
-            <button className="border shadow shadow-black border-b-black border-r-black bg-gray-300 text-sm p-[2px] px-2" onClick={aktualisieren}>
+            <button className="border shadow shadow-black border-b-black border-r-black bg-gray-300 text-sm p-[2px] px-2">
               <p className='mb-1'>aktualisieren</p>
             </button>
               <span className="flex flex-row my-2 text-sm">
-                <input type="checkbox" />
+                <input defaultChecked={false} type="checkbox" />
                 <p className="pl-1">Auto Aktual.</p>
               </span>
             <button className="border shadow shadow-black bg-gray-300 text-sm border-b-black border-r-black p-[2px] px-2 mb-1">
@@ -195,7 +216,7 @@ const Stammdaten = () => {
                     </>
                     }
                   </select>
-                <input className="items-center justify-items-center ml-1" type="checkbox" />
+                <input defaultChecked={false} className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">
@@ -210,7 +231,7 @@ const Stammdaten = () => {
                     </>
                     }
                   </select>
-                <input className="items-center justify-items-center ml-1" type="checkbox" />
+                <input defaultChecked={false} className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
             </div>
@@ -224,7 +245,7 @@ const Stammdaten = () => {
                 <input type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="flex flex-row my-2 text-sm justify-center">
-                <input type="checkbox" />
+                <input defaultChecked={false} type="checkbox" />
                 <p className="pl-1">aktuelle Berichte</p>
               </span>
             </div>
@@ -255,7 +276,7 @@ const Stammdaten = () => {
                     }
                   </select>
                 </span>
-                  <input className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
+                  <input defaultChecked={false} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
             </div>
 
             <div className="col-span-1 border border-black h-full text-sm relative">
@@ -290,6 +311,17 @@ const Stammdaten = () => {
                   <th className='border border-solid border-black px-2'>Erledigt</th>
                 </tr>
                 </thead>
+                {tdata.length>0 ?
+                <>
+                {tdata.map((item,index) => (
+                  <RowColor key={item+index} ITEM={item} />
+                ))}
+                </>
+                :
+                <>
+
+                </>
+                }
                 <tbody>
                 <tr className='bg-red-400'>
                   <td className='border border-solid border-black'></td>
@@ -300,10 +332,10 @@ const Stammdaten = () => {
                   <td className='border border-solid border-black'>Mustermann</td>
                   <td className='border border-solid border-black'>Sonstiges</td>
                   <td className='border border-solid border-black'>11.11.1111</td>
-                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
                   <td className='border border-solid border-black'>Mustermann</td>
                   <td className='border border-solid border-black'></td>
-                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
                 </tr>
                 </tbody>
                 <tbody>
@@ -316,10 +348,10 @@ const Stammdaten = () => {
                   <td className='border border-solid border-black'>Mustermann</td>
                   <td className='border border-solid border-black'>Sonstiges</td>
                   <td className='border border-solid border-black'>11.11.1111</td>
-                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
                   <td className='border border-solid border-black'>Mustermann</td>
                   <td className='border border-solid border-black'></td>
-                  <td className='border border-solid border-black text-center'><input className="" type="checkbox" /></td>
+                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
                 </tr>
                 </tbody>
               </table>

@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL);
 header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
@@ -19,7 +19,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query='SELECT * FROM Tagesbericht WHERE ID = 4';
+$query='SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID, Kategorie.Kategorie as Kategorie_ID, Mitarbeiter.Mitarbeiter, Art.Art as Art_ID, Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, Tagesbericht.rtfText, Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer, Tagesbericht.gelöscht, Tagesbericht.parentID FROM Tagesbericht JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID JOIN Art ON  Art.Art_ID = Tagesbericht.Art_ID JOIN Kategorie ON Tagesbericht.Kategorie_ID = Kategorie.Kategorie_ID';
 
 $abruf= sqlsrv_query($db, $query);
 
@@ -30,7 +30,7 @@ if($abruf==false){ //Kein abruf möglich
           $id = $row['ID'];
           $kid = $row['Kunden_ID'];
           $katid = $row['Kategorie_ID'];
-          $mid = $row['Mitarbeiter_ID'];
+          $mid = $row['Mitarbeiter'];
           $aid = $row['Art_ID'];
           $date = $row['Datum'];
           $duration = $row['Dauer'];
@@ -48,18 +48,18 @@ if($abruf==false){ //Kein abruf möglich
           'ID' => $id,
           'Kunden_ID' => $kid,
           'Kategorie_ID' => $katid,
-          'Mitarbeiter_ID' => $mid,
+          'Mitarbeiter' => $mid,
           'Art_ID' => $aid,
           'Datum' => $date,
           'Dauer' => $duration,
-          'Rückruf' => $callback,
+          'Rueckruf' => $callback,
           'text' => $text,
           'Erledigt' => $done,
           'rtfText' => $rtfText,
           'Kategorie' => $cate,
-          'DatumRückruf' => $dateCallback,
-          'RückrufWer' => $callbackWer,
-          'gelöscht' => $delete,
+          'DatumRueckruf' => $dateCallback,
+          'RueckrufWer' => $callbackWer,
+          'geloescht' => $delete,
           'parentID' => $parentId
           ));   
         }
