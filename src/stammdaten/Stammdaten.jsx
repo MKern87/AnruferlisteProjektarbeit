@@ -10,6 +10,19 @@ const Stammdaten = () => {
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
   const [tdata, setTdata] = useState([]);
+  const [filter, setFilter] = useState({
+    Text: null,
+    Kfilter: null,
+    Katfilter: null,
+    Mitarbeiter: null,
+    Art: null,
+    DBerichte: null,
+    Rueckruf: null,
+    RrufAll: null,
+    Erledigt: null
+  });
+
+  console.log(filter);
 
   const menuItems = [
     {
@@ -21,6 +34,22 @@ const Stammdaten = () => {
       key: '/Eintrag'
     }
   ]
+
+  const allFilter = ({I, arr}) => {
+      let narr = []
+    for (let index = 0; index < arr.length; index++) {
+      if (I.Erledigt == null && I.Text == null && I.Kfilter == null && I.Katfilter == null && I.SMitarbeiter == null && I.SArt == null && I.DBerichte == null && I.Rruf == null && I.RrufAll == null){
+        narr.push(arr[index])
+      }else if(I.Erledigt == 1 || I.Erledigt == 0){
+        narr.push(arr[index])
+      }
+      console.log(Object.keys(arr[index]))
+    }
+    console.log(narr);
+
+    return narr
+    
+  }
   
 
   //function aktualisieren() {
@@ -117,7 +146,7 @@ const Stammdaten = () => {
       datenabruf();
       datenabrufe();
       databruf();
-  }, [])
+  }, [tdata])
   
 
   return(
@@ -283,13 +312,13 @@ const Stammdaten = () => {
               <p className="ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Erledigt</p>
               <div className="flex flex-col items-start ml-10 my-2 mt-5">
                 <label className="my-1" for="default-radio-1">
-                <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={1} type="radio" name='erledigt' onChange={() => setFilter(true)} className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label className="my-1" for="default-radio-2">
-                <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={0} type="radio" name='erledigt' onChange={() => setFilter(true)} className="text-blue-600 focus:ring-blue-500" />
                 Nein</label>
                 <label className="my-1" for="default-radio-3">
-                <input type="radio" name='erledigt' className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={2} type="radio" name='erledigt' onChange={() => setFilter(false)} className="text-blue-600 focus:ring-blue-500" />
                 Alle</label>
               </div>
               </div>
@@ -313,13 +342,13 @@ const Stammdaten = () => {
                 </thead>
                 {tdata.length>0 ?
                 <>
-                {tdata.map((item,index) => (
-                  <RowColor key={item+index} ITEM={item} />
-                ))}
+                {
+                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />) )
+                }
                 </>
                 :
                 <>
-
+                Keine Daten!
                 </>
                 }
                 <tbody>
