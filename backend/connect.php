@@ -7,7 +7,7 @@ class Database{
                       'PWD' => 'burgerking'
                   );
 */
-                private  $Servername = 'DESKTOP-VMSKIRO';
+                private  $Servername = 'DESKTOP-VMSKIR0';
                 private  $connection = array (
                     'Database' => 'Schafhausentest',
                     'UID' => '',

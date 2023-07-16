@@ -100,6 +100,12 @@ const Stammdaten = () => {
   
 
   return(
+    <>
+    <div>
+      {menuItems.map((item, index) => (
+        <a key={item+index} href={item.key}>{item.title}</a>
+      ))}
+    </div>
     <div className="w-full grid grid-cols-4 bg-gray-100 absolute m-2">
       <div className="grid grid-cols-span-1 h-full">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
@@ -321,6 +327,7 @@ const Stammdaten = () => {
         </div>
         
     </div>
+    </>
   )
 
 }
