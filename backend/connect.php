@@ -1,12 +1,13 @@
 <?php
 class Database{
-  /*private     $Servername ='SERVER-DS-2016\MSSQLSERVER2016';
+  private     $Servername ='SERVER-DS-2016\MSSQLSERVER2016';
   private     $connection= array(
                       'Database' => 'Schafhausentest',
                       'UID' => 'bk',
-                      'PWD' => 'burgerking'
+                      'PWD' => 'burgerking',
+                      'CharacterSet' => 'UTF-8'
                   );
-*/
+/*
                 private  $Servername = 'DESKTOP-VMSKIR0';
                 private  $connection = array (
                     'Database' => 'Schafhausentest',
@@ -14,6 +15,7 @@ class Database{
                     'PWD' => '',
                     "CharacterSet" => "UTF-8"
                   );
+*/
   public $conn;
 
   public function connect(){

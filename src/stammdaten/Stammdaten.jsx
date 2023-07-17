@@ -10,19 +10,19 @@ const Stammdaten = () => {
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
   const [tdata, setTdata] = useState([]);
-  const [filter, setFilter] = useState({
-    Text: null,
-    Kfilter: null,
-    Katfilter: null,
-    Mitarbeiter: null,
-    Art: null,
-    DBerichte: null,
-    Rueckruf: null,
-    RrufAll: null,
-    Erledigt: null
-  });
+  //const [filter, setFilter] = useState({
+  //  Text: null,
+  //  Kfilter: null,
+  //  Katfilter: null,
+  //  Mitarbeiter: null,
+  //  Art: null,
+  //  DBerichte: null,
+  //  Rueckruf: null,
+  //  RrufAll: null,
+  //  Erledigt: null
+  //});
 
-  console.log(filter);
+  //console.log(filter);
 
   const menuItems = [
     {
@@ -35,21 +35,21 @@ const Stammdaten = () => {
     }
   ]
 
-  const allFilter = ({I, arr}) => {
-      let narr = []
-    for (let index = 0; index < arr.length; index++) {
-      if (I.Erledigt == null && I.Text == null && I.Kfilter == null && I.Katfilter == null && I.SMitarbeiter == null && I.SArt == null && I.DBerichte == null && I.Rruf == null && I.RrufAll == null){
-        narr.push(arr[index])
-      }else if(I.Erledigt == 1 || I.Erledigt == 0){
-        narr.push(arr[index])
-      }
-      console.log(Object.keys(arr[index]))
-    }
-    console.log(narr);
-
-    return narr
-    
-  }
+  //const allFilter = ({I, arr}) => {
+  //    let narr = []
+  //  for (let index = 0; index < arr.length; index++) {
+  //    if (I.Erledigt == null && I.Text == null && I.Kfilter == null && I.Katfilter == null && I.SMitarbeiter == null && I.SArt == null && I.DBerichte == null && I.Rruf == null && I.RrufAll == null){
+  //      narr.push(arr[index])
+  //    }else if(I.Erledigt == 1 || I.Erledigt == 0){
+  //      narr.push(arr[index])
+  //    }
+  //    console.log(Object.keys(arr[index]))
+  //  }
+  //  console.log(narr);
+//
+  //  return narr
+  //  
+  //}
   
 
   //function aktualisieren() {
