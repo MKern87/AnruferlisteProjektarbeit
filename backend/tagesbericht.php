@@ -19,7 +19,19 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query='SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID, Kategorie.Kategorie as Kategorie_ID, Mitarbeiter.Mitarbeiter, Art.Art as Art_ID, Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, Tagesbericht.rtfText, Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer, Tagesbericht.gelöscht, Tagesbericht.parentID FROM Tagesbericht JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID JOIN Art ON  Art.Art_ID = Tagesbericht.Art_ID JOIN Kategorie ON Tagesbericht.Kategorie_ID = Kategorie.Kategorie_ID';
+$query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID, 
+        Baum.Kategorie as Kategorie_ID, 
+        Mitarbeiter.Mitarbeiter as Mitarbeiter,
+        Art.Art as Art_ID,
+        Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
+        Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer, 
+        Tagesbericht.gelöscht, Tagesbericht.parentID 
+        FROM Tagesbericht
+        JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID
+        JOIN Art ON Tagesbericht.Art_ID = Art.Art_ID 
+        JOIN Baum ON Tagesbericht.Kategorie_ID = Baum.ID
+        WHERE Tagesbericht.Datum > '2023-01-06 00:00:00' 
+        ORDER BY Tagesbericht.Datum DESC";
 
 $abruf= sqlsrv_query($db, $query);
 
@@ -37,7 +49,7 @@ if($abruf==false){ //Kein abruf möglich
           $callback = $row['Rückruf'];
           $text = $row['text'];
           $done = $row['Erledigt'];
-          $rtfText = $row['rtfText'];
+          //$rtfText = $row['rtfText'];
           $cate = $row['Kategorie'];
           $dateCallback = $row['DatumRückruf'];
           $callbackWer = $row['RückrufWer'];
@@ -55,7 +67,7 @@ if($abruf==false){ //Kein abruf möglich
           'Rueckruf' => $callback,
           'text' => $text,
           'Erledigt' => $done,
-          'rtfText' => $rtfText,
+          //'rtfText' => $rtfText,
           'Kategorie' => $cate,
           'DatumRueckruf' => $dateCallback,
           'RueckrufWer' => $callbackWer,

@@ -7,23 +7,101 @@ const RowColor = ({ITEM}) => {
   const colorTest = ({D}) => {
     console.log(D)
     switch (D.trim().toString()) {
-      case "Dienstleistung":
-        setbgColor(' bg-yellow-300 ')
-        break;
-      case "Software Medicare Verwaltung":
-        setbgColor(' bg-blue-500 ')
-        break;
-      case "Software Trend XL":
-        setbgColor(' bg-violet-300 ')
-        break;
-      case "Sonstiges":
-        setbgColor(' bg-green-800 ')
+      case "Medicare":
+        setbgColor(' bg-[#3F3F40] ')
         break;
       case "Software Medicare Pflege":
-        setbgColor(' bg-orange-100 ')
+        setbgColor(' bg-[#007FC0] ')
+        break;
+      case "Software Medicare Verwaltung":
+        setbgColor(' bg-[#FF7F01] ')
+        break;
+      case "Software Medicare Dienstplan":
+        setbgColor(' bg-[#7F0080] ')
+        break;
+      case "Software Medicare Ambulant":
+        setbgColor(' bg-[#00FF01] ')
         break;
       case "Software System 2000":
-        setbgColor(' bg-sky-300 ')
+        setbgColor(' bg-[#FF0001] ')
+        break;
+      case "Software Sonstige":
+        setbgColor(' bg-[#7F0001]')
+        break;
+      case "Hardware":
+        setbgColor(' bg-[#7F7F01]')
+        break;
+      case "Software TNVP":
+        setbgColor(' bg-[#BB1109]')
+        break;
+      case "Dienstleistung":
+        setbgColor(' bg-[#000080] ')
+        break;
+      case "Software Trend XL":
+        setbgColor(' bg-[#7FFF01] ')
+        break;
+      case "Sonstiges":
+        setbgColor(' bg-[#7F8000] ')
+        break;
+      case "Fehler Medicare Pflege":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Fehler Medicare Verwaltung":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Fehler Medicare Dienstplan":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Fehler Medicare Ambulant":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Fehler TNVP":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Fehler Trend XL":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Fehler System 2000":
+        setbgColor(' bg-[#010000] ')
+        break;
+      case "Webdesign":
+        setbgColor(' bg-[#007F01] ')
+        break;
+      case "Fortbildung":
+        setbgColor(' bg-[#7F7F01] ')
+        break;
+      case "Cleanin":
+        setbgColor(' bg-[#FF7F40] ')
+        break;
+      case "Medicare App":
+        setbgColor(' bg-[#318BA2] ')
+        break;
+      case "Patsy":
+        setbgColor(' bg-[#FF7F40] ')
+        break;
+      case "Telefonie":
+        setbgColor(' bg-[#206C1F] ')
+        break;
+      case "Panda":
+        setbgColor(' bg-[#0F0F10] ')
+        break;
+      case "D A U":
+        setbgColor(' bg-[#7F7F01] ')
+        break;
+      case "TI":
+        setbgColor(' bg-[#030442] ')
+        break;
+      case "Backup":
+        setbgColor(' bg-[#7F0100] ')
+        break;
+      case "Medicare CummoLino":
+        setbgColor(' bg-[#7FFF01] ')
+        break;
+      case "Zeiterfassung":
+        setbgColor(' bg-[#FF0080] ')
+        break;
+      case "Medicare Zeiterfassung":
+        setbgColor(' bg-[#7F0100] ')
         break;
     
       default:

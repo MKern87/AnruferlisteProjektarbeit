@@ -10,17 +10,17 @@ const Stammdaten = () => {
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
   const [tdata, setTdata] = useState([]);
-  //const [filter, setFilter] = useState({
-  //  Text: null,
-  //  Kfilter: null,
-  //  Katfilter: null,
-  //  Mitarbeiter: null,
-  //  Art: null,
-  //  DBerichte: null,
-  //  Rueckruf: null,
-  //  RrufAll: null,
-  //  Erledigt: null
-  //});
+  const [filter, setFilter] = useState({
+    Text: null,
+    Kfilter: null,
+    Katfilter: null,
+    Mitarbeiter: null,
+    Art: null,
+    DBerichte: null,
+    Rueckruf: null,
+    RrufAll: null,
+    Erledigt: null
+  });
 
   //console.log(filter);
 
@@ -35,21 +35,21 @@ const Stammdaten = () => {
     }
   ]
 
-  //const allFilter = ({I, arr}) => {
-  //    let narr = []
-  //  for (let index = 0; index < arr.length; index++) {
-  //    if (I.Erledigt == null && I.Text == null && I.Kfilter == null && I.Katfilter == null && I.SMitarbeiter == null && I.SArt == null && I.DBerichte == null && I.Rruf == null && I.RrufAll == null){
-  //      narr.push(arr[index])
-  //    }else if(I.Erledigt == 1 || I.Erledigt == 0){
-  //      narr.push(arr[index])
-  //    }
-  //    console.log(Object.keys(arr[index]))
-  //  }
-  //  console.log(narr);
-//
-  //  return narr
-  //  
-  //}
+  const allFilter = ({I, arr}) => {
+      let narr = []
+    for (let index = 0; index < arr.length; index++) {
+      if (I.Erledigt == null && I.Text == null && I.Kfilter == null && I.Katfilter == null && I.SMitarbeiter == null && I.SArt == null && I.DBerichte == null && I.Rruf == null && I.RrufAll == null){
+        narr.push(arr[index])
+      }else if(I.Erledigt == 1 || I.Erledigt == 0){
+        narr.push(arr[index])
+      }
+      console.log(Object.keys(arr[index]))
+    }
+    console.log(narr);
+
+    return narr
+    
+  }
   
 
   //function aktualisieren() {
@@ -146,7 +146,7 @@ const Stammdaten = () => {
       datenabruf();
       datenabrufe();
       databruf();
-  }, [tdata])
+  }, [])
   
 
   return(
@@ -157,11 +157,11 @@ const Stammdaten = () => {
       ))}
     </div>
     <div className="w-full grid grid-cols-4 bg-gray-100 absolute m-2">
-      <div className="grid grid-cols-span-1 h-full">
+      <div className="grid grid-cols-span-1">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
-        <div className="flex">
+        <div className="flex h-auto">
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
-          <input className="inline border border-black rounded-sm" />
+          <input className=" w-full inline border border-black rounded-sm" />
         </div>
         <p className="mt-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
         </div>
@@ -343,7 +343,7 @@ const Stammdaten = () => {
                 {tdata.length>0 ?
                 <>
                 {
-                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />) )
+                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />) )                 
                 }
                 </>
                 :
@@ -351,38 +351,6 @@ const Stammdaten = () => {
                 Keine Daten!
                 </>
                 }
-                <tbody>
-                <tr className='bg-red-400'>
-                  <td className='border border-solid border-black'></td>
-                  <td className='border border-solid border-black'>Mustermann</td>
-                  <td className='border border-solid border-black'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
-                  </td>
-                  <td className='border border-solid border-black'>Ruf eingehend</td>
-                  <td className='border border-solid border-black'>Mustermann</td>
-                  <td className='border border-solid border-black'>Sonstiges</td>
-                  <td className='border border-solid border-black'>11.11.1111</td>
-                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
-                  <td className='border border-solid border-black'>Mustermann</td>
-                  <td className='border border-solid border-black'></td>
-                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr className='bg-blue-400'>
-                  <td className='border border-solid border-black'></td>
-                  <td className='border border-solid border-black'>Mustermann</td>
-                  <td className='border border-solid border-black'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-                  </td>
-                  <td className='border border-solid border-black'>Ruf eingehend</td>
-                  <td className='border border-solid border-black'>Mustermann</td>
-                  <td className='border border-solid border-black'>Sonstiges</td>
-                  <td className='border border-solid border-black'>11.11.1111</td>
-                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
-                  <td className='border border-solid border-black'>Mustermann</td>
-                  <td className='border border-solid border-black'></td>
-                  <td className='border border-solid border-black text-center'><input defaultChecked={false} className="" type="checkbox" /></td>
-                </tr>
-                </tbody>
               </table>
         </div>
         </div>
