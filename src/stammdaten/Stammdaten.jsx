@@ -2,14 +2,15 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import Dropdown from '../dropdown/Dropdown'
 import RowColor from '../RowColor'
+import HP from '../Handelsp'
 
 const Stammdaten = () => {
 
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
   const [tdata, setTdata] = useState([]);
+  const [HpData, setHpdata] = useState([]);
   const [filter, setFilter] = useState({
     Text: null,
     Kfilter: null,
@@ -76,7 +77,7 @@ const Stammdaten = () => {
 
   }
 
-    const datenabrufe = async() => {
+    const datenart = async() => {
       const request = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -95,7 +96,7 @@ const Stammdaten = () => {
     
   }
 
-  const databruf = async() => {
+  const datentagesbericht = async() => {
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -110,6 +111,24 @@ const Stammdaten = () => {
 
     if (i.tdata.length>0) {
       setTdata(i.tdata)
+    }
+  }
+
+  const datenhandelsp = async() => {
+    const request = {
+      method:'POST',
+      headers: { 'Content-Type': 'aplication/json' },
+      body:JSON.stringify({
+
+      })
+    };
+
+    const j = await fetch ('http://localhost/Kundenliste/backend/handelspartner.php', request);
+    let k = await j.json();
+    console.log(k);
+
+    if (k.HpData.length>0){
+      setHpdata(k.HpData)
     }
   }
 
@@ -144,26 +163,52 @@ const Stammdaten = () => {
 
     useEffect(()=>{
       datenabruf();
-      datenabrufe();
-      databruf();
+      datenart();
+      datentagesbericht();
+      datenhandelsp();
   }, [])
   
 
   return(
     <>
-    <div>
+    <div className='w-screen'>
       {menuItems.map((item, index) => (
         <a key={item+index} href={item.key}>{item.title}</a>
       ))}
     </div>
-    <div className="w-full grid grid-cols-4 bg-gray-100 absolute m-2">
+    <div className="w-screen grid grid-cols-4 bg-gray-100 p-2">
       <div className="grid grid-cols-span-1">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
         <div className="flex h-auto">
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
           <input className=" w-full inline border border-black rounded-sm" />
         </div>
-        <p className="mt-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <div className='h-screen col-span-1 px-1 mr-2 mt-2 overflow-scroll'>
+              <table className='text-sm border border-solid border-black'>
+                <thead>
+                <tr className='bg-gray-400 items-center justify-items-center'>
+                  <th className='border border-solid border-black px-2'>Suchbegriff</th>
+                  <th className='border border-solid border-black px-2'>Name1</th>
+                  <th className='border border-solid border-black px-2'>Name2</th>
+                  <th className='border border-solid border-black px-2'>Straße</th>
+                  <th className='border border-solid border-black px-2'>Plz</th>
+                  <th className='border border-solid border-black px-2'>Ort</th>
+                  <th className='border border-solid border-black px-2'>Telefon</th>
+                </tr>
+                </thead>
+                {HpData.length>0 ?
+                <>
+                {
+                  allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />) )                 
+                }
+                </>
+                :
+                <>
+                Keine Daten!
+                </>
+                }
+              </table>
+          </div>
         </div>
         <div className="w-full col-start-2 col-span-3 pl-1">
           <div className="flex w-full col-span-1">
@@ -186,18 +231,6 @@ const Stammdaten = () => {
             <button className="border shadow shadow-black bg-gray-300 text-sm border-b-black border-r-black p-[2px] px-2 mb-1">
               <p className='mb-1'>zurücksetzen</p>
             </button>
-            <span className="flex flex-row mt-2 text-sm">
-                  <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Export'>
-                    {(data.length>0)?
-                    <>
-                    <Names Name={data}/>
-                    </>
-                    :
-                    <>
-                    </>
-                    }
-                  </select>
-            </span>
             </div>
 
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
@@ -233,7 +266,7 @@ const Stammdaten = () => {
 
             <div className="col-span-2 mr-2 h-full border border-black relative">
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Stammdaten</p>
-              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-8">
+              <span className="text-sm items-center flex flex-row my-2 mt-8">
                 <p className='pr-1'>Mitarbeiter:</p>
                 <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
                     {(data.length>0)?
@@ -246,10 +279,10 @@ const Stammdaten = () => {
                     }
                   </select>
                 <input defaultChecked={false} className="items-center justify-items-center ml-1" type="checkbox" />
-                <p className="pl-1">Alle</p>
+                <p className="pl-[1px]">Alle</p>
               </span>
-              <span className="text-sm items-center ml-1 flex flex-row my-2 mt-6">
-                <p className='mr-12 pr-1'>Art:</p>
+              <span className="text-sm items-center flex flex-row my-2 mt-6">
+                <p className='mr-5 pr-1'>Art:</p>
                 <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
                     {(artData.length>0)?
                     <>
@@ -323,7 +356,7 @@ const Stammdaten = () => {
               </div>
               </div>
             </div>
-            <div className='h-full col-start-2 col-span-3 px-1 mr-2' >
+            <div className='h-full col-start-2 col-span-3 px-1 mr-2 overflow-y-scroll fixed'>
               <table className='text-sm border border-solid border-black'>
                 <thead>
                 <tr className='bg-sky-200 items-center justify-items-center'>
@@ -352,7 +385,7 @@ const Stammdaten = () => {
                 </>
                 }
               </table>
-        </div>
+          </div>
         </div>
         
     </div>

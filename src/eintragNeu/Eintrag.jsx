@@ -1,5 +1,4 @@
 import React from 'react'
-import Stammdaten from '../stammdaten/Stammdaten'
 
 const Eintrag = () => {
 
@@ -22,7 +21,7 @@ const Eintrag = () => {
         <a key={item+index} href={item.key}>{item.title}</a>
       ))}
     </div>
-    <div className=' text-sm w-full bg-gray-100 absolute m-2 grid grid-cols-6 grid-rows-4 h-full overflow overflow-hidden border border-black px-2 py-2'>
+    <div className=' text-sm w-screen bg-gray-100 absolute grid grid-cols-6 grid-rows-4 h-full border border-black px-2 py-2'>
       <div className='grid col-span-3 border border-black relative mt-6'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Kundeninfo</p>
       </div>
