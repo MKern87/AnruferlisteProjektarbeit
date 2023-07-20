@@ -5,7 +5,7 @@ const RowColor = ({ITEM}) => {
   const [bgColor, setbgColor] = useState (' bg-white ')
   
   const colorTest = ({D}) => {
-    console.log(D)
+    //console.log(D)
     switch (D.trim().toString()) {
       case "Medicare":
         setbgColor(' bg-[#3F3F40] ')
@@ -116,21 +116,21 @@ const RowColor = ({ITEM}) => {
 
   return (
     
-    <tbody>
-    <tr className={bgColor}>
-    <td className='border border-solid border-black'></td>
-    <td className='border border-solid border-black'>{ITEM.Kunden_ID}</td>
-    <td className='border border-solid border-black'>{ITEM.text}</td>
-    <td className='border border-solid border-black'>{ITEM.Art_ID}</td>
-    <td className='border border-solid border-black'>{ITEM.Mitarbeiter}</td>
-    <td className='border border-solid border-black'>{ITEM.Kategorie_ID}</td>
-    <td className='border border-solid border-black'>{ITEM.Datum.date}</td>
-    <td className='border border-solid border-black text-center'>
-    <input defaultChecked={ITEM.Rueckruf==1 ? true : false} className="" type="checkbox" /></td>
-    <td className='border border-solid border-black'>{ITEM.RueckrufWer}</td>
-    <td className='border border-solid border-black'>{ITEM.DatumRueckruf.date}</td>
-    <td className='border border-solid border-black text-center'><input defaultChecked={ITEM.Erledigt==1 ? true : false} className="" type="checkbox" /></td>
-    </tr>
+    <tbody className=''>
+      <tr className={bgColor}>
+        <td className='border border-solid border-black'></td>
+        <td className='border border-solid border-black'>{ITEM.Kunden_ID}</td>
+        <td className='border border-solid border-black'>{ITEM.text}</td>
+        <td className='border border-solid border-black'>{ITEM.Art_ID}</td>
+        <td className='border border-solid border-black'>{ITEM.Mitarbeiter}</td>
+        <td className='border border-solid border-black'>{ITEM.Kategorie_ID}</td>
+        <td className='border border-solid border-black'>{ITEM.Datum.date}</td>
+        <td className='border border-solid border-black text-center'>
+        <input defaultChecked={ITEM.Rueckruf==1 ? true : false} className="" type="checkbox" /></td>
+        <td className='border border-solid border-black'>{ITEM.RueckrufWer}</td>
+        <td className='border border-solid border-black'>{ITEM.DatumRueckruf.date}</td>
+        <td className='border border-solid border-black text-center'><input defaultChecked={ITEM.Erledigt==1 ? true : false} className="" type="checkbox" /></td>
+      </tr>
     </tbody>
     
   )

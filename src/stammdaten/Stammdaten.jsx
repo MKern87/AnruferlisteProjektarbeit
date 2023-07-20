@@ -11,19 +11,20 @@ const Stammdaten = () => {
   const [artData, setArtData] = useState([]);
   const [tdata, setTdata] = useState([]);
   const [HpData, setHpdata] = useState([]);
+  const [search, setSearch] = useState('');
   const [filter, setFilter] = useState({
-    Text: null,
-    Kfilter: null,
-    Katfilter: null,
+    text: null,
+    Kategorie: null,
+    Kunden_ID: null,
     Mitarbeiter: null,
     Art: null,
-    DBerichte: null,
-    Rueckruf: null,
-    RrufAll: null,
+    Datum: null,
+    Rückruf: null,
+    RückrufWer: null,
     Erledigt: null
   });
 
-  //console.log(filter);
+  console.log(filter);
 
   const menuItems = [
     {
@@ -39,14 +40,14 @@ const Stammdaten = () => {
   const allFilter = ({I, arr}) => {
       let narr = []
     for (let index = 0; index < arr.length; index++) {
-      if (I.Erledigt == null && I.Text == null && I.Kfilter == null && I.Katfilter == null && I.SMitarbeiter == null && I.SArt == null && I.DBerichte == null && I.Rruf == null && I.RrufAll == null){
+      if (I.Erledigt == null && I.text == null && I.Kategorie == null && I.Kunden_ID == null && I.Mitarbeiter == null && I.Art == null && I.Datum == null && I.Rückruf == null && I.RückrufWer == null){
         narr.push(arr[index])
       }else if(I.Erledigt == 1 || I.Erledigt == 0){
         narr.push(arr[index])
       }
-      console.log(Object.keys(arr[index]))
+      //console.log(Object.keys(arr[index]))
     }
-    console.log(narr);
+    //console.log(narr);
 
     return narr
     
@@ -67,9 +68,9 @@ const Stammdaten = () => {
         })
     };
     
-    const d = await fetch('http://localhost/Kundenliste/backend/05b80e087db7c7713db71729e78a6ed3.php', request);
+    const d = await fetch('http://localhost/Kundenliste/backend/mitarbeiter.php', request);
     let e = await d.json();
-    console.log(e);
+    //console.log(e);
 
     if (e.data.length>0) {
       setData(e.data)
@@ -88,7 +89,7 @@ const Stammdaten = () => {
       
       const f = await fetch('http://localhost/Kundenliste/backend/art.php', request);
       let g = await f.json();
-      console.log(g);
+      //console.log(g);
 
     if (g.ArtData.length>0) {
       setArtData(g.ArtData)
@@ -107,7 +108,7 @@ const Stammdaten = () => {
 
     const h = await fetch ('http://localhost/Kundenliste/backend/tagesbericht.php', request);
     let i = await h.json();
-    console.log(i);
+    //console.log(i);
 
     if (i.tdata.length>0) {
       setTdata(i.tdata)
@@ -125,7 +126,7 @@ const Stammdaten = () => {
 
     const j = await fetch ('http://localhost/Kundenliste/backend/handelspartner.php', request);
     let k = await j.json();
-    console.log(k);
+    //console.log(k);
 
     if (k.HpData.length>0){
       setHpdata(k.HpData)
@@ -176,16 +177,16 @@ const Stammdaten = () => {
         <a key={item+index} href={item.key}>{item.title}</a>
       ))}
     </div>
-    <div className="w-screen grid grid-cols-4 bg-gray-100 p-2">
+    <div className="w-screen grid grid-cols-4 bg-gray-100 p-2 text-sm">
       <div className="grid grid-cols-span-1">
         <h1 className="flex font-bold float-left mb-3">Kunden</h1>
         <div className="flex h-auto">
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
-          <input className=" w-full inline border border-black rounded-sm" />
+          <input className="w-full inline border border-black rounded-sm" onChange={(e) => allFilter(e.target.value)}/>
         </div>
-        <div className='h-screen col-span-1 px-1 mr-2 mt-2 overflow-scroll'>
-              <table className='text-sm border border-solid border-black'>
-                <thead>
+        <div className='h-screen col-span-1 px-1 mt-2 overflow-scroll w-full'>
+              <table className='border border-solid border-black'>
+                <thead className=''>
                 <tr className='bg-gray-400 items-center justify-items-center'>
                   <th className='border border-solid border-black px-2'>Suchbegriff</th>
                   <th className='border border-solid border-black px-2'>Name1</th>
@@ -199,7 +200,7 @@ const Stammdaten = () => {
                 {HpData.length>0 ?
                 <>
                 {
-                  allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />) )                 
+                  allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />))                 
                 }
                 </>
                 :
@@ -376,7 +377,7 @@ const Stammdaten = () => {
                 {tdata.length>0 ?
                 <>
                 {
-                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />) )                 
+                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />))                 
                 }
                 </>
                 :
