@@ -413,4 +413,5 @@ const Stammdaten = () => {
   )
 
 }
+}
 export default Stammdaten
