@@ -22,7 +22,7 @@ const Stammdaten = () => {
     Rückruf: null,
     RückrufWer: null,
     Erledigt: null
-  });
+});
 
   console.log(filter);
 
@@ -59,6 +59,8 @@ const Stammdaten = () => {
   //}
 
 
+// scroll-height
+
   const datenabruf = async() => {
     const request = {
         method: 'POST',
@@ -75,7 +77,6 @@ const Stammdaten = () => {
     if (e.data.length>0) {
       setData(e.data)
     }
-
   }
 
     const datenart = async() => {
@@ -162,6 +163,13 @@ const Stammdaten = () => {
     )
   }
 
+  const filters = ({tdata}) => {
+    tdata.filter((item) => {
+      return search.toLowerCase() === ''
+        ? item
+        : item.first_name.toLowerCase().includes(search);
+  })
+
     useEffect(()=>{
       datenabruf();
       datenart();
@@ -184,7 +192,7 @@ const Stammdaten = () => {
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
           <input className="w-full inline border border-black rounded-sm" onChange={(e) => allFilter(e.target.value)}/>
         </div>
-        <div className='h-screen col-span-1 px-1 mt-2 overflow-scroll w-full'>
+        <div className='h-screen col-span-1 px-1 mt-2 w-full sc'>
               <table className='border border-solid border-black'>
                 <thead className=''>
                 <tr className='bg-gray-400 items-center justify-items-center'>
@@ -199,9 +207,20 @@ const Stammdaten = () => {
                 </thead>
                 {HpData.length>0 ?
                 <>
-                {
-                  allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />))                 
-                }
+                  <>
+                    {
+                      search ?
+                      <>
+                      
+                      </>
+                      :
+                      <>
+                      {
+                        allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />))                 
+                      }
+                      </>
+                    }
+                  </>
                 </>
                 :
                 <>
@@ -357,7 +376,7 @@ const Stammdaten = () => {
               </div>
               </div>
             </div>
-            <div className='h-full col-start-2 col-span-3 px-1 mr-2 overflow-y-scroll fixed'>
+            <div className='h-full col-start-2 col-span-3 px-1 mr-2 overflow-y-scroll'>
               <table className='text-sm border border-solid border-black'>
                 <thead>
                 <tr className='bg-sky-200 items-center justify-items-center'>
