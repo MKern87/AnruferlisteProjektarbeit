@@ -12,7 +12,8 @@ const Stammdaten = () => {
   const [tdata, setTdata] = useState([]);
   const [HpData, setHpdata] = useState([]);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState({
+  const [filter, setFilter] = useState(
+    {
     text: null,
     Kategorie: null,
     Kunden_ID: null,
@@ -21,8 +22,15 @@ const Stammdaten = () => {
     Datum: null,
     Rückruf: null,
     RückrufWer: null,
-    Erledigt: null
-  });
+    Erledigt: null,
+    Suchbegriff: null,
+    Name1: null,
+    Name2: null,
+    Straße: null,
+    Plz: null,
+    Ort: null,
+    Telefon: null
+    });
 
   console.log(filter);
 
@@ -37,21 +45,7 @@ const Stammdaten = () => {
     }
   ]
 
-  const allFilter = ({I, arr}) => {
-      let narr = []
-    for (let index = 0; index < arr.length; index++) {
-      if (I.Erledigt == null && I.text == null && I.Kategorie == null && I.Kunden_ID == null && I.Mitarbeiter == null && I.Art == null && I.Datum == null && I.Rückruf == null && I.RückrufWer == null){
-        narr.push(arr[index])
-      }else if(I.Erledigt == 1 || I.Erledigt == 0){
-        narr.push(arr[index])
-      }
-      //console.log(Object.keys(arr[index]))
-    }
-    //console.log(narr);
-
-    return narr
-    
-  }
+  
   
 
   //function aktualisieren() {
@@ -95,7 +89,7 @@ const Stammdaten = () => {
       setArtData(g.ArtData)
     }
     
-  }
+    }
 
   const datentagesbericht = async() => {
     const request = {
@@ -133,6 +127,24 @@ const Stammdaten = () => {
     }
   }
 
+  const allFilter = ({I, arr}) => {
+    let narr = []
+  for (let index = 0; index < arr.length; index++) {
+    if (I.Erledigt == null && I.text == null && I.Kategorie == null && I.Kunden_ID == null && I.Mitarbeiter == null 
+        && I.Art == null && I.Datum == null && I.Rückruf == null && I.RückrufWer == null && I.Suchbegriff == null
+        && I.Name1 == null && I.Name2 == null && I.Straße == null && I.Plz == null && I.Ort == null && I.Telefon == null){
+      narr.push(arr[index])
+    }else if(I.Erledigt == 1 || I.Erledigt == 0){
+      narr.push(arr[index])
+    }
+    console.log(Object.keys(arr[index]))
+  }
+  //console.log(narr);
+
+  return narr
+  
+}
+
   const Names = ({Name}) => {
     //console.log(Name);
     return (
@@ -162,6 +174,14 @@ const Stammdaten = () => {
     )
   }
 
+  const filters = ({HpData}) => {
+      HpData.filter((item) => {
+      return search.toLowerCase() === ''
+        ? item
+        : item.Suchbegriff.toLowerCase().includes(search);
+      })
+    }
+
     useEffect(()=>{
       datenabruf();
       datenart();
@@ -177,16 +197,16 @@ const Stammdaten = () => {
         <a key={item+index} href={item.key}>{item.title}</a>
       ))}
     </div>
-    <div className="w-screen grid grid-cols-4 bg-gray-100 p-2 text-sm">
+    <div className="w-screen grid grid-cols-4 bg-gray-100 p-2">
       <div className="grid grid-cols-span-1">
-        <h1 className="flex font-bold float-left mb-3">Kunden</h1>
-        <div className="flex h-auto">
+        <h1 className="flex font-bold float-left">Kunden</h1>
+        <div className="flex">
           <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
-          <input className="w-full inline border border-black rounded-sm" onChange={(e) => allFilter(e.target.value)}/>
+          <input className="w-full h-8 mt-10 inline border border-black rounded-sm" onChange={(e) => setSearch(e.target.value)}/>
         </div>
-        <div className='h-screen col-span-1 px-1 mt-2 overflow-scroll w-full'>
+        <div className='h-screen col-span-1 px-1 mt-2 overflow-scroll text-sm'>
               <table className='border border-solid border-black'>
-                <thead className=''>
+                <thead className=' sticky top-0'>
                 <tr className='bg-gray-400 items-center justify-items-center'>
                   <th className='border border-solid border-black px-2'>Suchbegriff</th>
                   <th className='border border-solid border-black px-2'>Name1</th>
@@ -199,9 +219,24 @@ const Stammdaten = () => {
                 </thead>
                 {HpData.length>0 ?
                 <>
-                {
-                  allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />))                 
-                }
+                  <>
+                    {
+                      search ?
+                      <>
+                      {
+                        filters.map((item, index) => (
+                          <HP key={item+index} ITEMHP={item} />
+                        ))
+                      }
+                      </>
+                      :
+                      <>
+                      {
+                        allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />))                 
+                      }
+                      </>
+                    }
+                  </>
                 </>
                 :
                 <>
@@ -237,7 +272,7 @@ const Stammdaten = () => {
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
             <div className="mb-2 relative border h-1/2 border-black px-2">
             <p className="ml-2 text-sm absolute inset-x -mt-3 bg-gray-200 px-1 ">Textsuche</p>
-            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" />
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" onChange={(e) => setSearch(e.target.value)}/>
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black relative mt-2">
@@ -302,7 +337,7 @@ const Stammdaten = () => {
             <div className="col-span-2 mr-2 border border-black h-full relative">
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
-                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" />
+                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" onChange={() => setFilter(true)}/>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2">Bis: 
                 <input type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
@@ -357,9 +392,9 @@ const Stammdaten = () => {
               </div>
               </div>
             </div>
-            <div className='h-full col-start-2 col-span-3 px-1 mr-2 overflow-y-scroll fixed'>
+            <div className='h-screen col-start-2 col-span-3 px-1 mr-2 overflow-scroll float-right'>
               <table className='text-sm border border-solid border-black'>
-                <thead>
+                <thead className='sticky top-0'>
                 <tr className='bg-sky-200 items-center justify-items-center'>
                   <th className='border border-solid border-black px-2'></th>
                   <th className='border border-solid border-black px-2'>Kunde</th>
@@ -377,7 +412,7 @@ const Stammdaten = () => {
                 {tdata.length>0 ?
                 <>
                 {
-                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />))                 
+                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />))               
                 }
                 </>
                 :
