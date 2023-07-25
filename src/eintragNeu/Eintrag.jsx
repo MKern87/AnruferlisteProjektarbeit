@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Baum from '../kategorieBaum/Baum';
 
 const Eintrag = () => {
 
@@ -6,6 +7,9 @@ const Eintrag = () => {
   const [artData, setArtData] = useState([]);
   const [rrChecked, setrrChecked] = useState(false);
   const [aInput, setaInput] = useState(false);
+  const [time, setTime] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
 
   const menuItems = [
     {
@@ -18,7 +22,10 @@ const Eintrag = () => {
     }
   ]
 
-  const today = new Date();
+  const today = new Date()
+  const showTime = today.getHours()
+    + ':' + today.getMinutes()
+    + ':' + today.getSeconds()
 
   const datenabruf = async() => {
     const request = {
@@ -87,13 +94,28 @@ const Eintrag = () => {
     )
   }
 
+  const hours = Math.floor(time / 360000)
+  const minutes = Math.floor((time % 360000) / 6000)
+  const seconds = Math.floor((time % 6000) / 100)
 
+  const startAndStop = () => {
+    setIsRunning(!isRunning)
+  }
+
+  const reset = () => {
+    setTime(0)
+  }
 
 
   useEffect (() => {
     datenabruf();
     datenart();
-  }, [])
+    let intervalId;
+      if (isRunning) {
+        intervalId = setInterval(() => setTime(time +1), 10);
+      }
+        return () => clearInterval(intervalId);
+  }, [isRunning, time])
 
   
   return (
@@ -109,6 +131,9 @@ const Eintrag = () => {
       </div>
       <div className='grid col-span-1 row-span-2 border border-black ml-2 mt-6'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Kategorie</p>
+        <span>
+          <Baum/>
+        </span>
       </div>
       <div className='grid col-start-1 col-span-1 border border-black mt-6 relative'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Stammdaten</p>
@@ -140,18 +165,22 @@ const Eintrag = () => {
       </div>
       <div className='grid col-start-2 col-span-1 border border-black mt-6 relative ml-2'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Status</p>
-        <span className='ml-4 mt-2'>
-        <input type="checkbox" defaultChecked={false}/> Erledigt
-        </span>
+          <span className='ml-4 mt-2'>
+            <input type="checkbox" defaultChecked={false}/> Erledigt
+          </span>
         <span>Start:
-        <input type='date' className="h-6 ml-10 border border-black rounded-sm bg-white p-1"/>
-        <input type='time' className="h-6 ml-2 border border-black rounded-sm bg-white p-1"/>
+          <input type='date' className="h-6 ml-10 border border-black rounded-sm bg-white"/>
+          <p className='float-right border border-black bg-white mr-10 px-4'>{ showTime }</p>
         </span>
-        <span>Dauer:
-        <input type='time' className="items-center justify-items-center h-6 ml-8 border border-black rounded-sm bg-white p-1"/>
+        <span className=''>Dauer:
+          <p className='border border-black pl-1 bg-white w-1/4 float-right mr-36'>
+            {hours}:
+            {minutes.toString().padStart(2, "0")}:
+            {seconds.toString().padStart(2, "0")}
+          </p>
         </span>
         <div className='ml-20 items-center justify-items-center'>
-        <button className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>Zeit verändern</button>
+        <button onClick={startAndStop} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>{isRunning ? 'Stop' : 'Zeit verändern'}</button>
         <button className='border shadow ml-2 px-2 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100 w-auto'>OK</button>
         </div>
       </div>
@@ -166,12 +195,12 @@ const Eintrag = () => {
         }}/> Rückruf
         </span>
         <span>Wann:
-        <input type='date' className="h-6 ml-10 border border-black rounded-sm bg-white p-1"/>
-        <input type='time' className="h-6 ml-2 border border-black rounded-sm bg-white p-1"/>
+        <input type='date' className="h-6 ml-10 border border-black rounded-sm bg-white"/>
+        <input type='time' className="h-6 ml-2 border border-black rounded-sm bg-white"/>
         <input type="checkbox" className='ml-2' defaultChecked={false}/> egal
         </span>
         <span className=''>Wer:
-          <select onChange={e => setaInput(e.target.value)} disabled={!rrChecked} value={aInput} className='text-left ml-12 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
+          <select onChange={(e) => setaInput(e.target.value)} disabled={!rrChecked} value={aInput} className='text-left ml-12 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
             {(data.length>0)?
             <>
             <Names Name={data}/>

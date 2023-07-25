@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 const Handelsp = ({ITEMHP}) => {
 
-  const [bgColor2, setbgColor2] = useState (' bg-gray ')
 
   useEffect(()=>{
   }, [])
@@ -10,7 +9,7 @@ const Handelsp = ({ITEMHP}) => {
   return (
     
     <tbody className=''>
-      <tr className={bgColor2}>
+      <tr className='bg-gray'>
         <td className='border border-solid border-black'>{ITEMHP.Suchbegriff}</td>
         <td className='border border-solid border-black'>{ITEMHP.Name1}</td>
         <td className='border border-solid border-black'>{ITEMHP.Name2}</td>

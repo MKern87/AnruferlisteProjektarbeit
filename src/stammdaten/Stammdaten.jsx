@@ -12,6 +12,7 @@ const Stammdaten = () => {
   const [tdata, setTdata] = useState([]);
   const [HpData, setHpdata] = useState([]);
   const [search, setSearch] = useState('');
+  const [searchd, setSearchd] = useState('');
   const [filter, setFilter] = useState(
     {
     text: null,
@@ -32,7 +33,7 @@ const Stammdaten = () => {
     Telefon: null
     });
 
-  console.log(filter);
+  //console.log(filter);
 
   const menuItems = [
     {
@@ -136,13 +137,13 @@ const Stammdaten = () => {
       narr.push(arr[index])
     }else if(I.Erledigt == 1 || I.Erledigt == 0){
       narr.push(arr[index])
+    }else if(I.Rückruf == 1 || I.Rückruf == 0){
+      narr.push(arr[index])
     }
-    console.log(Object.keys(arr[index]))
+    //console.log(Object.keys(arr[index]))
   }
   //console.log(narr);
-
   return narr
-  
 }
 
   const Names = ({Name}) => {
@@ -173,14 +174,6 @@ const Stammdaten = () => {
       </>
     )
   }
-
-  const filters = ({HpData}) => {
-      HpData.filter((item) => {
-      return search.toLowerCase() === ''
-        ? item
-        : item.Suchbegriff.toLowerCase().includes(search);
-      })
-    }
 
     useEffect(()=>{
       datenabruf();
@@ -224,7 +217,11 @@ const Stammdaten = () => {
                       search ?
                       <>
                       {
-                        filters.map((item, index) => (
+                        HpData.filter((item) => {
+                          return search.toLowerCase() === ''
+                          ? item
+                          : item.Suchbegriff.toLowerCase().includes(search) 
+                        }).map((item, index) =>(
                           <HP key={item+index} ITEMHP={item} />
                         ))
                       }
@@ -272,7 +269,7 @@ const Stammdaten = () => {
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
             <div className="mb-2 relative border h-1/2 border-black px-2">
             <p className="ml-2 text-sm absolute inset-x -mt-3 bg-gray-200 px-1 ">Textsuche</p>
-            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" onChange={(e) => setSearch(e.target.value)}/>
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" onChange={(e) => setSearchd(e.target.value)}/>
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black relative mt-2">
@@ -411,9 +408,28 @@ const Stammdaten = () => {
                 </thead>
                 {tdata.length>0 ?
                 <>
-                {
-                  allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />))               
-                }
+                  <>
+                    {
+                      searchd ?
+                      <>
+                      {
+                        tdata.filter((item) => {
+                          return searchd.toLowerCase() === ''
+                          ? item
+                          : item.text.toLowerCase().includes(searchd)
+                        }).map((item, index) =>(
+                          <RowColor key={item+index} ITEM={item} />
+                        ))
+                      }
+                      </>
+                      :
+                      <>
+                      {
+                        allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />))                 
+                      }
+                      </>
+                    }
+                  </>
                 </>
                 :
                 <>
