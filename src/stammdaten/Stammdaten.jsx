@@ -12,26 +12,7 @@ const Stammdaten = () => {
   const [tdata, setTdata] = useState([]);
   const [HpData, setHpdata] = useState([]);
   const [search, setSearch] = useState('');
-  const [searchd, setSearchd] = useState('');
-  const [filter, setFilter] = useState(
-    {
-    text: null,
-    Kategorie: null,
-    Kunden_ID: null,
-    Mitarbeiter: null,
-    Art: null,
-    Datum: null,
-    Rückruf: null,
-    RückrufWer: null,
-    Erledigt: null,
-    Suchbegriff: null,
-    Name1: null,
-    Name2: null,
-    Straße: null,
-    Plz: null,
-    Ort: null,
-    Telefon: null
-    });
+  const [arr, setArr] = useState([]);
 
   //console.log(filter);
 
@@ -44,7 +25,7 @@ const Stammdaten = () => {
       title: 'Eintrag',
       key: '/Eintrag'
     }
-  ]
+  ];
 
   
   
@@ -107,7 +88,9 @@ const Stammdaten = () => {
 
     if (i.tdata.length>0) {
       setTdata(i.tdata)
+      setArr(i.tdata)
     }
+    console.log(i);
   }
 
   const datenhandelsp = async() => {
@@ -128,20 +111,15 @@ const Stammdaten = () => {
     }
   }
 
-  const allFilter = ({I, arr}) => {
-      let narr = []
-    for (let index = 0; index < arr.length; index++) {
-      if (I.Erledigt == null && I.text == null && I.Kategorie == null && I.Kunden_ID == null && I.Mitarbeiter == null 
-          && I.Art == null && I.Datum == null && I.Rückruf == null && I.RückrufWer == null && I.Suchbegriff == null
-          && I.Name1 == null && I.Name2 == null && I.Straße == null && I.Plz == null && I.Ort == null && I.Telefon == null){
-        narr.push(arr[index])
-        }else if(I.Erledigt === 1 || I.Erledigt === 0){
-          narr.push(arr[index])
-        }
-      //console.log(Object.keys(arr[index]))
-    }
-  //console.log(narr);
-  return narr
+  const filter = ({item, value}) => {
+    let narr = item
+  if (value === 2) {
+    setTdata(narr)
+  }else{
+    narr = narr.filter((item) => item.Erledigt == value)
+    console.log(narr)
+    setTdata(narr)
+  }
   }
 
   const Names = ({Name}) => {
@@ -177,6 +155,7 @@ const Stammdaten = () => {
       datenart();
       datentagesbericht();
       datenhandelsp();
+      console.log(tdata)
   }, [])
   
 
@@ -209,33 +188,16 @@ const Stammdaten = () => {
                 </thead>
                 {HpData.length>0 ?
                 <>
+                  {
+                    HpData.map((item, index) =>(
+                      <HP key={item+index} ITEM={item} />
+                    ))
+                  }
+                 </>
+                  :
                   <>
-                    {
-                      search ?
-                      <>
-                      {
-                        HpData.filter((item) => {
-                          return search.toLowerCase() === ''
-                          ? item
-                          : item.Suchbegriff.toLowerCase().includes(search) 
-                        }).map((item, index) =>(
-                          <HP key={item+index} ITEMHP={item} />
-                        ))
-                      }
-                      </>
-                      :
-                      <>
-                      {
-                        allFilter({I:filter, arr:HpData}).map((item, index) => (<HP key={item+index} ITEMHP={item} />))                 
-                      }
-                      </>
-                    }
+                  Keine Daten!
                   </>
-                </>
-                :
-                <>
-                Keine Daten!
-                </>
                 }
               </table>
           </div>
@@ -266,7 +228,7 @@ const Stammdaten = () => {
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
             <div className="mb-2 relative border h-1/2 border-black px-2">
             <p className="ml-2 text-sm absolute inset-x -mt-3 bg-gray-200 px-1 ">Textsuche</p>
-            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" onChange={(e) => setSearchd(e.target.value)}/>
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" />
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black relative mt-2">
@@ -331,7 +293,7 @@ const Stammdaten = () => {
             <div className="col-span-2 mr-2 border border-black h-full relative">
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
-                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1" onChange={() => setFilter(true)}/>
+                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2">Bis: 
                 <input type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
@@ -375,13 +337,13 @@ const Stammdaten = () => {
               <p className="ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Erledigt</p>
               <div className="flex flex-col items-start ml-10 my-2 mt-5">
                 <label className="my-1" for="default-radio-1">
-                <input id='erledigt' value={1} type="radio" name='erledigt' onChange={() => setFilter(true)} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={1} type="radio" name='erledigt' onChange={() => filter({item: arr, value: 1})} className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label className="my-1" for="default-radio-2">
-                <input id='erledigt' value={0} type="radio" name='erledigt' onChange={() => setFilter(true)} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={0} type="radio" name='erledigt' onChange={() => filter({item: arr, value: 0})} className="text-blue-600 focus:ring-blue-500" />
                 Nein</label>
                 <label className="my-1" for="default-radio-3">
-                <input id='erledigt' value={2} type="radio" name='erledigt' onChange={() => setFilter(false)} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={2} type="radio" name='erledigt' onChange={() => filter({item: arr, value: 2})} className="text-blue-600 focus:ring-blue-500" />
                 Alle</label>
               </div>
               </div>
@@ -405,33 +367,16 @@ const Stammdaten = () => {
                 </thead>
                 {tdata.length>0 ?
                 <>
+                  {
+                    tdata.map((item, index) =>(
+                      <RowColor key={item+index} ITEM={item} />
+                    ))
+                  }
+                 </>
+                  :
                   <>
-                    {
-                      searchd ?
-                      <>
-                      {
-                        tdata.filter((item) => {
-                          return searchd.toLowerCase() === ''
-                          ? item
-                          : item.text.toLowerCase().includes(searchd)
-                        }).map((item, index) =>(
-                          <RowColor key={item+index} ITEM={item} />
-                        ))
-                      }
-                      </>
-                      :
-                      <>
-                      {
-                        allFilter({I:filter, arr:tdata}).map((item, index) => (<RowColor key={item+index} ITEM={item} />))                 
-                      }
-                      </>
-                    }
+                  Keine Daten!
                   </>
-                </>
-                :
-                <>
-                Keine Daten!
-                </>
                 }
               </table>
           </div>

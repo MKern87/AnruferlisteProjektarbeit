@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 const RowColor = ({ITEM}) => {
 
   const [bgColor, setbgColor] = useState (' bg-white ')
-  
+  console.log(ITEM)
   const colorTest = ({D}) => {
     //console.log(D)
     switch (D.trim().toString()) {
@@ -111,7 +111,6 @@ const RowColor = ({ITEM}) => {
 
   useEffect(()=>{
     colorTest({D:ITEM.Kategorie_ID});
-
 }, [])
 
   return (
@@ -129,7 +128,7 @@ const RowColor = ({ITEM}) => {
         <input defaultChecked={ITEM.Rueckruf==1 ? true : false} className="" type="checkbox" /></td>
         <td className='border border-solid border-black'>{ITEM.RueckrufWer}</td>
         <td className='border border-solid border-black'>{ITEM.DatumRueckruf.date}</td>
-        <td className='border border-solid border-black text-center'><input defaultChecked={ITEM.Erledigt==1 ? true : false} className="" type="checkbox" /></td>
+        <td className='border border-solid border-black text-center'>{ITEM.Erledigt == 0 ? <input className="" type="checkbox" /> : <input className="" type="checkbox" checked/>}</td>
       </tr>
     </tbody>
     
