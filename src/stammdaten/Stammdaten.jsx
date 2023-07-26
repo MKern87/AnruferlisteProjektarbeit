@@ -129,25 +129,22 @@ const Stammdaten = () => {
   }
 
   const allFilter = ({I, arr}) => {
-    let narr = []
-  for (let index = 0; index < arr.length; index++) {
-    if (I.Erledigt == null && I.text == null && I.Kategorie == null && I.Kunden_ID == null && I.Mitarbeiter == null 
-        && I.Art == null && I.Datum == null && I.Rückruf == null && I.RückrufWer == null && I.Suchbegriff == null
-        && I.Name1 == null && I.Name2 == null && I.Straße == null && I.Plz == null && I.Ort == null && I.Telefon == null){
-      narr.push(arr[index])
-    }else if(I.Erledigt == 1 || I.Erledigt == 0){
-      narr.push(arr[index])
-    }else if(I.Rückruf == 1 || I.Rückruf == 0){
-      narr.push(arr[index])
+      let narr = []
+    for (let index = 0; index < arr.length; index++) {
+      if (I.Erledigt == null && I.text == null && I.Kategorie == null && I.Kunden_ID == null && I.Mitarbeiter == null 
+          && I.Art == null && I.Datum == null && I.Rückruf == null && I.RückrufWer == null && I.Suchbegriff == null
+          && I.Name1 == null && I.Name2 == null && I.Straße == null && I.Plz == null && I.Ort == null && I.Telefon == null){
+        narr.push(arr[index])
+        }else if(I.Erledigt === 1 || I.Erledigt === 0){
+          narr.push(arr[index])
+        }
+      //console.log(Object.keys(arr[index]))
     }
-    //console.log(Object.keys(arr[index]))
-  }
   //console.log(narr);
   return narr
-}
+  }
 
   const Names = ({Name}) => {
-    //console.log(Name);
     return (
     <>
       {
