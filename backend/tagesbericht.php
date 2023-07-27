@@ -30,9 +30,10 @@ $query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID,
         JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID
         JOIN Art ON Tagesbericht.Art_ID = Art.Art_ID 
         JOIN Baum ON Tagesbericht.Kategorie_ID = Baum.ID        
+        WHERE Tagesbericht.Datum > '2023-01-06 00:00:00'
         ORDER BY Tagesbericht.Datum DESC";
 
-// WHERE Tagesbericht.Datum > '2023-01-06 00:00:00'
+
 
 $abruf= sqlsrv_query($db, $query);
 

@@ -12,6 +12,7 @@ const Stammdaten = () => {
   const [tdata, setTdata] = useState([]);
   const [HpData, setHpdata] = useState([]);
   const [search, setSearch] = useState('');
+  const [searchd, setSearchd] = useState('');
   const [arr, setArr] = useState([]);
 
   //console.log(filter);
@@ -26,8 +27,6 @@ const Stammdaten = () => {
       key: '/Eintrag'
     }
   ];
-
-  
   
 
   //function aktualisieren() {
@@ -51,7 +50,6 @@ const Stammdaten = () => {
     if (e.data.length>0) {
       setData(e.data)
     }
-
   }
 
     const datenart = async() => {
@@ -117,7 +115,7 @@ const Stammdaten = () => {
     setTdata(narr)
   }else{
     narr = narr.filter((item) => item.Erledigt == value)
-    console.log(narr)
+    //console.log(narr)
     setTdata(narr)
   }
   }
@@ -189,15 +187,19 @@ const Stammdaten = () => {
                 {HpData.length>0 ?
                 <>
                   {
-                    HpData.map((item, index) =>(
-                      <HP key={item+index} ITEM={item} />
+                    HpData.filter((item) => {
+                      return search.toLowerCase() === ''
+                      ? item
+                      : item.Suchbegriff.toLowerCase().includes(search) 
+                    }).map((item, index) =>(
+                      <HP key={item+index} ITEMHP={item} />
                     ))
-                  }
-                 </>
-                  :
-                  <>
-                  Keine Daten!
-                  </>
+                  }                  
+                </>
+                :
+                <>
+                Keine Daten!
+                </>
                 }
               </table>
           </div>
@@ -228,7 +230,7 @@ const Stammdaten = () => {
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
             <div className="mb-2 relative border h-1/2 border-black px-2">
             <p className="ml-2 text-sm absolute inset-x -mt-3 bg-gray-200 px-1 ">Textsuche</p>
-            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" />
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" onChange={(e) => setSearchd(e.target.value)} />
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black relative mt-2">
@@ -238,7 +240,7 @@ const Stammdaten = () => {
                 <input type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label for="default-radio-2">
-                <input checked type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
+                <input type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
                 Nein </label>
               </div>
             </div>
@@ -249,7 +251,7 @@ const Stammdaten = () => {
                 <input type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label for="default-radio-2">
-                <input checked type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
                 Nein</label>
               </div>
             </div>
@@ -308,13 +310,13 @@ const Stammdaten = () => {
               <p className="ml-4 mb-4 absolute inset-x -mt-3 bg-gray-200 px-1">Rückruf</p>
               <div className="flex flex-row items-stretch justify-center mt-6">
                 <label className="mr-6 ml-6" for="default-radio-1">
-                <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" value={1} onChange={() => filter({item: arr, value: 1})} name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Ja </label>
                 <label className="mr-6" for="default-radio-2">
-                <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" value={0} onChange={() => filter({item: arr, value: 0})} name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Nein </label>
                 <label for="default-radio-3">
-                <input type="radio" name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" value={2} onChange={() => filter({item: arr, value: 2})} name='rückruf' className="text-blue-600 focus:ring-blue-500" />
                 Alle </label>
               </div>
                 <span className="items-center ml-1 flex flex-row mt-4 mb-1">
@@ -368,7 +370,11 @@ const Stammdaten = () => {
                 {tdata.length>0 ?
                 <>
                   {
-                    tdata.map((item, index) =>(
+                    tdata.filter((item) => {
+                      return searchd.toLowerCase() === ''
+                      ? item
+                      : item.text.toLowerCase().includes(searchd)
+                    }).map((item, index) =>(
                       <RowColor key={item+index} ITEM={item} />
                     ))
                   }
