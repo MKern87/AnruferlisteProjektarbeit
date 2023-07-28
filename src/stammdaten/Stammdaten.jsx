@@ -14,6 +14,10 @@ const Stammdaten = () => {
   const [search, setSearch] = useState('');
   const [searchd, setSearchd] = useState('');
   const [arr, setArr] = useState([]);
+  //const [dateFilter, setDateFilter] = useState({
+  //  minDate: null,
+  //  maxDate: null
+  //})
 
   //console.log(filter);
 
@@ -148,12 +152,13 @@ const Stammdaten = () => {
     )
   }
 
+
     useEffect(()=>{
       datenabruf();
       datenart();
       datentagesbericht();
       datenhandelsp();
-      console.log(tdata)
+      //console.log(tdata)
   }, [])
   
 
@@ -165,15 +170,12 @@ const Stammdaten = () => {
       ))}
     </div>
     <div className="w-screen grid grid-cols-4 bg-gray-100 p-2">
-      <div className="grid grid-cols-span-1">
-        <h1 className="flex font-bold float-left">Kunden</h1>
-        <div className="flex">
-          <button className="inline mx-1 mt-1"><FaArrowAltCircleRight /></button>
-          <input className="w-full h-8 mt-10 inline border border-black rounded-sm" onChange={(e) => setSearch(e.target.value)}/>
-        </div>
-        <div className='h-screen col-span-1 px-1 mt-2 overflow-scroll text-sm'>
+      <div className="grid cols-span-1">
+        <h1 className="font-bold float-left">Kunden</h1>
+          <input className="text-sm w-full h-8 px-2 border border-black rounded-sm" placeholder='Kunden suchen...' onChange={(e) => setSearch(e.target.value)}/>        
+        <div className='h-screen col-span-1 px-1 overflow-scroll text-sm'>
               <table className='border border-solid border-black'>
-                <thead className=' sticky top-0'>
+                <thead className='sticky top-0'>
                 <tr className='bg-gray-400 items-center justify-items-center'>
                   <th className='border border-solid border-black px-2'>Suchbegriff</th>
                   <th className='border border-solid border-black px-2'>Name1</th>
@@ -194,7 +196,7 @@ const Stammdaten = () => {
                     }).map((item, index) =>(
                       <HP key={item+index} ITEMHP={item} />
                     ))
-                  }                  
+                  } 
                 </>
                 :
                 <>
@@ -230,7 +232,7 @@ const Stammdaten = () => {
           <div className="col-span-3 h-full bg-gray-200 text-sm mx-2">
             <div className="mb-2 relative border h-1/2 border-black px-2">
             <p className="ml-2 text-sm absolute inset-x -mt-3 bg-gray-200 px-1 ">Textsuche</p>
-            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" onChange={(e) => setSearchd(e.target.value)} />
+            <input type='text' className="w-full border border-black bg-slate-100 rounded-sm mt-6 p-1" placeholder='Textsuche' onChange={(e) => setSearchd(e.target.value)} />
             </div>
             <div className="flex flex-row">
             <div className="w-1/2 border mr-2 border-black relative mt-2">
@@ -262,7 +264,7 @@ const Stammdaten = () => {
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Stammdaten</p>
               <span className="text-sm items-center flex flex-row my-2 mt-8">
                 <p className='pr-1'>Mitarbeiter:</p>
-                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
+                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='mitarbeiter'>
                     {(data.length>0)?
                     <>
                     <Names Name={data}/>
@@ -272,7 +274,7 @@ const Stammdaten = () => {
                     </>
                     }
                   </select>
-                <input defaultChecked={false} className="items-center justify-items-center ml-1" type="checkbox" />
+                <input defaultChecked={false} id='mitarbeiter' className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-[1px]">Alle</p>
               </span>
               <span className="text-sm items-center flex flex-row my-2 mt-6">
@@ -295,10 +297,10 @@ const Stammdaten = () => {
             <div className="col-span-2 mr-2 border border-black h-full relative">
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
-                <input type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1"/>
+                <input id='minDate' type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2">Bis: 
-                <input type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
+                <input id='maxDate' type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="flex flex-row my-2 text-sm justify-center">
                 <input defaultChecked={false} type="checkbox" />
