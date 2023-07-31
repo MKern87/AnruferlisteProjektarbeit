@@ -1,9 +1,5 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { FaArrowAltCircleRight } from 'react-icons/fa'
-import { TiArrowSortedDown } from 'react-icons/ti'
-import RowColor from '../components/RowColor'
-import HP from '../components/Handelsp'
 import StammdatenMitarbeiter from '../components/StammdatenMitarbeiter'
 import StammdatenArt from '../components/StammdatenArt'
 import DatenTagesbericht from '../components/DatenTagesbericht'
@@ -140,7 +136,7 @@ const Stammdaten = () => {
     if (i.tdata.length>0) {
       setTdata(i.tdata)
     }
-    console.log(i);
+    //console.log(i);
   }
 
 //////// Datenabruf Handelspartner ////////

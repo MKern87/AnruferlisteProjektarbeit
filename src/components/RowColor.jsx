@@ -127,11 +127,11 @@ const RowColor = ({ITEM}) => {
         <td className='border border-solid border-black'>{ITEM.Kategorie_ID}</td>
         <td className='border border-solid border-black'>{ITEM.Datum.date}</td>
         <td className='border border-solid border-black text-center'>
-          <input disabled defaultChecked={ITEM.Rueckruf === 1 ? true : false} className="" type="checkbox" />{ITEM.Rueckruf}</td>
+          <input disabled defaultChecked={ITEM.Rueckruf === 1 ? true : false} className="" type="checkbox" /></td>
         <td className='border border-solid border-black'>{ITEM.Mitarbeitername}</td>
         <td className='border border-solid border-black'>{ITEM.DatumRueckruf.date}</td>
         <td className='border border-solid border-black text-center'>
-          <input disabled defaultChecked={ITEM.Erledigt === 1 ? true : false} className="" type="checkbox"/>{ITEM.Erledigt}
+          <input disabled defaultChecked={ITEM.Erledigt === 1 ? true : false} className="" type="checkbox"/>
         </td>
       </tr>
     </tbody>
