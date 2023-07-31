@@ -24,7 +24,7 @@ $query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID,
         Mitarbeiter.Mitarbeiter as Mitarbeiter,
         Art.Art as Art_ID,
         Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
-        Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer, 
+        Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer,
         Tagesbericht.gelöscht, Tagesbericht.parentID 
         FROM Tagesbericht
         JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID

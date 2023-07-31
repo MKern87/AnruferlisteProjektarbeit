@@ -1,7 +1,7 @@
 <?php
 class Database{
-  private     $Servername ='SERVER-DS-2016\MSSQLSERVER2016';
-  private     $connection= array(
+                private     $Servername ='SERVER-DS-2016\MSSQLSERVER2016';
+                private     $connection= array(
                       'Database' => 'Schafhausentest',
                       'UID' => 'bk',
                       'PWD' => 'burgerking',

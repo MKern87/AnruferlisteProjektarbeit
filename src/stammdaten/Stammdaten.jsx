@@ -2,8 +2,12 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { TiArrowSortedDown } from 'react-icons/ti'
-import RowColor from '../RowColor'
-import HP from '../Handelsp'
+import RowColor from '../components/RowColor'
+import HP from '../components/Handelsp'
+import StammdatenMitarbeiter from '../components/StammdatenMitarbeiter'
+import StammdatenArt from '../components/StammdatenArt'
+import DatenTagesbericht from '../components/DatenTagesbericht'
+import DatenHandelspartner from '../components/DatenHandelspartner'
 
 const Stammdaten = () => {
 
@@ -13,12 +17,16 @@ const Stammdaten = () => {
   const [HpData, setHpdata] = useState([]);
   const [search, setSearch] = useState('');
   const [searchd, setSearchd] = useState('');
-  const [arr, setArr] = useState([]);
-  //const [dateFilter, setDateFilter] = useState({
-  //  minDate: null,
-  //  maxDate: null
-  //})
-
+  const [vlue, setVlue] = useState(2);
+  const [rrvlue, setrrVlue] = useState(2);
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const [aktuelleBerichte, setaktuelleBerichte] = useState(false);
+  const [mArbeiter, setmArbeiter] = useState('');
+  const [mAaktuell, setmAaktuell] = useState(false);
+  const [art, setArt] = useState('');
+  const [artAktuell, setartAktuell] = useState(false);
+  
   //console.log(filter);
 
   const menuItems = [
@@ -31,12 +39,49 @@ const Stammdaten = () => {
       key: '/Eintrag'
     }
   ];
+
+//////// Alle Berichte (aktuelle Berichte) ////////
   
+  const berichteAktuell = ({ab}) => {
+    if (ab == true) {
+      setaktuelleBerichte(!ab)
+      setstartDate('')
+      setendDate('')
+    }else{
+      setaktuelleBerichte(!ab) 
+      setstartDate(new Intl.DateTimeFormat("fr-CA", {year: "numeric", month: "2-digit", day: "2-digit"}).format(Date.now())); setendDate(new Intl.DateTimeFormat("fr-CA", {year: "numeric", month: "2-digit", day: "2-digit"}).format(Date.now()));
+  }
+  }
 
-  //function aktualisieren() {
-  //  window.location.reload(false);
-  //}
+//////// Alle Mitarbeiter (Checkbox Alle) ////////
 
+  const mitarbeiterAktuell = ({maak}) => {
+    if(maak == false){
+      setmAaktuell (!maak)
+      setmArbeiter('')
+    }else{
+      setmAaktuell (!maak)
+    }
+  }
+
+//////// Alle Art (Checkbox Alle) ////////
+
+  const aktuelleArt = ({aa}) => {
+    if(aa == false){
+      setartAktuell (!aa)
+      setArt('')
+    }else{
+      setartAktuell (!aa)
+    }
+  }
+
+//////// Seite aktualisieren ////////
+
+  function aktualisieren() {
+    window.location.reload(false);
+  }
+
+//////// Datenabruf Mitarbeiter ////////
 
   const datenabruf = async() => {
     const request = {
@@ -55,6 +100,8 @@ const Stammdaten = () => {
       setData(e.data)
     }
   }
+
+//////// Datenabruf Art (kommunikation) ////////
 
     const datenart = async() => {
       const request = {
@@ -75,6 +122,8 @@ const Stammdaten = () => {
     
     }
 
+//////// Datenabruf Tagesberichte ////////
+
   const datentagesbericht = async() => {
     const request = {
       method: 'POST',
@@ -90,10 +139,11 @@ const Stammdaten = () => {
 
     if (i.tdata.length>0) {
       setTdata(i.tdata)
-      setArr(i.tdata)
     }
     console.log(i);
   }
+
+//////// Datenabruf Handelspartner ////////
 
   const datenhandelsp = async() => {
     const request = {
@@ -112,46 +162,6 @@ const Stammdaten = () => {
       setHpdata(k.HpData)
     }
   }
-
-  const filter = ({item, value}) => {
-    let narr = item
-  if (value === 2) {
-    setTdata(narr)
-  }else{
-    narr = narr.filter((item) => item.Erledigt == value)
-    //console.log(narr)
-    setTdata(narr)
-  }
-  }
-
-  const Names = ({Name}) => {
-    return (
-    <>
-      {
-        <>
-        {Name.map((item, index) => (
-          <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
-        ))}
-        </>
-      }
-    </>
-    )
-  }
-
-  const Type = ({Art}) => {
-    return (
-      <>
-      {
-        <>
-        {Art.map((item, index) => (
-          <option key={item + index} value={item.Art}>{item.Art}</option>
-        ))}
-        </>
-      }
-      </>
-    )
-  }
-
 
     useEffect(()=>{
       datenabruf();
@@ -186,23 +196,7 @@ const Stammdaten = () => {
                   <th className='border border-solid border-black px-2'>Telefon</th>
                 </tr>
                 </thead>
-                {HpData.length>0 ?
-                <>
-                  {
-                    HpData.filter((item) => {
-                      return search.toLowerCase() === ''
-                      ? item
-                      : item.Suchbegriff.toLowerCase().includes(search) 
-                    }).map((item, index) =>(
-                      <HP key={item+index} ITEMHP={item} />
-                    ))
-                  } 
-                </>
-                :
-                <>
-                Keine Daten!
-                </>
-                }
+                <DatenHandelspartner search={search} />
               </table>
           </div>
         </div>
@@ -217,7 +211,7 @@ const Stammdaten = () => {
 
           <div className="grid grid-cols-12 w-full bg-gray-200 py-4">
             <div className="col-span-1 flex flex-col items-center ml-1 h-full">
-            <button className="border shadow shadow-black border-b-black border-r-black bg-gray-300 text-sm p-[2px] px-2">
+            <button onClick={aktualisieren} className="border shadow shadow-black border-b-black border-r-black bg-gray-300 text-sm p-[2px] px-2">
               <p className='mb-1'>aktualisieren</p>
             </button>
               <span className="flex flex-row my-2 text-sm">
@@ -264,32 +258,32 @@ const Stammdaten = () => {
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Stammdaten</p>
               <span className="text-sm items-center flex flex-row my-2 mt-8">
                 <p className='pr-1'>Mitarbeiter:</p>
-                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='mitarbeiter'>
+                <select onChange={() => setmArbeiter(document.getElementById('mitarbeiter').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='mitarbeiter'>
                     {(data.length>0)?
                     <>
-                    <Names Name={data}/>
+                    <StammdatenMitarbeiter Name={data}/>
                     </>
                     :
                     <>
                     </>
                     }
                   </select>
-                <input defaultChecked={false} id='mitarbeiter' className="items-center justify-items-center ml-1" type="checkbox" />
+                <input defaultChecked={false} id='mitarbeiter' onChange={() => mitarbeiterAktuell({maak: mAaktuell})} className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-[1px]">Alle</p>
               </span>
               <span className="text-sm items-center flex flex-row my-2 mt-6">
                 <p className='mr-5 pr-1'>Art:</p>
-                <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
+                <select onChange={() => setArt(document.getElementById('Art').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
                     {(artData.length>0)?
                     <>
-                    <Type Art={artData}/>
+                    <StammdatenArt Art={artData}/>
                     </>
                     :
                     <>
                     </>
                     }
                   </select>
-                <input defaultChecked={false} className="items-center justify-items-center ml-1" type="checkbox" />
+                <input defaultChecked={false} onChange={() => aktuelleArt({aa: artAktuell})} className="items-center justify-items-center ml-1" type="checkbox" />
                 <p className="pl-1">Alle</p>
               </span>
             </div>
@@ -297,13 +291,13 @@ const Stammdaten = () => {
             <div className="col-span-2 mr-2 border border-black h-full relative">
               <p className="ml-4 text-sm absolute inset-x -mt-3 bg-gray-200 px-1">Datum</p>
               <span className="text-sm items-center ml-1 flex flex-row my-2 mt-4">Von: 
-                <input id='minDate' type='date' className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1"/>
+                <input id='minDate' type='date' onChange={() => setstartDate(document.getElementById('minDate').value)} className="items-center justify-items-center ml-2 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="text-sm items-center ml-1 flex flex-row my-2">Bis: 
-                <input id='maxDate' type='date' className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
+                <input id='maxDate' type='date' onChange={() => setendDate(document.getElementById('maxDate').value)} className="items-center justify-items-center ml-4 border border-black rounded-sm bg-slate-100 p-1"/>
               </span>
               <span className="flex flex-row my-2 text-sm justify-center">
-                <input defaultChecked={false} type="checkbox" />
+                <input defaultChecked={false} onChange={() => berichteAktuell({ab: aktuelleBerichte})} type="checkbox" />
                 <p className="pl-1">aktuelle Berichte</p>
               </span>
             </div>
@@ -312,21 +306,21 @@ const Stammdaten = () => {
               <p className="ml-4 mb-4 absolute inset-x -mt-3 bg-gray-200 px-1">Rückruf</p>
               <div className="flex flex-row items-stretch justify-center mt-6">
                 <label className="mr-6 ml-6" for="default-radio-1">
-                <input type="radio" value={1} onChange={() => filter({item: arr, value: 1})} name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" name='rückruf' onChange={() => setrrVlue(1)} className="text-blue-600 focus:ring-blue-500" />
                 Ja </label>
                 <label className="mr-6" for="default-radio-2">
-                <input type="radio" value={0} onChange={() => filter({item: arr, value: 0})} name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" name='rückruf' onChange={() => setrrVlue(0)} className="text-blue-600 focus:ring-blue-500" />
                 Nein </label>
                 <label for="default-radio-3">
-                <input type="radio" value={2} onChange={() => filter({item: arr, value: 2})} name='rückruf' className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" name='rückruf' onChange={() => setrrVlue(2)} className="text-blue-600 focus:ring-blue-500" />
                 Alle </label>
               </div>
                 <span className="items-center ml-1 flex flex-row mt-4 mb-1">
                   <p className='pr-1'>Mitarbeiter:</p>
-                  <select className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Mitarbeiter'>
+                  <select id='Mitarbeiter' onChange={() => setmArbeiter(document.getElementById('Mitarbeiter').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' >
                     {(data.length>0)?
                     <>
-                    <Names Name={data}/>
+                    <StammdatenMitarbeiter Name={data}/>
                     </>
                     :
                     <>
@@ -334,20 +328,20 @@ const Stammdaten = () => {
                     }
                   </select>
                 </span>
-                  <input defaultChecked={false} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
+                  <input defaultChecked={false} onChange={() => mitarbeiterAktuell({maak: mAaktuell})} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
             </div>
 
             <div className="col-span-1 border border-black h-full text-sm relative">
               <p className="ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Erledigt</p>
               <div className="flex flex-col items-start ml-10 my-2 mt-5">
                 <label className="my-1" for="default-radio-1">
-                <input id='erledigt' value={1} type="radio" name='erledigt' onChange={() => filter({item: arr, value: 1})} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' type="radio" name='erledigt' onChange={() => setVlue(1)} className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label className="my-1" for="default-radio-2">
-                <input id='erledigt' value={0} type="radio" name='erledigt' onChange={() => filter({item: arr, value: 0})} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' type="radio" name='erledigt' onChange={() => setVlue(0)} className="text-blue-600 focus:ring-blue-500" />
                 Nein</label>
                 <label className="my-1" for="default-radio-3">
-                <input id='erledigt' value={2} type="radio" name='erledigt' onChange={() => filter({item: arr, value: 2})} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' type="radio" name='erledigt' onChange={() => setVlue(2)} className="text-blue-600 focus:ring-blue-500" />
                 Alle</label>
               </div>
               </div>
@@ -369,23 +363,7 @@ const Stammdaten = () => {
                   <th className='border border-solid border-black px-2'>Erledigt</th>
                 </tr>
                 </thead>
-                {tdata.length>0 ?
-                <>
-                  {
-                    tdata.filter((item) => {
-                      return searchd.toLowerCase() === ''
-                      ? item
-                      : item.text.toLowerCase().includes(searchd)
-                    }).map((item, index) =>(
-                      <RowColor key={item+index} ITEM={item} />
-                    ))
-                  }
-                 </>
-                  :
-                  <>
-                  Keine Daten!
-                  </>
-                }
+                <DatenTagesbericht searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art}/>
               </table>
           </div>
         </div>
