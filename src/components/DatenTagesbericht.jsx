@@ -104,7 +104,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
               || item.Mitarbeiter.toLowerCase().includes(searchd.toLowerCase()) 
               || item.Art_ID.toLowerCase().includes(searchd.toLowerCase()) 
               || item.Kategorie_ID.toLowerCase().includes(searchd.toLowerCase())
-              //|| item.Kunden_ID.toLowerCase().includes(searchd.toLowerCase())
+              || item.Kunden_ID.toLowerCase().includes(searchd.toLowerCase())
               //|| item.Mitarbeitername.toLowerCase().includes(searchd.toLowerCase())
               )
           }).map((item, index) =>(

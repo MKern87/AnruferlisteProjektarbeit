@@ -19,10 +19,11 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID,
+$query="SELECT Tagesbericht.ID,
         Baum.Kategorie as Kategorie_ID, 
         Mitarbeiter.Mitarbeiter as Mitarbeiter,
         Art.Art as Art_ID,
+        HandelsPartner.Name1 as Kunden_ID,
         Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
         Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer,
         Tagesbericht.gelöscht, Tagesbericht.parentID, 
@@ -33,6 +34,7 @@ $query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID,
         JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID
         JOIN Art ON Tagesbericht.Art_ID = Art.Art_ID 
         JOIN Baum ON Tagesbericht.Kategorie_ID = Baum.ID
+        JOIN HandelsPartner ON Tagesbericht.Kunden_ID = HandelsPartner.ID
         WHERE Tagesbericht.Datum > '2023-01-06 00:00:00'
         ORDER BY Tagesbericht.Datum DESC";
 
