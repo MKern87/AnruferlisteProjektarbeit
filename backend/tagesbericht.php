@@ -19,20 +19,22 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID, 
+$query="SELECT Tagesbericht.ID, Tagesbericht.Kunden_ID,
         Baum.Kategorie as Kategorie_ID, 
         Mitarbeiter.Mitarbeiter as Mitarbeiter,
         Art.Art as Art_ID,
         Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
         Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer,
-        Tagesbericht.gelöscht, Tagesbericht.parentID 
+        Tagesbericht.gelöscht, Tagesbericht.parentID, 
+                (SELECT Mitarbeiter.Mitarbeiter 
+                FROM Mitarbeiter 
+                WHERE Mitarbeiter_ID = Tagesbericht.RückrufWer) as Mitarbeitername 
         FROM Tagesbericht
         JOIN Mitarbeiter ON Tagesbericht.Mitarbeiter_ID = Mitarbeiter.Mitarbeiter_ID
         JOIN Art ON Tagesbericht.Art_ID = Art.Art_ID 
-        JOIN Baum ON Tagesbericht.Kategorie_ID = Baum.ID        
+        JOIN Baum ON Tagesbericht.Kategorie_ID = Baum.ID
         WHERE Tagesbericht.Datum > '2023-01-06 00:00:00'
         ORDER BY Tagesbericht.Datum DESC";
-
 
 
 $abruf= sqlsrv_query($db, $query);
@@ -54,7 +56,7 @@ if($abruf==false){ //Kein abruf möglich
           //$rtfText = $row['rtfText'];
           $cate = $row['Kategorie'];
           $dateCallback = $row['DatumRückruf'];
-          $callbackWer = $row['RückrufWer'];
+          $callbackWer = $row['Mitarbeitername'];
           $delete = $row['gelöscht'];
           $parentId = $row['parentID'];
         
@@ -72,7 +74,7 @@ if($abruf==false){ //Kein abruf möglich
           //'rtfText' => $rtfText,
           'Kategorie' => $cate,
           'DatumRueckruf' => $dateCallback,
-          'RueckrufWer' => $callbackWer,
+          'Mitarbeitername' => $callbackWer,
           'geloescht' => $delete,
           'parentID' => $parentId
           ));   
