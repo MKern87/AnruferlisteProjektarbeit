@@ -70,7 +70,7 @@ if($abruf==false){ //Kein abruf möglich
           'Art_ID' => $aid,
           'Datum' => $date,
           'Dauer' => $duration,
-          'Rueckruf' => $callback,
+          'Rückruf' => $callback,
           'text' => $text,
           'Erledigt' => $done,
           //'rtfText' => $rtfText,

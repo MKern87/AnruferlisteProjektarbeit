@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import RowColor from './RowColor';
 
-const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt}) => {
+const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA}) => {
 
   const [tdata, setTdata] = useState([]);
 
 //////// Datenbankabfrage Tagesbericht //////// 
 
-  const datentagesbericht = async({value, rrvalue, sdate, edate, mitArb, sdArt}) => {
+  const datentagesbericht = async({value, rrvalue, sdate, edate, mitArb, sdArt, rrMarb}) => {
     const request = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -27,16 +27,20 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
 
 //////// Filtern nach erledigt ////////
 
-      if (value === 2) { 
+      if (value === 2) {
+        console.log(value)
       }else{
         narr = narr.filter((item) => item.Erledigt == value)
+        console.log(value)
       }
 
 //////// Filtern nach Rückruf ////////
 
       if (rrvalue === 2) {
+        //console.log(rrvalue)
       }else{
-        narr = narr.filter((item) => item.Rueckruf == rrvalue)
+        narr = narr.filter((item) => item.Rückruf == rrvalue)
+        //console.log(rrvalue)
       }
 
 //////// Filtern nach StartDatum ////////
@@ -77,6 +81,16 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
           )
          }
 
+//////// Filtern nach Rückrufer ////////
+console.log(rrMarb)
+        if (rrMarb == ''){
+         }else{
+          console.log(narr)
+          narr = narr.filter(
+            (item) => {return (item.Mitarbeitername == null) ? '' : item.Mitarbeitername.toLowerCase().toString().includes(rrMarb.toLowerCase().toString())}
+          )
+         }
+
 //////// Arr an tData ////////
 
       setTdata(narr)
@@ -86,8 +100,8 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
 
 
   useEffect(()=>{
-    datentagesbericht({value: werte, rrvalue: werterr, sdate: sDate, edate: eDate, mitArb: mA, sdArt: stammdatenArt});
-  }, [werte, werterr, sDate, eDate, mA, stammdatenArt])
+    datentagesbericht({value: werte, rrvalue: werterr, sdate: sDate, edate: eDate, mitArb: mA, sdArt: stammdatenArt, rrMarb: rrmA});
+  }, [werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA])
 
 
 //////// Filter Textsuche ////////  

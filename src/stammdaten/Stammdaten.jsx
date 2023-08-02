@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import StammdatenMitarbeiter from '../components/StammdatenMitarbeiter'
+import StammdatenMitarbeiterRR from '../components/StammdatenMitarbeiterRR'
 import StammdatenArt from '../components/StammdatenArt'
 import DatenTagesbericht from '../components/DatenTagesbericht'
 import DatenHandelspartner from '../components/DatenHandelspartner'
@@ -19,6 +20,7 @@ const Stammdaten = () => {
   const [endDate, setendDate] = useState('');
   const [aktuelleBerichte, setaktuelleBerichte] = useState(false);
   const [mArbeiter, setmArbeiter] = useState('');
+  const [rrmArbeiter, setrrmArbeiter] = useState('');
   const [mAaktuell, setmAaktuell] = useState(false);
   const [art, setArt] = useState('');
   const [artAktuell, setartAktuell] = useState(false);
@@ -302,21 +304,21 @@ const Stammdaten = () => {
               <p className="ml-4 mb-4 absolute inset-x -mt-3 bg-gray-200 px-1">Rückruf</p>
               <div className="flex flex-row items-stretch justify-center mt-6">
                 <label className="mr-6 ml-6" for="default-radio-1">
-                <input type="radio" name='rückruf' onChange={() => setrrVlue(1)} className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" id='rückruf' name='rückruf' value={1} onChange={() => setrrVlue(1)} className="text-blue-600 focus:ring-blue-500" />
                 Ja </label>
                 <label className="mr-6" for="default-radio-2">
-                <input type="radio" name='rückruf' onChange={() => setrrVlue(0)} className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" id='rückruf' name='rückruf' value={0} onChange={() => setrrVlue(0)} className="text-blue-600 focus:ring-blue-500" />
                 Nein </label>
                 <label for="default-radio-3">
-                <input type="radio" name='rückruf' onChange={() => setrrVlue(2)} className="text-blue-600 focus:ring-blue-500" />
+                <input type="radio" id='rückruf' name='rückruf' value={2} onChange={() => setrrVlue(2)} className="text-blue-600 focus:ring-blue-500" />
                 Alle </label>
               </div>
                 <span className="items-center ml-1 flex flex-row mt-4 mb-1">
                   <p className='pr-1'>Mitarbeiter:</p>
-                  <select id='Mitarbeiter' onChange={() => setmArbeiter(document.getElementById('Mitarbeiter').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' >
+                  <select id='itarbeiter' onChange={() => setrrmArbeiter(document.getElementById('itarbeiter').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' >
                     {(data.length>0)?
                     <>
-                    <StammdatenMitarbeiter Name={data}/>
+                    <StammdatenMitarbeiterRR Name={data}/>
                     </>
                     :
                     <>
@@ -324,20 +326,20 @@ const Stammdaten = () => {
                     }
                   </select>
                 </span>
-                  <input defaultChecked={false} onChange={() => mitarbeiterAktuell({maak: mAaktuell})} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
+                  <input defaultChecked={false} onChange={() => setmArbeiter({maak: mAaktuell})} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
             </div>
 
             <div className="col-span-1 border border-black h-full text-sm relative">
               <p className="ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Erledigt</p>
               <div className="flex flex-col items-start ml-10 my-2 mt-5">
                 <label className="my-1" for="default-radio-1">
-                <input id='erledigt' type="radio" name='erledigt' onChange={() => setVlue(1)} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={1} type="radio" name='erledigt' onChange={() => setVlue(1)} className="text-blue-600 focus:ring-blue-500" />
                 Ja</label>
                 <label className="my-1" for="default-radio-2">
-                <input id='erledigt' type="radio" name='erledigt' onChange={() => setVlue(0)} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={0} type="radio" name='erledigt' onChange={() => setVlue(0)} className="text-blue-600 focus:ring-blue-500" />
                 Nein</label>
                 <label className="my-1" for="default-radio-3">
-                <input id='erledigt' type="radio" name='erledigt' onChange={() => setVlue(2)} className="text-blue-600 focus:ring-blue-500" />
+                <input id='erledigt' value={2} type="radio" name='erledigt' onChange={() => setVlue(2)} className="text-blue-600 focus:ring-blue-500" />
                 Alle</label>
               </div>
               </div>
@@ -359,7 +361,7 @@ const Stammdaten = () => {
                   <th className='border border-solid border-black px-2'>Erledigt</th>
                 </tr>
                 </thead>
-                <DatenTagesbericht searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art}/>
+                <DatenTagesbericht searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art} rrmA={rrmArbeiter}/>
               </table>
           </div>
         </div>
