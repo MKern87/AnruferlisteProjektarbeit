@@ -20,8 +20,9 @@ const Stammdaten = () => {
   const [endDate, setendDate] = useState('');
   const [aktuelleBerichte, setaktuelleBerichte] = useState(false);
   const [mArbeiter, setmArbeiter] = useState('');
-  const [rrmArbeiter, setrrmArbeiter] = useState('');
   const [mAaktuell, setmAaktuell] = useState(false);
+  const [rrmArbeiter, setrrmArbeiter] = useState('');
+  const [rrmArbeiterAktuell, setrrmArbeiterAktuell] = useState(false)
   const [art, setArt] = useState('');
   const [artAktuell, setartAktuell] = useState(false);
   
@@ -51,7 +52,7 @@ const Stammdaten = () => {
   }
   }
 
-//////// Alle Mitarbeiter (Checkbox Alle) ////////
+//////// Alle Mitarbeiter Stammdaten (Checkbox Alle) ////////
 
   const mitarbeiterAktuell = ({maak}) => {
     if(maak == false){
@@ -59,6 +60,17 @@ const Stammdaten = () => {
       setmArbeiter('')
     }else{
       setmAaktuell (!maak)
+    }
+  }
+
+//////// Alle Mitarbeiter Rürckruf (Checkbox Alle) ////////
+
+  const mitarbeiterAktuellRR = ({maakrr}) => {
+    if(maakrr == false){
+      setrrmArbeiterAktuell (!maakrr)
+      setrrmArbeiter('')
+    }else{
+      setrrmArbeiterAktuell (!maakrr)
     }
   }
 
@@ -75,7 +87,7 @@ const Stammdaten = () => {
 
 //////// Seite aktualisieren ////////
 
-  function aktualisieren() {
+  const aktualisieren = () => {
     window.location.reload(false);
   }
 
@@ -257,6 +269,7 @@ const Stammdaten = () => {
               <span className="text-sm items-center flex flex-row my-2 mt-8">
                 <p className='pr-1'>Mitarbeiter:</p>
                 <select onChange={() => setmArbeiter(document.getElementById('mitarbeiter').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='mitarbeiter'>
+                    <option value={'Name'}></option>
                     {(data.length>0)?
                     <>
                     <StammdatenMitarbeiter Name={data}/>
@@ -272,6 +285,7 @@ const Stammdaten = () => {
               <span className="text-sm items-center flex flex-row my-2 mt-6">
                 <p className='mr-5 pr-1'>Art:</p>
                 <select onChange={() => setArt(document.getElementById('Art').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
+                  <option value={'Art'}></option>
                     {(artData.length>0)?
                     <>
                     <StammdatenArt Art={artData}/>
@@ -316,6 +330,7 @@ const Stammdaten = () => {
                 <span className="items-center ml-1 flex flex-row mt-4 mb-1">
                   <p className='pr-1'>Mitarbeiter:</p>
                   <select id='itarbeiter' onChange={() => setrrmArbeiter(document.getElementById('itarbeiter').value)} className='text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' >
+                    {<option value={'Name'}></option>}
                     {(data.length>0)?
                     <>
                     <StammdatenMitarbeiterRR Name={data}/>
@@ -326,7 +341,7 @@ const Stammdaten = () => {
                     }
                   </select>
                 </span>
-                  <input defaultChecked={false} onChange={() => setmArbeiter({maak: mAaktuell})} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
+                  <input defaultChecked={false} onChange={() => mitarbeiterAktuellRR({maakrr: rrmArbeiterAktuell})} className="items-center justify-items-center ml-20 mt-3" type="checkbox" /> Alle
             </div>
 
             <div className="col-span-1 border border-black h-full text-sm relative">

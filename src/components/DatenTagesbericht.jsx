@@ -119,7 +119,6 @@ console.log(rrMarb)
               || item.Art_ID.toLowerCase().includes(searchd.toLowerCase()) 
               || item.Kategorie_ID.toLowerCase().includes(searchd.toLowerCase())
               || item.Kunden_ID.toLowerCase().includes(searchd.toLowerCase())
-              //|| item.Mitarbeitername.toLowerCase().includes(searchd.toLowerCase())
               )
           }).map((item, index) =>(
             <RowColor key={item+index} ITEM={item} />

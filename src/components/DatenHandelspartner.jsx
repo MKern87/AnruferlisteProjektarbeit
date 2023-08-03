@@ -44,11 +44,11 @@ const DatenHandelspartner = ({search}) => {
             : (
               item.Suchbegriff.toLowerCase().includes(search.toLowerCase()) 
               || item.Name1.toLowerCase().includes(search.toLowerCase()) 
-              //|| item.Name2.toLowerCase().includes(search.toLowerCase())
+              || (item.Name2 == null) ? '' : item.Name2.toLowerCase().includes(search.toLowerCase())
               || item.Straße.toLowerCase().includes(search.toLowerCase())
               || item.Plz.toLowerCase().includes(search.toLowerCase())
               || item.Ort.toLowerCase().includes(search.toLowerCase())
-              //|| item.Telefon.toLowerCase().includes(search.toLowerCase())
+              || (item.Telefon == null) ? '' : item.Telefon.toLowerCase().includes(search.toLowerCase())
               ) 
           }).map((item, index) =>(
             <HP key={item+index} ITEMHP={item} />

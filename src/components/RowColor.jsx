@@ -113,7 +113,7 @@ const RowColor = ({ITEM}) => {
 
   useEffect(()=>{
     colorTest({D:ITEM.Kategorie_ID});
-}, [])
+}, [colorTest])
 
   return (
     
