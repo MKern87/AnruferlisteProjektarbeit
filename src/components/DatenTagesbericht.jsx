@@ -127,7 +127,9 @@ console.log(rrMarb)
        </>
         :
         <>
-        Keine Daten!
+        <div className='w-full grid bg-white grid-cols-3 items-center justify-items-center py-10'>
+        <div className='text-center py-2 w-full col-span-3 pl-2'>Keine Daten vorhanden</div>
+      </div>
         </>
     }
     </>

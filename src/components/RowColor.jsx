@@ -116,32 +116,39 @@ const RowColor = ({ITEM}) => {
 }, [colorTest])
 
   return (
+    <div className={bgColor+ 'md:h-20 h-auto w-full cursor-pointer grid md:grid-cols-[180px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_70px] grid-cols-3 items-center justify-items-center'}>
+      <div className='py-1 w-full md:col-span-1 col-span-3 md:border-0 border-b border-gray-400 pl-2'>{ITEM.Kunden_ID}</div>
+      <div className='md:border-x border-x-0 md:border-b-0 border-b border-gray-400 py-1 w-full md:col-span-3 col-span-3 pl-2'>{ITEM.text.length>200? ITEM.text.substr(0, 156)+' ...':ITEM.text}</div>
+      <div className='py-1 w-full col-span-1 pl-2 md:block hidden '>{ITEM.Art_ID}</div>
+      <div className='md:border-x border-r border-gray-400 py-1 w-full col-span-1 pl-2 '>{ITEM.Mitarbeiter}</div>
+      <div className='py-1 w-full md:col-span-1 col-span-2 pl-2 '>{ITEM.Kategorie_ID}</div>
+      <div className='md:border-l border-l-0 md:border-y-0 border-y border-gray-400 py-1 w-full md:col-span-1 col-span-3 pl-2 '>{ITEM.Datum.date}</div>
+      <div className=
+      {
+        (ITEM.Rückruf == 1 && ITEM.Erledigt == 0) ? 
+          ' bg-red-600 flex flex-col h-full items-center justify-center md:border-x border-r border-gray-400 py-2 w-full col-span-1 ' 
+          : 
+          ' text-center flex flex-col items-center justify-center md:border-x border-r border-gray-400 py-2 w-full col-span-1 '
+      }>
+      {
+        ITEM.Rückruf == 0 ? 
+        <input disabled checked={false} className="" type="checkbox"/>
+        :
+        <input disabled checked className="" type="checkbox"/>
+      }
+      </div>
+      <div className='py-1 w-full col-span-1 pl-2 md:block hidden '>{ITEM.Mitarbeitername}</div>
+      <div className='border-x border-gray-400 py-1 w-full col-span-1 pl-2 md:block hidden '>{ITEM.DatumRueckruf.date}</div>              
+      <div className='flex flex-col items-center justify-center border-0 border-gray-400 py-1 w-full col-span-1'>
+      {
+        ITEM.Erledigt == 0 ? 
+        <input disabled checked={false} className="" type="checkbox"/>
+        :
+        <input disabled checked className="" type="checkbox"/>
+      }
+      </div>
+    </div>
     
-    <tbody>
-      <tr className={bgColor}>
-        <td className='border border-solid border-black'></td>
-        <td className='border border-solid border-black'>{ITEM.Kunden_ID}</td>
-        <td className='border border-solid border-black'>{ITEM.text}</td>
-        <td className='border border-solid border-black'>{ITEM.Art_ID}</td>
-        <td className='border border-solid border-black'>{ITEM.Mitarbeiter}</td>
-        <td className='border border-solid border-black'>{ITEM.Kategorie_ID}</td>
-        <td className='border border-solid border-black'>{ITEM.Datum.date}</td>
-        <td className={(ITEM.Rückruf == 1 && ITEM.Erledigt == 0) ? 'bg-red-600 text-center border border-black ' : '' +' border border-black text-center'}>
-        {ITEM.Rückruf == 0 ? 
-          <input disabled checked={false} className="" type="checkbox"/>
-          :
-          <input disabled checked className="" type="checkbox"/>}
-        </td>
-        <td className='border border-solid border-black'>{ITEM.Mitarbeitername}</td>
-        <td className='border border-solid border-black'>{ITEM.DatumRueckruf.date}</td>
-        <td className='border border-solid border-black text-center'>
-          {ITEM.Erledigt == 0 ? 
-          <input disabled checked={false} className="" type="checkbox"/>
-          :
-          <input disabled checked className="" type="checkbox"/>}
-        </td>
-      </tr>
-    </tbody>
     
   )
 }

@@ -43,7 +43,7 @@ if($abruf==false){ //Kein abruf möglich
           'Suchbegriff' => $sBegriff,
           'Name1' => $n1,
           'Name2' => $n2,
-          'Straße' => $str,
+          'Strasse' => $str,
           'Plz' => $plz,
           'Ort' => $ort,
           'Telefon' => $tel

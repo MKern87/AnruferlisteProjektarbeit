@@ -39,16 +39,17 @@ const DatenHandelspartner = ({search}) => {
       <>
         {
           HpData.filter((item) => {
+            //console.log(HpData)
             return search.toLowerCase() === ''
             ? item
             : (
               item.Suchbegriff.toLowerCase().includes(search.toLowerCase()) 
               || item.Name1.toLowerCase().includes(search.toLowerCase()) 
-              || (item.Name2 == null) ? '' : item.Name2.toLowerCase().includes(search.toLowerCase())
-              || item.Straße.toLowerCase().includes(search.toLowerCase())
-              || item.Plz.toLowerCase().includes(search.toLowerCase())
-              || item.Ort.toLowerCase().includes(search.toLowerCase())
-              || (item.Telefon == null) ? '' : item.Telefon.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Name2 == null) ? "" : item.Name2.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Strasse == null) ? "" : item.Strasse.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Plz == null || item.Plz == "") ? item : item.Plz.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Ort == null || item.Ort == "") ? item : item.Ort.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Telefon == null || item.Telefon == "") ? item : item.Telefon.toLowerCase().includes(search.toLowerCase())
               ) 
           }).map((item, index) =>(
             <HP key={item+index} ITEMHP={item} />
@@ -57,7 +58,9 @@ const DatenHandelspartner = ({search}) => {
       </>
       :
       <>
-      Keine Daten!
+      <div className='w-full grid grid-cols-3 items-center justify-items-center py-10'>
+        <div className='text-center py-2 w-full col-span-3 pl-2'>Keine Daten vorhanden</div>
+      </div>
       </>
     }
     </>
