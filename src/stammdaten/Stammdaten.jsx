@@ -172,18 +172,28 @@ const Stammdaten = () => {
       setHpdata(k.HpData)
     }
   }
-  const mtoogler = ({m})=>{
+
+  const mtoogler = ({m}) => {
     if(m[0].style.display=="block"){
       m.forEach(e => {
         e.style.display="none";
       });
-      
     }else{
       m.forEach(e => {
         e.style.display="block";
       });
     }
   }
+
+  const EintragKunde = ({ID}) => {
+    if(document.getElementById(ID.toString()).style.display=='block'){
+        document.getElementById(ID.toString()).style.display = 'none';
+        }else{
+        document.getElementById(ID.toString()).style.display = 'block';
+        }
+    }
+
+
     useEffect(()=>{
       datenabruf();
       datenart();
@@ -204,7 +214,7 @@ const Stammdaten = () => {
       <div className="md:overflow-scroll col-span-1 p-2">
         <h1 className="font-bold float-left">Kunden</h1>
           <input className="text-sm w-full h-8 px-2 my-4 border border-black rounded-sm" placeholder='Kunden suchen...' onChange={(e) => setSearch(e.target.value)}/>        
-        <div className='md:w-[800px] md:overflow-scroll w-full divide-y divide-slate-300 md:max-h-[720px] max-h-[400px] overflow-y-scroll md:text-sm text-xs border border-slate-400'>
+        <div className='md:w-[800px] md:overflow-scroll w-full divide-y divide-slate-300 md:max-h-[720px] max-h-[400px] overflow-x-hidden overflow-y-scroll md:text-sm text-xs border border-slate-400'>
           <div className='sticky top-0 md:overflow-scroll font-semibold bg-gray-400 w-full grid md:grid-cols-12 grid-cols-3 items-center justify-items-center '>
           <div className='py-1 bg-gray-400 w-full md:col-span-3 col-span-1 pl-2'>Suchbegriff</div>
           <div className='py-1 border-x border-gray-500 bg-gray-400 w-full md:col-span-2 col-span-1 pl-2'>Name1</div>
@@ -263,7 +273,7 @@ const Stammdaten = () => {
           </div>
           </div>
             <div onClick={()=>mtoogler({m:document.querySelectorAll('.mtoggle')})} className="cursor-pointer w-full md:hidden col-span-2 text-center flex flex-col h-full border border-black -mt-4 pb-6 bg-[rgba(0,0,0,0.3)] py-2">Mehr Filter anzeigen</div>
-              <div className={"md:block hidden mtoggle w-full md:col-span-2 col-span-2  h-full border border-black   py-2 relative"}>
+              <div className={"md:block hidden mtoggle w-full md:col-span-2 col-span-2 h-full border border-black py-2 relative"}>
                 <p className="ml-4 text-sm absolute inset-x -mt-5 bg-gray-200 px-1">Stammdaten</p>
                 <span className="w-full grid md:grid-cols-1 grid-cols-4 mt-2 gap-1 text-sm items-start justify-items-center">
                   <div className='w-full md:col-span-1 col-span-3 flex md:flex-col flex-row px-2 overflow-hidden'><p className='pr-1'>Mitarbeiter:</p>
@@ -364,7 +374,7 @@ const Stammdaten = () => {
                 Alle</label>
               </div>
               </div>
-              <div className='md:col-span-12 col-span-2 md:text-sm text-xs font-semibold bg-sky-200 md:mt-0 md:-mb-2 mt-20 w-full grid md:grid-cols-[180px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_70px] grid-cols-3 items-center justify-items-center py-1'>
+              <div className='md:col-span-12 col-span-2 md:text-sm text-xs font-semibold bg-sky-200 md:mt-0 md:-mb-2 mt-12 -mb-2 w-full grid md:grid-cols-[180px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_70px] grid-cols-3 items-center justify-items-center py-1'>
                 <div className='py-1 w-full md:col-span-1 col-span-3 md:border-0 border-b border-gray-500 pl-2'>Kunde</div>
                 <div className='md:border-x border-x-0 md:border-b-0 border-b border-gray-500 py-1 w-full md:col-span-3 col-span-3 pl-2'>Text</div>
                 <div className='py-1 w-full col-span-1 pl-2 md:block hidden'>Art</div>

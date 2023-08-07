@@ -82,7 +82,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
          }
 
 //////// Filtern nach Rückrufer ////////
-console.log(rrMarb)
+
         if (rrMarb == ''){
          }else{
           console.log(narr)
