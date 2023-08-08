@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import HP from './Handelsp';
 
-const DatenHandelspartner = ({search}) => {
+const DatenHandelspartner = ({search, popUp}) => {
   
   const [HpData, setHpdata] = useState([]);
 
@@ -45,14 +45,14 @@ const DatenHandelspartner = ({search}) => {
             : (
               item.Suchbegriff.toLowerCase().includes(search.toLowerCase()) 
               || item.Name1.toLowerCase().includes(search.toLowerCase()) 
-              //|| (item.Name2 == null) ? "" : item.Name2.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Name2.toString() == null) ? "" : item.Name2.toLowerCase().includes(search.toLowerCase())
               //|| (item.Strasse == null) ? "" : item.Strasse.toLowerCase().includes(search.toLowerCase())
               //|| (item.Plz == null || item.Plz == "") ? item : item.Plz.toLowerCase().includes(search.toLowerCase())
               //|| (item.Ort == null || item.Ort == "") ? item : item.Ort.toLowerCase().includes(search.toLowerCase())
               //|| (item.Telefon == null || item.Telefon == "") ? item : item.Telefon.toLowerCase().includes(search.toLowerCase())
               ) 
           }).map((item, index) =>(
-            <HP key={item+index} ITEMHP={item} />
+            <HP key={item+index} ITEMHP={item} popUp={popUp} />
           ))
         } 
       </>

@@ -19,11 +19,13 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query="SELECT Tagesbericht.ID,
+$query="SELECT Tagesbericht.ID, 
+        Tagesbericht.Kunden_ID as kid,
         Baum.Kategorie as Kategorie_ID, 
         Mitarbeiter.Mitarbeiter as Mitarbeiter,
         Art.Art as Art_ID,
-        HandelsPartner.Name1 as Kunden_ID,
+        HandelsPartner.Name1 as Kunden_ID, 
+        HandelsPartner.Straße, HandelsPartner.Plz, HandelsPartner.Ort, HandelsPartner.Telefon,
         Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
         Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer,
         Tagesbericht.gelöscht, Tagesbericht.parentID, 
@@ -46,6 +48,7 @@ if($abruf==false){ //Kein abruf möglich
 }else{
         while($row=sqlsrv_fetch_array($abruf, SQLSRV_FETCH_ASSOC)){
           $id = $row['ID'];
+          $kuid = $row['kid'];
           $kid = $row['Kunden_ID'];
           $katid = $row['Kategorie_ID'];
           $mid = $row['Mitarbeiter'];
@@ -61,14 +64,20 @@ if($abruf==false){ //Kein abruf möglich
           $callbackWer = $row['Mitarbeitername'];
           $delete = $row['gelöscht'];
           $parentId = $row['parentID'];
+          $str = $row['Straße'];
+          $plz = $row['Plz'];
+          $ort = $row['Ort'];
+          $tel = $row['Telefon'];
         
           array_push($arr,array(
           'ID' => $id,
+          'kid' => $kuid,
           'Kunden_ID' => $kid,
           'Kategorie_ID' => $katid,
           'Mitarbeiter' => $mid,
           'Art_ID' => $aid,
-          'Datum' => $date,
+          'Datum' =>$date,
+          'DatumZeit' => $date,
           'Dauer' => $duration,
           'Rückruf' => $callback,
           'text' => $text,
@@ -78,7 +87,11 @@ if($abruf==false){ //Kein abruf möglich
           'DatumRueckruf' => $dateCallback,
           'Mitarbeitername' => $callbackWer,
           'geloescht' => $delete,
-          'parentID' => $parentId
+          'parentID' => $parentId,
+          'Strasse' => $str,
+          'Plz' => $plz,
+          'Ort' => $ort,
+          'Telefon' => $tel
           ));   
         }
         sqlsrv_free_stmt($abruf); //löst den Abruf auf

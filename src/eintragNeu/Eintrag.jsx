@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Baum from '../kategorieBaum/Baum';
+import RowColor from '../components/RowColor';
 
-const Eintrag = () => {
+const Eintrag = ({tdata}) => {
 
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
@@ -9,18 +10,8 @@ const Eintrag = () => {
   const [aInput, setaInput] = useState(false);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const getTwoDigits = (value) => value < 10 ? `0${value}` : value;
 
-
-  const menuItems = [
-    {
-      title: 'Stammdaten',
-      key: '/'
-    },
-    {
-      title: 'Eintrag',
-      key: '/Eintrag'
-    }
-  ]
 
   const today = new Date()
   const showTime = today.getHours()
@@ -110,36 +101,40 @@ const Eintrag = () => {
   useEffect (() => {
     datenabruf();
     datenart();
+    console.log(tdata);
     let intervalId;
       if (isRunning) {
         intervalId = setInterval(() => setTime(time +1), 10);
       }
         return () => clearInterval(intervalId);
-  }, [isRunning, time])
+  }, [isRunning, time,])
 
   
   return (
     <>
-    <div>
-      {menuItems.map((item, index) => (
-        <a key={item+index} href={item.key}>{item.title}</a>
-      ))}
-    </div>
-    <div className='text-sm w-screen bg-gray-100 absolute grid grid-cols-6 grid-rows-4 h-full border border-black px-2 py-2'>
+    <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 grid-rows-4 h-full border border-black px-2 py-2'>
       <div className='grid col-span-3 border border-black relative mt-6'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Kundeninfo</p>
+        {tdata.kid}
+        {tdata.Kunden_ID}
+        {tdata.Strasse}
+        {tdata.Plz}
+        {tdata.Ort}
+        {tdata.Telefon}
       </div>
       <div className='grid col-span-1 row-span-2 border border-black ml-2 mt-6'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Kategorie</p>
         <span>
-          <Baum/>
+          <Baum />
         </span>
       </div>
       <div className='grid col-start-1 col-span-1 border border-black mt-6 relative'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Stammdaten</p>
         <span className='ml-4 mt-2'>Kategorie:</span>
+        {tdata.Kategorie}
         <span className='ml-4 mt-8'>Mitarbeiter:
           <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='Mitarbeiter'>
+          <option value={'Name'}></option>
             {(data.length>0)?
             <>
             <Names Name={data}/>
@@ -152,6 +147,7 @@ const Eintrag = () => {
         </span>
         <span className='ml-4'>Art:
           <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='Art'>
+          <option value={'Art'}></option>
             {(artData.length>0)?
             <>
             <Type Art={artData}/>
@@ -169,8 +165,15 @@ const Eintrag = () => {
             <input type="checkbox" defaultChecked={false}/> Erledigt
           </span>
         <span>Start:
-          <input type='date' className="h-6 ml-10 border border-black rounded-sm bg-white"/>
-          <p className='float-right border border-black bg-white mr-10 px-4'>{ showTime }</p>
+          <input type='date' 
+          defaultValue={new Date(tdata.Datum.date.toString()).toLocaleDateString('fr-CA', 
+          {day: '2-digit', month: '2-digit', year: 'numeric',}
+          )}
+          className="h-6 ml-10 border border-black rounded-sm bg-white"
+          />
+          <input type='time' defaultValue={getTwoDigits(new Date(tdata.Datum.date.toString()).getHours()) + ':' + getTwoDigits(new Date(tdata.Datum.date.toString()).getMinutes())}
+          className="h-6 ml-10 border border-black rounded-sm bg-white"
+          />
         </span>
         <span className=''>Dauer:
           <p className='border border-black pl-1 bg-white w-1/4 float-right mr-36'>
@@ -195,12 +198,18 @@ const Eintrag = () => {
         }}/> Rückruf
         </span>
         <span>Wann:
-        <input type='date' className="h-6 ml-10 border border-black rounded-sm bg-white"/>
-        <input type='time' className="h-6 ml-2 border border-black rounded-sm bg-white"/>
+        <input type='date' 
+          defaultValue={new Date(tdata.DatumRueckruf.date.toString()).toLocaleDateString('fr-CA', 
+          {day: '2-digit', month: '2-digit', year: 'numeric',}
+          )}
+          className="h-6 ml-10 border border-black rounded-sm bg-white"
+          />
+        <input type='time' defaultValue={getTwoDigits(new Date(tdata.DatumRueckruf.date.toString()).getHours()) + ':' + getTwoDigits(new Date(tdata.DatumRueckruf.date.toString()).getMinutes())} className="h-6 ml-2 border border-black rounded-sm bg-white"/>
         <input type="checkbox" className='ml-2' defaultChecked={false}/> egal
         </span>
         <span className=''>Wer:
           <select onChange={(e) => setaInput(e.target.value)} disabled={!rrChecked} value={aInput} className='text-left ml-12 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
+          <option value={'Name'}></option>
             {(data.length>0)?
             <>
             <Names Name={data}/>
@@ -214,14 +223,14 @@ const Eintrag = () => {
       </div>
       <div className='grid col-span-4 row-span-4 mt-6 border border-black relative'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Beschreibung</p>
-        <input type="text" />
+        <textarea className='resize-none' type="text">{tdata.text}</textarea>
       </div>
       <div className='grid col-start-5 col-span-2 row-span-4 mt-6 border border-black ml-2'>
         <input type="text" />
       </div>
     </div>
     </>
-  )
+    )
 }
 
 export default Eintrag
