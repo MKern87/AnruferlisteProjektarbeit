@@ -56,7 +56,7 @@ if($abruf==false){ //Kein abruf möglich
           $date = $row['Datum'];
           $duration = $row['Dauer'];
           $callback = $row['Rückruf'];
-          $text = $row['text'];
+          $text = $row['text']; 
           $done = $row['Erledigt'];
           //$rtfText = $row['rtfText'];
           $cate = $row['Kategorie'];

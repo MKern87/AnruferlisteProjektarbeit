@@ -4,8 +4,8 @@ import Eintrag from '../eintragNeu/Eintrag';
 
 const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA, popUp, tagesbDaten}) => {
 
-  const [tdata, setTdata] = useState([]);
-
+  const [tdata, setTdata] = useState([]); 
+  
 //////// Datenbankabfrage Tagesbericht //////// 
 
   const datentagesbericht = async({value, rrvalue, sdate, edate, mitArb, sdArt, rrMarb}) => {
