@@ -25,7 +25,7 @@ $query="SELECT Tagesbericht.ID,
         Mitarbeiter.Mitarbeiter as Mitarbeiter,
         Art.Art as Art_ID,
         HandelsPartner.Name1 as Kunden_ID, 
-        HandelsPartner.Straße, HandelsPartner.Plz, HandelsPartner.Ort, HandelsPartner.Telefon,
+        HandelsPartner.Straße, HandelsPartner.Plz, HandelsPartner.Ort, HandelsPartner.Telefon, HandelsPartner.Memo,
         Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
         Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer,
         Tagesbericht.gelöscht, Tagesbericht.parentID, 
@@ -68,6 +68,7 @@ if($abruf==false){ //Kein abruf möglich
           $plz = $row['Plz'];
           $ort = $row['Ort'];
           $tel = $row['Telefon'];
+          $hMemo = $row['Memo'];
         
           array_push($arr,array(
           'ID' => $id,
@@ -91,7 +92,8 @@ if($abruf==false){ //Kein abruf möglich
           'Strasse' => $str,
           'Plz' => $plz,
           'Ort' => $ort,
-          'Telefon' => $tel
+          'Telefon' => $tel,
+          'Memo' => $hMemo
           ));   
         }
         sqlsrv_free_stmt($abruf); //löst den Abruf auf
