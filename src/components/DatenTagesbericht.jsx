@@ -29,7 +29,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
 //////// Filtern nach erledigt ////////
 
       if (value === 2) {
-        console.log(value)
+        //console.log(value)
       }else{
         narr = narr.filter((item) => item.Erledigt == value)
         console.log(value)

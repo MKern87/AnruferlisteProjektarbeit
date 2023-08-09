@@ -28,7 +28,7 @@ $query="SELECT Tagesbericht.ID,
         HandelsPartner.Straße, HandelsPartner.Plz, HandelsPartner.Ort, HandelsPartner.Telefon, HandelsPartner.Memo,
         Tagesbericht.Datum, Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, 
         Tagesbericht.Kategorie, Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer,
-        Tagesbericht.gelöscht, Tagesbericht.parentID, 
+        Tagesbericht.gelöscht, Tagesbericht.parentID, Tagesbericht.Dauer,
                 (SELECT Mitarbeiter.Mitarbeiter 
                 FROM Mitarbeiter 
                 WHERE Mitarbeiter_ID = Tagesbericht.RückrufWer) as Mitarbeitername 
@@ -69,6 +69,7 @@ if($abruf==false){ //Kein abruf möglich
           $ort = $row['Ort'];
           $tel = $row['Telefon'];
           $hMemo = $row['Memo'];
+          $dauer = $row['Dauer'];
         
           array_push($arr,array(
           'ID' => $id,
@@ -93,7 +94,8 @@ if($abruf==false){ //Kein abruf möglich
           'Plz' => $plz,
           'Ort' => $ort,
           'Telefon' => $tel,
-          'Memo' => $hMemo
+          'Memo' => $hMemo,
+          'Dauer' => $dauer
           ));   
         }
         sqlsrv_free_stmt($abruf); //löst den Abruf auf

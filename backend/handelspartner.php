@@ -33,11 +33,11 @@ if($abruf==false){ //Kein abruf möglich
         while($row=sqlsrv_fetch_array($abruf, SQLSRV_FETCH_ASSOC)){
           $sBegriff = $row['Suchbegriff'];
           $n1 = $row['Name1'];
-          $n2 = $row['Name2'];
-          $str = $row['Straße'];
-          $plz = $row['Plz'];
-          $ort = $row['Ort'];
-          $tel = $row['Telefon'];
+          $n2 = ($row['Name2'] == null || $row['Name2']=="") ? "" : $row['Name2'];
+          $str = ($row['Straße'] == null || $row['Straße']=="") ? "" : $row['Straße'];
+          $plz = ($row['Plz'] == null || $row['Plz']=="") ? "" : $row['Plz'];
+          $ort = ($row['Ort'] == null || $row['Ort']=="") ? "" : $row['Ort'];
+          $tel = ($row['Telefon'] == null || $row['Telefon']=="") ? "" : $row['Telefon'];
         
           array_push($arr,array(
           'Suchbegriff' => $sBegriff,

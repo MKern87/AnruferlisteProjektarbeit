@@ -45,11 +45,11 @@ const DatenHandelspartner = ({search, popUp}) => {
             : (
               item.Suchbegriff.toLowerCase().includes(search.toLowerCase()) 
               || item.Name1.toLowerCase().includes(search.toLowerCase()) 
-              //|| (item.Name2.toString() == null) ? "" : item.Name2.toLowerCase().includes(search.toLowerCase())
-              //|| (item.Strasse == null) ? "" : item.Strasse.toLowerCase().includes(search.toLowerCase())
-              //|| (item.Plz == null || item.Plz == "") ? item : item.Plz.toLowerCase().includes(search.toLowerCase())
-              //|| (item.Ort == null || item.Ort == "") ? item : item.Ort.toLowerCase().includes(search.toLowerCase())
-              //|| (item.Telefon == null || item.Telefon == "") ? item : item.Telefon.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Name2 == "") ? "" : item.Name2.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Strasse == "") ? "" : item.Strasse.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Plz == "") ? "" : item.Plz.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Ort == "") ? "" : item.Ort.toLowerCase().includes(search.toLowerCase())
+              //|| (item.Telefon == "") ? "" : item.Telefon.toLowerCase().includes(search.toLowerCase())
               ) 
           }).map((item, index) =>(
             <HP key={item+index} ITEMHP={item} popUp={popUp} />
