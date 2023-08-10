@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Baum from '../kategorieBaum/Baum';
 import RowColor from '../components/RowColor';
-import { BsCheckSquareFill } from 'react-icons/bs'
+import Handelsp from '../components/Handelsp';
+import { BsCheckSquareFill } from 'react-icons/bs';
+import { TbSquareLetterX } from 'react-icons/tb';
+import { RiEditBoxLine } from 'react-icons/ri';
 
-const Eintrag = ({tdata}) => {
+const Eintrag = ({tdata, HpData}) => {
 
   const [data, setData] = useState([]);
   const [artData, setArtData] = useState([]);
@@ -58,7 +61,7 @@ const Eintrag = ({tdata}) => {
   }
 
   const Names = ({Name}) => {
-    console.log(Name);
+    //console.log(Name);
     return (
     <>
       {
@@ -86,9 +89,9 @@ const Eintrag = ({tdata}) => {
     )
   }
 
-  const hours = Math.floor(time / 360000)
-  const minutes = Math.floor((time % 360000) / 6000)
-  const seconds = Math.floor((time % 6000) / 100)
+  //const hours = Math.floor(time / 360000)
+  //const minutes = Math.floor((time % 360000) / 6000)
+  //const seconds = Math.floor((time % 6000) / 100)
             //{hours}:
             //{minutes.toString().padStart(2, "0")}:
             //{seconds.toString().padStart(2, "0")}
@@ -105,7 +108,7 @@ const Eintrag = ({tdata}) => {
   useEffect (() => {
     datenabruf();
     datenart();
-    console.log(tdata);
+    //console.log(tdata);
     let intervalId;
       if (isRunning) {
         intervalId = setInterval(() => setTime(time +1), 10);
@@ -116,8 +119,13 @@ const Eintrag = ({tdata}) => {
   
   return (
     <>
-    <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 grid-rows-4 h-full border border-black px-2 py-2'>
-      <div className='grid col-span-3 border border-black mt-6'>
+    <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
+      <div className='w-screen h-4 col-span-6 flex'>
+        <BsCheckSquareFill className='hover cursor-pointer mr-1' />
+        <RiEditBoxLine className='hover cursor-pointer mr-1' />
+        <TbSquareLetterX className='hover cursor-pointer' />
+      </div>
+      <div className='grid col-span-3 border border-black'>
         <p className='inset-x -mt-3 ml-4 bg-gray-100 px-1 w-20'>Kundeninfo</p>
           <div className='w-full grid grid-cols-2 items-center justify-items-center'>
             <div className='w-full h-full ml-2'>
@@ -133,11 +141,11 @@ const Eintrag = ({tdata}) => {
             </div>
           </div>
       </div>
-      <div className='grid col-span-1 row-span-2 border border-black ml-2 mt-6'>
+      <div className='grid col-span-1 row-span-2 border border-black ml-2'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Kategorie</p>
-        <span>
+        <div>
           <Baum />
-        </span>
+        </div>
       </div>
       <div className='grid col-start-1 col-span-1 border border-black mt-6 relative'>
         <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Stammdaten</p>
@@ -177,9 +185,9 @@ const Eintrag = ({tdata}) => {
           <span className='ml-4 mt-2'>
           {
           tdata.Erledigt == 0 ? 
-          <input checked={false} className="" type="checkbox"/>
+          <input type="checkbox" checked={false} onClick={true} id='erledigt' />
           :
-          <input checked className="" type="checkbox"/>
+          <input type="checkbox" checked={true} id='erledigt' />
           } Erledigt
           </span>
         <span className='ml-4'>Start:
@@ -208,9 +216,19 @@ const Eintrag = ({tdata}) => {
         <span className='ml-4 mt-2'>
         {
         tdata.Rückruf == 0 ? 
-        <input checked={false} className="" type="checkbox"/>
+        <input type="checkbox" checked={rrChecked} id='rueckruf' onChange={() => {
+          if(rrChecked){
+            setaInput
+          }
+          setrrChecked(rrChecked)
+        }} />
         :
-        <input checked className="" type="checkbox" />
+        <input type="checkbox" checked={!rrChecked} onChange={() => {
+          if(!rrChecked){
+            !setaInput
+          }
+          setrrChecked(!rrChecked)
+        }} id='rueckruf' />
         }
         {//
          // <input type="checkbox" defaultChecked={false} checked={rrChecked} onChange={() => {
@@ -232,7 +250,7 @@ const Eintrag = ({tdata}) => {
         <input type="checkbox" className='ml-2' defaultChecked={false}/> egal
         </span>
         <span className='ml-2'>Wer:
-          <select onChange={(e) => setaInput(e.target.value)} disabled={!rrChecked} value={aInput} className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
+          <select onChange={(e) => setaInput(e.target.value)} disabled={rrChecked} value={aInput} className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
           <option value={'Name'}>{tdata.Mitarbeitername}</option>
             {
             (data.length>0)?

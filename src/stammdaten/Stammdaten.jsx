@@ -28,6 +28,7 @@ const Stammdaten = () => {
   const [artAktuell, setartAktuell] = useState(false);
   const [open, setOpen] = useState(false);
   const [dTagesbericht, setdTagesbericht] = useState({});
+  const [dHandelspartner, setdHandelspartner] = useState({})
   
 
 //////// Alle Berichte (aktuelle Berichte) ////////
@@ -200,7 +201,7 @@ const Stammdaten = () => {
           <div className='py-1 border-x border-gray-500 bg-gray-400 w-full col-span-3 pl-2 md:block hidden'>Adresse</div>
           <div className='py-1 md:border-0 border-t border-gray-500 bg-gray-400 w-full md:col-span-2 col-span-3 pl-2'>Telefon</div>
         </div>
-          <DatenHandelspartner search={search} popUp={setOpen} />
+          <DatenHandelspartner HandelspartnerDaten={setdHandelspartner} search={search} popUp={setOpen} />
       </div>
     </div>
       <div className="w-full md:col-span-3 col-span-1 p-2">
@@ -371,7 +372,7 @@ const Stammdaten = () => {
         </div>
     </div>
     <div className=''>
-      {open ? <Eintrag tdata={dTagesbericht} /> : null}
+      {open ? <Eintrag tdata={dTagesbericht} HpData={dHandelspartner} /> : null}
     </div>
     </>
   )

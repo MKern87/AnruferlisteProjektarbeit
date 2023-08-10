@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Handelsp = ({ITEMHP, popUp}) => {
+const Handelsp = ({ITEMHP, popUp, dHandelspartner}) => {
 
 
   useEffect(()=>{

@@ -19,7 +19,10 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query='SELECT * FROM Baum WHERE Aktiv = 1';
+$query='SELECT 
+        Baum.Kategorie, Baum.ID, Baum.aktiv, Baum.Parent_ID
+        FROM Baum 
+        WHERE Aktiv = 1';
 
 $abruf= sqlsrv_query($db, $query);
 
