@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
-import Zweig from './Zweig'
+//import Zweig from './Zweig'
 
-const Baum = ({BITEM}) => {
+const Baum = () => {
 
   const [bData, setbData] = useState([])
 
@@ -15,14 +15,14 @@ const Baum = ({BITEM}) => {
       })
     };
 
-    const d = await fetch ('http://localhost/Kundenliste/backend/baum.php', request);
-    let e = await d.json();
-    console.log(e);
+    const x = await fetch ('http://localhost/Kundenliste/backend/baum.php', request);
+    let y = await x.json();
+    console.log(y);
 
-    if (e.bData.length>0){
-      setbData(e.bData)
+    if (y.bData.length>0){
+      setbData(y.bData)
+      console.log(bData)
     }
-    console.log(bData)
   }
 
   useEffect(() => {
@@ -35,6 +35,8 @@ const Baum = ({BITEM}) => {
       {bData.map((item) => <Zweig key={item.Mitarbeiter_ID} item={item} level={0} />)}
     </div>
   )
+
+
 }
 
 export default Baum

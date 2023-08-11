@@ -2,31 +2,31 @@ import React, { useEffect, useState } from 'react'
 import Ast from './Ast';
 
 
-const Zweig = ({ item, level }) => {
+const Zweig = ({ item, Parent_ID }) => {
 
   const [selected, setSelected] = useState(item.selected ?? false);
 
-  const hasChildren = item.children && item.children.length !==0;
+  const hasChildren = item.Parent_ID && item.Parent_ID.length !==0;
 
   const renderZweige = () => {
     if (hasChildren){
-      const newLevel = level + 1;
+      const newParent_ID = Parent_ID + 1;
 
-      return item.children.map((child) => {
-        return <Zweig key={child.Mitarbeiter_ID} item={child} level={newLevel} />
+      return item.Parent_ID.map((child) => {
+        return <Zweig key={child.Mitarbeiter_ID} item={child} level={newParent_ID} />
       });
     }
 
     return null;
   };
 
+  const toggleSelected = () => {
+    setSelected(prev => !prev);
+  }
+
   useEffect(() => {
 
   }, []);
-
-  const toggleSelected = () => {
-    setSelected(prev => !prev);
-  };
 
   return (
     <>
@@ -34,7 +34,7 @@ const Zweig = ({ item, level }) => {
         item={item}
         selected={selected}
         hasChildren={hasChildren}
-        level={level}
+        level={Parent_ID}
         onToggle={toggleSelected}
       />
 
