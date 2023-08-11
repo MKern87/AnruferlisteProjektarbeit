@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-//import Zweig from './Zweig'
+import Zweig from './Zweig'
 
 const Baum = () => {
 
@@ -21,7 +21,7 @@ const Baum = () => {
 
     if (y.bData.length>0){
       setbData(y.bData)
-      console.log(bData)
+      //console.log(bData)
     }
   }
 
@@ -32,7 +32,7 @@ const Baum = () => {
 
   return (
     <div>
-      {bData.map((item) => <Zweig key={item.Mitarbeiter_ID} item={item} level={0} />)}
+      {bData.map((item) => <Zweig key={item.Mitarbeiter_ID} item={item} level={1} />)}
     </div>
   )
 

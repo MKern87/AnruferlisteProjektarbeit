@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const Ast = ({ item, hasChildren, Parent_ID, onToggle }) => {
+const Ast = ({ item, hasChildren, level, onToggle }) => {
 
 
 
@@ -11,7 +11,7 @@ const Ast = ({ item, hasChildren, Parent_ID, onToggle }) => {
   }, []);
 
   return (
-    <div style={{ paddingLeft: `${Parent_ID * 16}px`}}>
+    <div style={{ paddingLeft: `${level * 16}px`}}>
       {item.Kategorie}
 
       {hasChildren && <button onClick={onToggle}>toggle</button>}

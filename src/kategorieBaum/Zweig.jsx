@@ -6,14 +6,14 @@ const Zweig = ({ item, Parent_ID }) => {
 
   const [selected, setSelected] = useState(item.selected ?? false);
 
-  const hasChildren = item.Parent_ID && item.Parent_ID.length !==0;
+  const hasChildren = item.Mitarbeiter_ID == item.Parent_ID;
 
   const renderZweige = () => {
     if (hasChildren){
-      const newParent_ID = Parent_ID + 1;
+      const Mitarbeiter_ID = Parent_ID;
 
-      return item.Parent_ID.map((child) => {
-        return <Zweig key={child.Mitarbeiter_ID} item={child} level={newParent_ID} />
+      return item.Mitarbeiter_ID.map((child) => {
+        return <Zweig key={child.Mitarbeiter_ID} item={child} level={Mitarbeiter_ID} />
       });
     }
 
