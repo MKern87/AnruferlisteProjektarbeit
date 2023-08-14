@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+
 const Ast = ({ item, hasChildren, level, onToggle }) => {
-
-
 
 
 
@@ -11,10 +10,9 @@ const Ast = ({ item, hasChildren, level, onToggle }) => {
   }, []);
 
   return (
-    <div style={{ paddingLeft: `${level * 16}px`}}>
+    <div style={{ paddingLeft: `${level * 10}px`}}>
       {item.Kategorie}
-
-      {hasChildren && <button onClick={onToggle}>toggle</button>}
+      {hasChildren && <button onClick={onToggle}>+</button>}
     </div>
   )
 }

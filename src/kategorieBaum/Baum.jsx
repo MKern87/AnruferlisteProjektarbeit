@@ -31,8 +31,8 @@ const Baum = () => {
 
 
   return (
-    <div>
-      {bData.map((item) => <Zweig key={item.Mitarbeiter_ID} item={item} level={1} />)}
+    <div className='ml-1'>
+      {bData.map((item) => <Zweig key={item.ID} item={item} level={item.Parent_ID} />)}
     </div>
   )
 

@@ -21,8 +21,9 @@ $arr=array();
 
 $query='SELECT 
         Baum.Kategorie, Baum.ID, Baum.aktiv, Baum.Parent_ID
-        FROM Baum 
-        WHERE Aktiv = 1';
+        FROM Baum
+        WHERE Aktiv = 1
+        ORDER BY Baum.ID';
 
 $abruf= sqlsrv_query($db, $query);
 
@@ -37,7 +38,7 @@ if($abruf==false){ //Kein abruf möglich
         
           array_push($arr,array(
           'Kategorie' => $Kategorie,
-          'Mitarbeiter_ID' => $id,
+          'ID' => $id,
           'Aktiv' => $aktiv,
           'Parent_ID' => $pid
           ));   
