@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Ast from './Ast';
 
 
-const Zweig = ({ item, ID }) => {
+const Zweig = ({ item, Parent_ID }) => {
 
   const [selected, setSelected] = useState(false);
 
-  const hasChildren = item.Parent_ID == item.ID;
+  const hasChildren = item.ID ? true : false;
 
   const renderZweige = () => {
     if (hasChildren){
       const nextLvl = item.Parent_ID + 1;
 
-      return ID.map((child) => {
-        return <Zweig key={child.ID} item={child} level={nextLvl} />
+      return item.ID.map((child) => {
+        return <Zweig key={child.Parent_ID} item={child} level={nextLvl} />
       });
     }
     return null;

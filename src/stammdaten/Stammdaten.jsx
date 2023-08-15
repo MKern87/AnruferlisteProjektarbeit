@@ -28,7 +28,8 @@ const Stammdaten = () => {
   const [artAktuell, setartAktuell] = useState(false);
   const [open, setOpen] = useState(false);
   const [dTagesbericht, setdTagesbericht] = useState({});
-  const [dHandelspartner, setdHandelspartner] = useState({})
+  const [dHandelspartner, setdHandelspartner] = useState({});
+  const [T, setT] = useState('');
   
 
 //////// Alle Berichte (aktuelle Berichte) ////////
@@ -189,12 +190,12 @@ const Stammdaten = () => {
 
   return(
     <>
-    <div className="w-full grid md:grid-cols-4 grid-cols-1 bg-gray-100 p-2 md:overflow-scroll">
+    <div className="w-full grid md:grid-cols-4 grid-cols-1 bg-gray-100 p-2">
       <div className="md:overflow-scroll col-span-1 p-2">
         <h1 className="font-bold float-left">Kunden</h1>
           <input className="text-sm w-full h-8 px-2 my-4 border border-black rounded-sm" placeholder='Kunden suchen...' onChange={(e) => setSearch(e.target.value)}/>        
-        <div className='md:w-[800px] md:overflow-scroll w-full divide-y divide-slate-300 md:max-h-[720px] max-h-[400px] overflow-x-hidden overflow-y-scroll md:text-sm text-xs border border-slate-400'>
-          <div className='sticky top-0 md:overflow-scroll font-semibold bg-gray-400 w-full grid md:grid-cols-12 grid-cols-3 items-center justify-items-center '>
+        <div className='md:w-[800px] w-full divide-y divide-slate-300 md:max-h-[720px] max-h-[400px] overflow-x-hidden overflow-y-scroll md:text-sm text-xs border border-slate-400'>
+          <div className='sticky top-0 font-semibold bg-gray-400 w-full grid md:grid-cols-12 grid-cols-3 items-center justify-items-center '>
           <div onClick={() => setOpen(true)} className='py-1 bg-gray-400 w-full md:col-span-3 col-span-1 pl-2'>Suchbegriff</div>
           <div className='py-1 border-x border-gray-500 bg-gray-400 w-full md:col-span-2 col-span-1 pl-2'>Name1</div>
           <div className='py-1 bg-gray-400 w-full md:col-span-2 col-span-1 pl-2'>Name2</div>
@@ -352,27 +353,27 @@ const Stammdaten = () => {
                 <input id='erledigt' value={2} type="radio" name='erledigt' onChange={() => setVlue(2)} className="text-blue-600 focus:ring-blue-500" />
                 Alle</label>
               </div>
-              </div>
-              <div className='md:col-span-12 col-span-2 md:text-sm text-xs font-semibold bg-sky-200 md:mt-0 md:-mb-2 mt-12 -mb-2 w-full grid md:grid-cols-[180px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_70px] grid-cols-3 items-center justify-items-center py-1'>
-                <div className='py-1 w-full md:col-span-1 col-span-3 md:border-0 border-b border-gray-500 pl-2'>Kunde</div>
-                <div className='md:border-x border-x-0 md:border-b-0 border-b border-gray-500 py-1 w-full md:col-span-3 col-span-3 pl-2'>Text</div>
-                <div className='py-1 w-full col-span-1 pl-2 md:block hidden'>Art</div>
-                <div className='md:border-x border-r border-gray-500 py-1 w-full col-span-1 pl-2'>Mitarbeiter</div>
-                <div className='py-1 w-full md:col-span-1 col-span-2 pl-2'>Kategorie</div>
-                <div className='md:border-l border-l-0 border-y md:border-y-0 border-gray-500  py-1 w-full md:col-span-1 col-span-3 pl-2'>Datum</div>
-                <div className='md:border-x border-r border-gray-500 py-1 w-full col-span-1 pl-2'>Rückruf</div>
-                <div className='py-1 w-full col-span-1 pl-2 md:block hidden'>Rückrufer</div>
-                <div className='border-x border-gray-500  py-1 w-full col-span-1 pl-2 md:block hidden'>DatumRückruf</div>              
-                <div className='border-0 border-gray-500 py-1 w-full col-span-1 pl-2'>Erledigt</div>
-              </div>
-              <div className="w-full md:col-span-12 h-[550px] bg-white inline-block col-span-2 divide-y divide-slate-300 md:max-h-[550px] max-h-[550px] overflow-scroll md:text-sm text-xs border border-slate-400">
-              <DatenTagesbericht tagesbDaten={setdTagesbericht} popUp={setOpen} searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art} rrmA={rrmArbeiter}/>
-              </div>
             </div>
+            <div className='md:col-span-12 col-span-2 md:text-sm text-xs font-semibold bg-sky-200 md:mt-0 md:-mb-2 mt-12 -mb-2 w-full grid md:grid-cols-[181px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_88px] grid-cols-3 items-center justify-items-center py-1'>
+              <div className='py-1 w-full md:col-span-1 col-span-3 md:border-0 border-b border-gray-500 pl-2'>Kunde</div>
+              <div className='md:border-x border-x-0 md:border-b-0 border-b border-gray-500 py-1 w-full md:col-span-3 col-span-3 pl-2'>Text</div>
+              <div className='py-1 w-full col-span-1 pl-2 md:block hidden'>Art</div>
+              <div className='md:border-x border-r border-gray-500 py-1 w-full col-span-1 pl-2'>Mitarbeiter</div>
+              <div className='py-1 w-full md:col-span-1 col-span-2 pl-2'>Kategorie</div>
+              <div className='md:border-l border-l-0 border-y md:border-y-0 border-gray-500  py-1 w-full md:col-span-1 col-span-3 pl-2'>Datum</div>
+              <div className='md:border-x border-r border-gray-500 py-1 w-full col-span-1 pl-2'>Rückruf</div>
+              <div className='py-1 w-full col-span-1 pl-2 md:block hidden'>Rückrufer</div>
+              <div className='border-x border-gray-500  py-1 w-full col-span-1 pl-2 md:block hidden'>DatumRückruf</div>              
+              <div className='border-0 border-gray-500 py-1 w-full col-span-1 pl-2'>Erledigt</div>
+            </div>
+            <div className="w-full md:col-span-12 h-[550px] bg-white inline-block col-span-2 divide-y divide-slate-300 md:max-h-[550px] max-h-[550px] overflow-y-scroll overflow-x-hidden md:text-sm text-xs border border-slate-400">
+            <DatenTagesbericht T={setT} tagesbDaten={setdTagesbericht} popUp={setOpen} searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art} rrmA={rrmArbeiter}/>
+            </div>
+          </div>
         </div>
     </div>
     <div className=''>
-      {open ? <Eintrag tdata={dTagesbericht} HpData={dHandelspartner} /> : null}
+      {open ? <Eintrag Typ={T} tdata={dTagesbericht} HpData={dHandelspartner} /> : null}
     </div>
     </>
   )

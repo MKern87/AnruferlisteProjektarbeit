@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import RowColor from './RowColor';
 
 
-const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA, popUp, tagesbDaten}) => {
+const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA, popUp, tagesbDaten, T}) => {
 
   const [tdata, setTdata] = useState([]); 
 
@@ -122,7 +122,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
               || item.Kunden_ID.toLowerCase().includes(searchd.toLowerCase())
               )
           }).map((item, index) =>(
-            <RowColor key={item+index} ITEM={item} popUp={popUp} dTagesbericht={tagesbDaten} />
+            <RowColor key={item+index} ITEM={item} popUp={popUp} dTagesbericht={tagesbDaten} T={T}/>
           ))
         }
        </>

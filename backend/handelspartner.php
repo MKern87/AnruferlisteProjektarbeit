@@ -19,8 +19,8 @@ $data = json_decode(file_get_contents("php://input"));
 
 $arr=array();
 
-$query='SELECT HandelsPartner.Suchbegriff, HandelsPartner.Name1, HandelsPartner.Name2, HandelsPartner.Straße,
-        HandelsPartner.Plz, HandelsPartner.Ort, HandelsPartner.Telefon, HandelsPartner.Typ, HandelsPartner.gelöscht
+$query='SELECT HandelsPartner.ID, HandelsPartner.Suchbegriff, HandelsPartner.Name1, HandelsPartner.Name2, HandelsPartner.Straße,
+        HandelsPartner.Plz, HandelsPartner.Ort, HandelsPartner.Telefon, HandelsPartner.Typ, HandelsPartner.gelöscht, HandelsPartner.Memo
         FROM HandelsPartner
         WHERE HandelsPartner.Typ = 0 AND (HandelsPartner.gelöscht = 0 OR HandelsPartner.gelöscht is NULL)
         ORDER BY Suchbegriff ASC';
@@ -38,6 +38,8 @@ if($abruf==false){ //Kein abruf möglich
           $plz = ($row['Plz'] == null || $row['Plz']=="") ? "" : $row['Plz'];
           $ort = ($row['Ort'] == null || $row['Ort']=="") ? "" : $row['Ort'];
           $tel = ($row['Telefon'] == null || $row['Telefon']=="") ? "" : $row['Telefon'];
+          $id = $row['ID'];
+          $memo = $row['Memo'];
         
           array_push($arr,array(
           'Suchbegriff' => $sBegriff,
@@ -46,7 +48,9 @@ if($abruf==false){ //Kein abruf möglich
           'Strasse' => $str,
           'Plz' => $plz,
           'Ort' => $ort,
-          'Telefon' => $tel
+          'Telefon' => $tel,
+          'ID' => $id,
+          'Memo' => $memo
           ));   
         }
         sqlsrv_free_stmt($abruf); //löst den Abruf auf
