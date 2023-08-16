@@ -196,7 +196,7 @@ const Stammdaten = () => {
           <input className="text-sm w-full h-8 px-2 my-4 border border-black rounded-sm" placeholder='Kunden suchen...' onChange={(e) => setSearch(e.target.value)}/>        
         <div className='md:w-[800px] w-full divide-y divide-slate-300 md:max-h-[720px] max-h-[400px] overflow-x-hidden overflow-y-scroll md:text-sm text-xs border border-slate-400'>
           <div className='sticky top-0 font-semibold bg-gray-400 w-full grid md:grid-cols-12 grid-cols-3 items-center justify-items-center '>
-          <div onClick={() => setOpen(true)} className='py-1 bg-gray-400 w-full md:col-span-3 col-span-1 pl-2'>Suchbegriff</div>
+          <div className='py-1 bg-gray-400 w-full md:col-span-3 col-span-1 pl-2'>Suchbegriff</div>
           <div className='py-1 border-x border-gray-500 bg-gray-400 w-full md:col-span-2 col-span-1 pl-2'>Name1</div>
           <div className='py-1 bg-gray-400 w-full md:col-span-2 col-span-1 pl-2'>Name2</div>
           <div className='py-1 border-x border-gray-500 bg-gray-400 w-full col-span-3 pl-2 md:block hidden'>Adresse</div>
@@ -218,7 +218,7 @@ const Stammdaten = () => {
                 <input defaultChecked={false} type="checkbox" />
                 <p className="pl-1">Auto Aktual.</p>
               </span>
-            <button className="md:block hidden border  flex-3 shadow shadow-black bg-gray-300 text-sm border-b-black border-r-black p-[2px] px-2 mb-1">
+            <button className="md:block hidden border flex-3 shadow shadow-black bg-gray-300 text-sm border-b-black border-r-black p-[2px] px-2 mb-1">
               <p className='mb-1'>zurücksetzen</p>
             </button>
           </div>
@@ -372,7 +372,7 @@ const Stammdaten = () => {
           </div>
         </div>
     </div>
-    <div className=''>
+    <div>
       {open ? <Eintrag Typ={T} tdata={dTagesbericht} HpData={dHandelspartner} /> : null}
     </div>
     </>

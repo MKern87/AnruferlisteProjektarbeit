@@ -64,36 +64,47 @@ const Eintrag = ({tdata, HpData, Typ}) => {
   const hours = Math.floor(time / 360000)
   const minutes = Math.floor((time % 360000) / 6000)
   const seconds = Math.floor((time % 6000) / 100)
-  //{hours}:
-  //{minutes.toString().padStart(2, "0")}:
-  //{seconds.toString().padStart(2, "0")}
-
+  
   const startAndStop = () => {
     setIsRunning(!isRunning)
   }
 
-  const reset = () => {
-    setTime(0)
+  const save = ({hP, TypN, timer, Mitarbeiter, Art, erledigt, date, time, rueckruf, daterr, timerr, textArea, tD, TypU, MitarbeiterU, ArtU, erledigtU, rueckrufU }) => {
+    if(Typ == 'T'){
+      console.log()
+    }else{
+      console.log()
+    }
   }
-
 
   useEffect (() => {
     datenabruf();
     datenart();
     //console.log(tdata);
     let intervalId;
-      if (isRunning) {
-        intervalId = setInterval(() => setTime(time +1), 10);
-      }
+      intervalId = setInterval(() => setTime(time +10), 100);
         return () => clearInterval(intervalId);
-  }, [isRunning, time,])
+  }, [time])
 
   if(Typ == 'T'){
   return (
     <>
     <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
       <div className='w-screen h-4 col-span-6 flex'>
-        <BsCheckSquareFill className='hover cursor-pointer mr-1' />
+        <BsCheckSquareFill className='hover cursor-pointer mr-1' onClick={() => {save({
+            tD:tdata, 
+            TypU:'U', 
+            //timer:document.getElementById('timer').value,
+            MitarbeiterU:document.getElementById('MitarbeiterU').value,
+            ArtU:document.getElementById('ArtU').value,
+            erledigtU:document.getElementById('erledigtU').value,
+            rueckrufU:document.getElementById('rueckrufU')
+            //time:document.getElementById('time'),
+            //rueckruf:document.getElementById('rueckruf'),
+            //daterr:document.getElementById('daterr'),
+            //timerr:document.getElementById('timerr'),
+            //textArea:document.getElementById('textArea')
+            })}}/>
         <RiEditBoxLine className='hover cursor-pointer mr-1' />
         <TbSquareLetterX className='hover cursor-pointer' />
       </div>
@@ -124,7 +135,7 @@ const Eintrag = ({tdata, HpData, Typ}) => {
         <span className='ml-4 mt-2'>Kategorie:</span>
         <div className='ml-4'>{tdata.Kategorie}</div>
         <span className='ml-4 mt-8'>Mitarbeiter:
-          <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='Mitarbeiter'>
+          <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='MitarbeiterU'>
           <option value={'Name'}>{tdata.Mitarbeiter}</option>
           { 
             (data.length>0)?
@@ -138,7 +149,7 @@ const Eintrag = ({tdata, HpData, Typ}) => {
           </select>
         </span>
         <span className='ml-4'>Art:
-          <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='Art'>
+          <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='ArtU'>
           <option value={'Art'}>{tdata.Art_ID}</option>
           { 
             (artData.length>0)?
@@ -157,9 +168,9 @@ const Eintrag = ({tdata, HpData, Typ}) => {
           <span className='ml-4 mt-2'>
           {
           tdata.Erledigt == 0 ? 
-          <input type="checkbox" checked={false} onClick={true} id='erledigt' />
+          <input type="checkbox" checked={false} onClick={true} id='erledigtU' />
           :
-          <input type="checkbox" checked={true} id='erledigt' />
+          <input type="checkbox" checked={true} id='erledigtU' />
           } Erledigt
           </span>
         <span className='ml-4'>Start:
@@ -188,7 +199,7 @@ const Eintrag = ({tdata, HpData, Typ}) => {
         <span className='ml-4 mt-2'>
         {
         tdata.Rückruf == 0 ? 
-        <input type="checkbox" checked={rrChecked} id='rueckruf' onChange={() => {
+        <input type="checkbox" checked={rrChecked} id='rueckrufU' onChange={() => {
           if(rrChecked){
             setaInput
           }
@@ -200,7 +211,7 @@ const Eintrag = ({tdata, HpData, Typ}) => {
             !setaInput
           }
           setrrChecked(!rrChecked)
-        }} id='rueckruf' />
+        }} id='rueckrufU' />
         }
         {//
          // <input type="checkbox" defaultChecked={false} checked={rrChecked} onChange={() => {
@@ -251,7 +262,20 @@ const Eintrag = ({tdata, HpData, Typ}) => {
       <>
       <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
         <div className='w-screen h-4 col-span-6 flex'>
-          <BsCheckSquareFill className='hover cursor-pointer mr-1' />
+          <BsCheckSquareFill className='hover cursor-pointer mr-1' onClick={() => {save({
+            hP:HpData, 
+            TypN:'N', 
+            timer:document.getElementById('timer').value,
+            Mitarbeiter:document.getElementById('Mitarbeiter').value,
+            Art:document.getElementById('Art').value,
+            erledigt:document.getElementById('erledigt').value,
+            date:document.getElementById('date'),
+            time:document.getElementById('time'),
+            rueckruf:document.getElementById('rueckruf'),
+            daterr:document.getElementById('daterr'),
+            timerr:document.getElementById('timerr'),
+            textArea:document.getElementById('textArea')
+            })}}/>
           <RiEditBoxLine className='hover cursor-pointer mr-1' />
           <TbSquareLetterX className='hover cursor-pointer' />
         </div>
@@ -315,26 +339,27 @@ const Eintrag = ({tdata, HpData, Typ}) => {
             <input type="checkbox" defaultChecked={false} className='mr-1' id='erledigt' />
              Erledigt
             </span>
-          <span className='ml-4'>Start:
+          <div className='ml-4'>Start:
             <input type='date' id='date'
             defaultValue={new Date().toLocaleDateString('fr-CA', 
             {day: '2-digit', month: '2-digit', year: 'numeric',}
             )}
             className="h-6 ml-4 border border-black rounded-sm bg-white"
             />
-            <input type='time' id='time'
+            <span type='time' id='time' 
             className="h-6 ml-4 border border-black rounded-sm bg-white"
-            />
-          </span>
-          <span className='ml-4'>Dauer:
-            <p className='border border-black pl-1 bg-white w-1/4 float-right mr-36'>
-              <input type="time" id='span'/>
-              
+            />{showTime}
+          </div>
+          <div className='flex h-6 ml-4'>Dauer:
+            <p className='border border-black px-1 ml-2 bg-white w-1/4 float-right mr-36'>
+              <span className='' type="time" id='timer' />
+              {hours}:
+              {minutes.toString().padStart(2, "0")}:
+              {seconds.toString().padStart(2, "0")}
             </p>
-          </span>
+          </div>
           <div className='ml-20 items-center justify-items-center'>
-          <button onClick={startAndStop} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>{isRunning ? 'Stop' : 'Zeit verändern'}</button>
-          <button className='border shadow ml-2 px-2 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100 w-auto'>OK</button>
+          <button onClick={startAndStop} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>{!isRunning ? 'Stop' : 'Zeit verändern'}</button>
           </div>
         </div>
         <div className='grid col-start-3 col-span-1 border border-black mt-6 relative ml-2'>
