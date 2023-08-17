@@ -15,6 +15,7 @@ const Eintrag = ({tdata, HpData, Typ}) => {
   const [aInput, setaInput] = useState(false);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [done, setDone] = useState(false);
   const getTwoDigits = (value) => value < 10 ? `0${value}` : value;
 
 
@@ -69,11 +70,29 @@ const Eintrag = ({tdata, HpData, Typ}) => {
     setIsRunning(!isRunning)
   }
 
-  const save = ({hP, TypN, timer, Mitarbeiter, Art, erledigt, date, time, rueckruf, daterr, timerr, textArea, tD, TypU, MitarbeiterU, ArtU, erledigtU, rueckrufU }) => {
+  const save = ({hP, timer, Mitarbeiter, Art, erledigt, date, time, rueckruf, daterr, timerr, textArea, tD, MitarbeiterU, ArtU, erledigtU, rueckrufU }) => {
     if(Typ == 'T'){
-      console.log()
+      console.log(
+        tD,
+        MitarbeiterU,
+        ArtU,
+        erledigtU,
+        rueckrufU
+        )
     }else{
-      console.log()
+      console.log(
+        hP,
+        timer,
+        Mitarbeiter,
+        Art,
+        erledigt,
+        date,
+        time,
+        rueckruf,
+        daterr,
+        timerr,
+        textArea
+        )
     }
   }
 
@@ -93,12 +112,11 @@ const Eintrag = ({tdata, HpData, Typ}) => {
       <div className='w-screen h-4 col-span-6 flex'>
         <BsCheckSquareFill className='hover cursor-pointer mr-1' onClick={() => {save({
             tD:tdata, 
-            TypU:'U', 
             //timer:document.getElementById('timer').value,
             MitarbeiterU:document.getElementById('MitarbeiterU').value,
             ArtU:document.getElementById('ArtU').value,
             erledigtU:document.getElementById('erledigtU').value,
-            rueckrufU:document.getElementById('rueckrufU')
+            rueckrufU:document.getElementById('rueckrufU').value
             //time:document.getElementById('time'),
             //rueckruf:document.getElementById('rueckruf'),
             //daterr:document.getElementById('daterr'),
@@ -168,9 +186,23 @@ const Eintrag = ({tdata, HpData, Typ}) => {
           <span className='ml-4 mt-2'>
           {
           tdata.Erledigt == 0 ? 
-          <input type="checkbox" checked={false} onClick={true} id='erledigtU' />
+          <input type="checkbox" checked={done} id='erledigtU' onChange={() => {
+            if(done){
+              console.log(tdata.Erledigt)
+            }else if(setDone){
+              done
+            console.log(tdata.Erledigt)
+            }
+          }} />
           :
-          <input type="checkbox" checked={true} id='erledigtU' />
+          <input type="checkbox" id='erledigtU'  checked={!done} onChange={() => {
+            if(!done){
+              setDone
+              console.log(tdata.Erledigt)
+            }else if(!setDone){
+            console.log(tdata.Erledigt)
+            }
+          }} />
           } Erledigt
           </span>
         <span className='ml-4'>Start:
@@ -202,21 +234,25 @@ const Eintrag = ({tdata, HpData, Typ}) => {
         <input type="checkbox" checked={rrChecked} id='rueckrufU' onChange={() => {
           if(rrChecked){
             setaInput
+            console.log(tdata.Rückruf)
           }
           setrrChecked(rrChecked)
+          console.log(tdata.Rückruf)
         }} />
         :
-        <input type="checkbox" checked={!rrChecked} onChange={() => {
+        <input type="checkbox" checked={!rrChecked} id='rueckrufU' onChange={() => {
           if(!rrChecked){
             !setaInput
+            console.log(tdata.Rückruf)
           }
           setrrChecked(!rrChecked)
-        }} id='rueckrufU' />
+          console.log(tdata.Rückruf)
+        }} />
         }
         {//
          // <input type="checkbox" defaultChecked={false} checked={rrChecked} onChange={() => {
          //   if(rrChecked){
-         //     setaInput == true
+         //     setaInput
          //   }
          //   setrrChecked(!rrChecked)
          // }}
@@ -263,18 +299,17 @@ const Eintrag = ({tdata, HpData, Typ}) => {
       <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
         <div className='w-screen h-4 col-span-6 flex'>
           <BsCheckSquareFill className='hover cursor-pointer mr-1' onClick={() => {save({
-            hP:HpData, 
-            TypN:'N', 
+            hP:HpData,
             timer:document.getElementById('timer').value,
             Mitarbeiter:document.getElementById('Mitarbeiter').value,
             Art:document.getElementById('Art').value,
             erledigt:document.getElementById('erledigt').value,
-            date:document.getElementById('date'),
-            time:document.getElementById('time'),
-            rueckruf:document.getElementById('rueckruf'),
-            daterr:document.getElementById('daterr'),
-            timerr:document.getElementById('timerr'),
-            textArea:document.getElementById('textArea')
+            date:document.getElementById('date').value,
+            time:document.getElementById('time').value,
+            rueckruf:document.getElementById('rueckruf').value,
+            daterr:document.getElementById('daterr').value,
+            timerr:document.getElementById('timerr').value,
+            textArea:document.getElementById('textArea').value
             })}}/>
           <RiEditBoxLine className='hover cursor-pointer mr-1' />
           <TbSquareLetterX className='hover cursor-pointer' />
@@ -307,7 +342,7 @@ const Eintrag = ({tdata, HpData, Typ}) => {
           <span className='ml-4 mt-8'>Mitarbeiter:
             <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='Mitarbeiter'>
             <option value={'Name'}></option>
-            { 
+            {
               (data.length>0)?
               <>
               <StammdatenMitarbeiter Name={data}/>
@@ -320,8 +355,8 @@ const Eintrag = ({tdata, HpData, Typ}) => {
           </span>
           <span className='ml-4'>Art:
             <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='Art'>
-            <option value={'Art'}></option>
-            { 
+            <option value={'Artt'}></option>
+            {
               (artData.length>0)?
               <>
               <StammdatenArt Art={artData}/>
