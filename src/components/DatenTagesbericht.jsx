@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import RowColor from './RowColor';
 
 
-const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA, popUp, tagesbDaten, T}) => {
+const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA, popUp, tagesbDaten, T, daten}) => {
 
   const [tdata, setTdata] = useState([]); 
 
@@ -94,7 +94,9 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
 
 //////// Arr an tData ////////
 
-      setTdata(narr)
+      setTdata(narr);
+      daten(narr);
+      console.log(narr)
 }
     //console.log(i);
 }

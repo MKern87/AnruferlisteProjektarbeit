@@ -116,7 +116,7 @@ const RowColor = ({ITEM, popUp, dTagesbericht, T}) => {
 }, [colorTest])
 
   return (
-    <div onClick={() => {popUp(true); T('T'); dTagesbericht(ITEM)}} className={bgColor+ 'md:h-auto h-auto w-full cursor-pointer grid md:grid-cols-[180px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_70px] grid-cols-3 items-center justify-items-center'}>
+    <div onClick={() => {dTagesbericht(ITEM); T('T'); popUp(true)}} className={bgColor+ 'md:h-auto h-auto w-full cursor-pointer grid md:grid-cols-[180px_auto_50px_50px_100px_100px_120px_120px_70px_100px_120px_70px] grid-cols-3 items-center justify-items-center'}>
       <div className='py-1 w-full md:col-span-1 col-span-3 md:border-0 border-b border-gray-400 pl-2'>{ITEM.Kunden_ID}</div>
       <div className='md:border-x border-x-0 md:border-b-0 border-b border-gray-400 py-1 w-full md:col-span-3 col-span-3 pl-2'>{ITEM.text.length>200? ITEM.text.substr(0, 156)+' ...':ITEM.text}</div>
       <div className='py-1 w-full col-span-1 pl-2 md:block hidden '>{ITEM.Art_ID}</div>
