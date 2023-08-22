@@ -12,12 +12,12 @@ const Eintrag = ({tdata, HpData, Typ, Opener}) => {
     setTag(tdata)
     setKunde(HpData)
     console.log(type)
-  }, [Typ, tag, kunde])
+  }, [Typ, tag, kunde,tdata])
 
   if(Typ == 'T'){
   return (
     <>
-    <EintragUpdate tD={tag} stD={setTag} O={Opener}/>
+    <EintragUpdate tD={tdata} stD={setTag} O={Opener}/>
     </>
     )
   }else{

@@ -81,7 +81,7 @@ if($abruf==false){ //Kein abruf möglich
           'Datum' =>$date,
           'DatumZeit' => $date,
           'Dauer' => $duration,
-          'Rückruf' => $callback,
+          'Rueckruf' => $callback,
           'text' => $text,
           'Erledigt' => $done,
           //'rtfText' => $rtfText,

@@ -125,13 +125,13 @@ const RowColor = ({ITEM, popUp, dTagesbericht, T}) => {
       <div className='md:border-l border-l-0 md:border-y-0 border-y border-gray-400 py-1 w-full md:col-span-1 col-span-3 pl-2 '>{ITEM.Datum.date}</div>
       <div className=
       {
-        (ITEM.Rückruf == 1 && ITEM.Erledigt == 0) ? 
+        (ITEM.Rueckruf == 1 && ITEM.Erledigt == 0) ? 
           ' bg-red-600 flex flex-col h-full items-center justify-center md:border-x border-r border-gray-400 py-2 w-full col-span-1 ' 
           : 
           ' text-center flex flex-col items-center justify-center md:border-x border-r border-gray-400 py-2 w-full col-span-1 '
       }>
       {
-        ITEM.Rückruf == 0 ? 
+        ITEM.Rueckruf == 0 ? 
         <input disabled checked={false} className="" type="checkbox"/>
         :
         <input disabled checked className="" type="checkbox"/>

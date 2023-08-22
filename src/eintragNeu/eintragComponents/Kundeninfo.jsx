@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 const Kundeninfo = ({H}) =>{
 
   useEffect(() => {
-    console.log(H)
+     
   },[H])
   
   return(

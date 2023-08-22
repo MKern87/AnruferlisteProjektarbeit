@@ -15,8 +15,8 @@ const EintragUpdate = ({tD, O, stD}) => {
         console.log(props)
     }
   useEffect (() => {
-    
     console.log(tD)
+     
   }, [tD])
 
  
@@ -33,14 +33,14 @@ const EintragUpdate = ({tD, O, stD}) => {
             'Tel':tD.Telefon,
             'Memo':tD.Memo,
             'KategorieText':tD.Kategorie_ID,
-            'MitarbeiterID':document.getElementById('Mitarbeiter').value,
-            'ArtID':document.getElementById('artname').value,
-            'statusErledigt':document.getElementById('erledigt').checked,
-            'statusStart':document.getElementById('date').value,
-            'statusDauer':document.getElementById('seconds').value,
-            'isRueckruf':document.getElementById('rueckruf').checked,
-            'isDatumR':document.getElementById('daterr').value,
-            'RueckrufWer':document.getElementById('rruf').value,
+            'MitarbeiterID':tD.Mitarbeiter,//document.getElementById('Mitarbeiter').value,
+            'ArtID':tD.Art_ID,//document.getElementById('artname').value,
+            'statusErledigt':tD.Erledigt,//document.getElementById('erledigt').checked,
+            'statusStart':tD.Datum,//document.getElementById('date').value,
+            'statusDauer':tD.Dauer,//document.getElementById('seconds').value,
+            'isRueckruf':tD.Rueckruf,//document.getElementById('rueckruf').checked,
+            'isDatumR':tD.DatumRueckruf,//document.getElementById('daterr').value,
+            'RueckrufWer':tD.Mitarbeitername,//document.getElementById('rruf').value,
             'text':tD.text
           });
           stD('')
@@ -53,13 +53,13 @@ const EintragUpdate = ({tD, O, stD}) => {
    
         <Baum />
    
-        <Stammdaten />
+        <Stammdaten S={tD}/>
    
-        <Status />
+        <Status ST={tD}/>
    
-        <Rueckruf />
+        <Rueckruf R={tD}/>
    
-        <Beschreibung />
+        <Beschreibung T={tD}/>
          
         <div className='grid col-start-5 col-span-2 row-span-4 mt-6 border border-black ml-2'>
           <input type="text" id='tArea' />

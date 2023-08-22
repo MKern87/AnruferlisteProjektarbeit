@@ -23,8 +23,7 @@ $arr=array();
 $tsql1 = 'INSERT INTO Tagesbericht
         (Tagesbericht.Kunden_ID, Tagesbericht.Kategorie_ID, Tagesbericht.Mitarbeiter_ID, Tagesbericht.Art_ID, Tagesbericht.Datum,
         Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, Tagesbericht.Kategorie,
-        Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer)
-        ';
+        Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer)';
   
 /* Construct the parameter array. */  
 $employeeId = 5;  

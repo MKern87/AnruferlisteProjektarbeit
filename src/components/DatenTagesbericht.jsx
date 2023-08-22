@@ -40,7 +40,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
       if (rrvalue === 2) {
         //console.log(rrvalue)
       }else{
-        narr = narr.filter((item) => item.Rückruf == rrvalue)
+        narr = narr.filter((item) => item.Rueckruf == rrvalue)
         //console.log(rrvalue)
       }
 
