@@ -7,7 +7,6 @@ const RowColor = ({ITEM, popUp, dTagesbericht, T}) => {
   
   //console.log(ITEM)
   const colorTest = ({D}) => {
-    //console.log(D)
     switch (D.trim().toString()) {
       case "Medicare":
         setbgColor(' bg-[#3F3F40] hover:brightness-75 ')

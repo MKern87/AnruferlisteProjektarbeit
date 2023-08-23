@@ -11,7 +11,7 @@ const Eintrag = ({tdata, HpData, Typ, Opener}) => {
   useEffect (() => {
     setTag(tdata)
     setKunde(HpData)
-    console.log(type)
+    //console.log(type)
   }, [Typ, tag, kunde,tdata])
 
   if(Typ == 'T'){

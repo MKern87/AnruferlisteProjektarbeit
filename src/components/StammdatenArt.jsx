@@ -18,7 +18,7 @@ const StammdatenArt = () => {
     
     const f = await fetch('http://localhost/Kundenliste/backend/art.php', request);
     let g = await f.json();
-    //console.log(g);
+    console.log(g);
 
   if (g.ArtData.length>0) {
     setArtData(g.ArtData)
@@ -35,7 +35,7 @@ const StammdatenArt = () => {
     {
       <>
       {artData.map((item, index) => (
-        <option key={item + index} value={item.Art}>{item.Art}</option>
+        <option key={item + index} value={item.Mitarbeiter_ID}>{item.Art}</option>
       ))}
       </>
     }

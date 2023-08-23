@@ -28,15 +28,9 @@ const StammdatenMitarbeiter = () =>  {
   }, [])
   
   return (
-      <>
-        {
-          <>
-          {data.map((item, index) => (
-            <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
-          ))}
-          </>
-        }
-      </>
+          data.map((item, index) => (
+            <option key={item + index} value={item.Mitarbeiter.trim()}>{item.Mitarbeiter}</option>
+          ))
   )
 }
 

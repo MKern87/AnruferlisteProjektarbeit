@@ -13,69 +13,47 @@ $db = $database->connect();
 
 $data = json_decode(file_get_contents("php://input"));
 
-//$skey = md5(htmlspecialchars(strip_tags($data->SK)));
-//$skey2 = md5(htmlspecialchars(strip_tags($data->SKA)));
-//$skey3 = md5(htmlspecialchars(strip_tags($data->SKB)));
+$KundenID = htmlspecialchars(strip_tags($data->KundenID));
+$Kunde = htmlspecialchars(strip_tags($data->Kunde));
+$Strasse = htmlspecialchars(strip_tags($data->Strasse));
+$Plz = htmlspecialchars(strip_tags($data->Plz));
+$Ort = htmlspecialchars(strip_tags($data->Ort));
+$Tel = htmlspecialchars(strip_tags($data->Tel));
+$Memo = htmlspecialchars(strip_tags($data->Memo));
+$Kategorie = htmlspecialchars(strip_tags($data->Kategorie));
+$KategorieText = htmlspecialchars(strip_tags($data->KategorieText));
+$Mitarbeiter = htmlspecialchars(strip_tags($data->Mitarbeiter));
+$Art_ID = htmlspecialchars(strip_tags($data->Art_ID));
+$Erledigt = htmlspecialchars(strip_tags($data->Erledigt));
+$Datum = htmlspecialchars(strip_tags($data->Datum));
+$Dauer = htmlspecialchars(strip_tags($data->Dauer));
+$Rueckruf = htmlspecialchars(strip_tags($data->Rueckruf));
+$RueckrufWer = htmlspecialchars(strip_tags($data->RueckrufWer));
+$DatumRueckruf = htmlspecialchars(strip_tags($data->DatumRueckruf));
+$text = htmlspecialchars(strip_tags($data->text));
+$geloescht = htmlspecialchars(strip_tags($data->geloescht));
+$parentID = htmlspecialchars(strip_tags($data->parentID));
+
+$Erledigt = ($Erledigt == 'true') ? 1 : 0;
+$Rueckruf = ($Rueckruf == 'true') ? 1 : 0;
 
 $arr=array();
-  
-/* Define the query. */  
-$tsql1 = 'INSERT INTO Tagesbericht
-        (Tagesbericht.Kunden_ID, Tagesbericht.Kategorie_ID, Tagesbericht.Mitarbeiter_ID, Tagesbericht.Art_ID, Tagesbericht.Datum,
-        Tagesbericht.Dauer, Tagesbericht.Rückruf, Tagesbericht.text, Tagesbericht.Erledigt, Tagesbericht.Kategorie,
-        Tagesbericht.DatumRückruf, Tagesbericht.RückrufWer)';
-  
-/* Construct the parameter array. */  
-$employeeId = 5;  
-$changeDate = "2005-06-07";  
-$rate = 30;  
-$payFrequency = 2;  
-$params1 = array(  
-               array($employeeId, null),  
-               array($changeDate, null, null, SQLSRV_SQLTYPE_DATETIME),  
-               array($rate, null, null, SQLSRV_SQLTYPE_MONEY),  
-               array($payFrequency, null, null, SQLSRV_SQLTYPE_TINYINT)  
-           );  
-  
-/* Execute the INSERT query. $conn, */  
-$stmt1 = sqlsrv_query($tsql1, $params1);  
+    
+$tsql1 = 'UPDATE Tagesbericht SET
+          Kategorie_ID = "'.$Kategorie.'", Mitarbeiter_ID = "'.$Mitarbeiter.'", Art_ID = "'.$Art_ID.'", Datum = "now()",
+        Dauer = "'.$Dauer.'", Rückruf = "'.$Rueckruf.'", text = "'.$text.'", Erledigt = "'.$Erledigt.'", rtfText = "'.$rtfText.'", Kategorie = "'.$KategorieText.'",
+        DatumRückruf = "now()", RückrufWer = "'.$RueckrufWer.'", gelöscht = "'.$geloescht.'", parentID = "'.intval($parentID).'" WHERE ID = "'.$KundenID.'"';
+    
+$stmt1 = sqlsrv_query($db, $tsql1);  
 if( $stmt1 === false )  
 {  
      echo "Error in execution of INSERT.\n";  
      die( print_r( sqlsrv_errors(), true));  
-}  
-  
-/* Retrieve the newly inserted data. */  
-/* Define the query. */  
-$tsql2 = "SELECT EmployeeID, RateChangeDate, Rate, PayFrequency  
-          FROM HumanResources.EmployeePayHistory  
-          WHERE EmployeeID = ? AND RateChangeDate = ?";  
-  
-/* Construct the parameter array. */  
-$params2 = array($employeeId, $changeDate);  
-  
-/*Execute the SELECT query. */  
-$stmt2 = sqlsrv_query($conn, $tsql2, $params2);  
-if( $stmt2 === false )  
-{  
-     echo "Error in execution of SELECT.\n";  
-     die( print_r( sqlsrv_errors(), true));  
-}  
-  
-/* Retrieve and display the results. */  
-$row = sqlsrv_fetch_array( $stmt2 );  
-if( $row === false )  
-{  
-     echo "Error in fetching data.\n";  
-     die( print_r( sqlsrv_errors(), true));  
-}  
-echo "EmployeeID: ".$row['EmployeeID']."\n";  
-echo "Change Date: ".date_format($row['RateChangeDate'], "Y-m-d")."\n";  
-echo "Rate: ".$row['Rate']."\n";  
-echo "PayFrequency: ".$row['PayFrequency']."\n";  
-  
-/* Free statement and connection resources. */  
-sqlsrv_free_stmt($stmt1);  
-sqlsrv_free_stmt($stmt2);  
-sqlsrv_close($conn);  
+}else{
+     echo json_encode(array('data' => true));
+}
+
+sqlsrv_free_stmt($stmt1);   
+sqlsrv_close($db);
+
 ?>  

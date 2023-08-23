@@ -19,7 +19,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
 
     const h = await fetch ('http://localhost/Kundenliste/backend/tagesbericht.php', request);
     let i = await h.json();
-    //console.log(i);
+    console.log(i);
 
 //////// Daten vorhanden ? ////////
 

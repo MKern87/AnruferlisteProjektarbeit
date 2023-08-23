@@ -23,7 +23,7 @@ $query='SELECT
         Baum.Kategorie, Baum.ID, Baum.aktiv, Baum.Parent_ID
         FROM Baum
         WHERE Aktiv = 1
-        ORDER BY Baum.ID';
+        ORDER BY Parent_ID, Kategorie ASC';
 
 $abruf= sqlsrv_query($db, $query);
 

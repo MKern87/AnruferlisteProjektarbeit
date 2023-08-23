@@ -16,7 +16,7 @@ const Status = ({ST}) =>{
     const [CounterHour, setCounterHour] = useState('0');
     const [CounterMin, setCounterMin] = useState('0');
     const [CounterSec, setCounterSec] = useState('0');
-    const [Erledigt, setErledigt] = useState(false)
+    const [Erledigt, setErledigt] = useState((ST.Erledigt == 1) ? true : false)
 
     function CountdownTimer() {
        let now = Now;
@@ -28,7 +28,7 @@ const Status = ({ST}) =>{
         setseccounter(seccounter => seccounter + 1);
     }
     useEffect(()=>{
-      console.log(ST)
+      //console.log(ST)
         let interval;
     if (timerid) {
       interval = setInterval(() => {
@@ -48,7 +48,7 @@ const Status = ({ST}) =>{
     return (<div className='grid col-start-2 col-span-1 border border-black mt-6 relative ml-2'>
     <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Status</p>
       <span className='ml-4 mt-2'>
-      <input type="checkbox" onChange={()=>setErledigt(!Erledigt)}  className='mr-1' id='erledigt' />
+      <input type="checkbox" defaultChecked={(ST.Erledigt == 1) ? true : false} onChange={()=>setErledigt(!Erledigt)}  className='mr-1' id='erledigt' />
        Erledigt
       </span>
       <input type="hidden" id="iserlidgt" value={Erledigt} />
@@ -58,7 +58,7 @@ const Status = ({ST}) =>{
       className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
       <input type='time' value={HtmlCount(new Date(ST.DatumZeit.date.toString()).getHours(), new Date(ST.DatumZeit.date.toString()).getMinutes())}
-          className="h-6 ml-4 border border-black rounded-sm bg-white"
+        id="ttt"  className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
     </div>
     <div className='flex h-6 ml-4'>Dauer:
@@ -67,7 +67,7 @@ const Status = ({ST}) =>{
         {ST.Dauer}
       </p>
     </div>
-    <input type="hidden" id="seconds" value={seccounter} />
+    <input type="hidden" id="seconds" value={ST.Dauer} />
     <div className='ml-20 items-center justify-items-center'>
     <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>Stop</button>
     </div>

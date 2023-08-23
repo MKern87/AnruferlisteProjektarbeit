@@ -12,7 +12,38 @@ import Beschreibung from './eintragComponents/Beschreibung';
 const EintragUpdate = ({tD, O, stD}) => {
     
     const updateData = async(props) => {
-        console.log(props)
+      console.log(props.RueckrufWer)
+      const request = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+  
+          'KundenID': props.KundenID,
+          'Kunde': props.Kunde,
+          'Strasse': props.Strasse,
+          'Plz': props.Plz,
+          'Ort': props.Ort,
+          'Tel': props.Tel,
+          'Memo': props.Memo,
+          'Kategorie': props.Kategorie,
+          'KategorieText': props.Kategorie,
+          'Mitarbeiter': props.Mitarbeiter_ID,
+          'Art_ID': props.Art_ID,
+          'Erledigt': props.Erledigt,
+          'Datum': props.Datum,
+          'Dauer': props.Dauer,
+          'Rueckruf': props.Rueckruf,
+          'DatumRueckruf': props.DatumRueckruf,
+          'RueckrufWer': props.RueckrufWer,
+          'text': props.text,
+          'geloescht': props.geloescht,
+          'parentID': props.parentID
+        })
+      };
+      console.log(request)
+      const h = await fetch ('http://localhost/Kundenliste/backend/eintrag.php', request);
+      let i = await h.json();
+      console.log(i)
     }
   useEffect (() => {
     console.log(tD)
@@ -32,16 +63,19 @@ const EintragUpdate = ({tD, O, stD}) => {
             'Ort':tD.Ort,
             'Tel':tD.Telefon,
             'Memo':tD.Memo,
-            'KategorieText':tD.Kategorie_ID,
-            'MitarbeiterID':tD.Mitarbeiter,//document.getElementById('Mitarbeiter').value,
-            'ArtID':tD.Art_ID,//document.getElementById('artname').value,
-            'statusErledigt':tD.Erledigt,//document.getElementById('erledigt').checked,
-            'statusStart':tD.Datum,//document.getElementById('date').value,
-            'statusDauer':tD.Dauer,//document.getElementById('seconds').value,
-            'isRueckruf':tD.Rueckruf,//document.getElementById('rueckruf').checked,
-            'isDatumR':tD.DatumRueckruf,//document.getElementById('daterr').value,
-            'RueckrufWer':tD.Mitarbeitername,//document.getElementById('rruf').value,
-            'text':tD.text
+            'Kategorie':tD.Kategorie_kID,
+            'KategorieText':tD.Kategorie,
+            'Mitarbeiter_ID':tD.Mitarbeiter_ID,
+            'Art_ID':document.getElementById('artname').value,
+            'Erledigt':document.getElementById('iserlidgt').value,
+            'Datum':document.getElementById('date').value+'T'+document.getElementById('ttt').value+':00',
+            'Dauer':document.getElementById('seconds').value,
+            'Rueckruf':document.getElementById('rueckruf').checked,
+            'DatumRueckruf':document.getElementById('daterr').value+'T'+document.getElementById('timerr').value+':00',
+            'RueckrufWer':document.getElementById('rruf').value,
+            'text':document.getElementById('textArea').value,
+            'geloescht':tD.geloescht,
+            'parentID':tD.parentID
           });
           stD('')
           }} className='hover cursor-pointer mr-1' />

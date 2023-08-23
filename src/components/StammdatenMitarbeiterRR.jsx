@@ -15,7 +15,7 @@ const StammdatenMitarbeiterRR = () =>  {
     
     const d = await fetch('http://localhost/Kundenliste/backend/mitarbeiter.php', request);
     let e = await d.json();
-    //console.log(e);
+    console.log(e);
 
     if (e.data.length>0) {
       setData(e.data)
@@ -31,7 +31,7 @@ const StammdatenMitarbeiterRR = () =>  {
         {
           <>
           {data.map((item, index) => (
-            <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
+            <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
           ))}
           </>
         }
