@@ -6,13 +6,13 @@ const Zweig = ({ item, Parent_ID }) => {
 
   const [selected, setSelected] = useState(false);
 
-  const hasChildren = item.ID ? true : false;
+  const hasChildren = item.Parent_ID ? true : false;
 
   const renderZweige = () => {
     if (hasChildren){
-      const nextLvl = item.Parent_ID + 1;
+      const nextLvl = Parent_ID + 1;
 
-      return item.ID.map((child) => {
+      return item.Parent_ID.map((child) => {
         return <Zweig key={child.Parent_ID} item={child} level={nextLvl} />
       });
     }
@@ -33,7 +33,7 @@ const Zweig = ({ item, Parent_ID }) => {
         item={item}
         selected={selected}
         hasChildren={hasChildren}
-        level={item.Parent_ID}
+        level={Parent_ID}
         onToggle={toggleSelected}
       />
       {selected && renderZweige()}

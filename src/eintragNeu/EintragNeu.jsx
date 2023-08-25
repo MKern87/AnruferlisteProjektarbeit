@@ -13,6 +13,37 @@ const EintragNeu = ({HP, O, sK}) => {
     
     const createData = async(props) => {
         console.log(props)
+        const request = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+    
+            'KundenID': props.KundenID,
+            'Kunde': props.Kunde,
+            'Strasse': props.Strasse,
+            'Plz': props.Plz,
+            'Ort': props.Ort,
+            'Tel': props.Tel,
+            'Memo': props.Memo,
+            'Kategorie': props.Kategorie,
+            'KategorieText': props.Kategorie,
+            'Mitarbeiter': props.Mitarbeiter_ID,
+            'Art_ID': props.Art_ID,
+            'Erledigt': props.Erledigt,
+            'Datum': props.Datum,
+            'Dauer': props.Dauer,
+            'Rueckruf': props.Rueckruf,
+            'DatumRueckruf': props.DatumRueckruf,
+            'RueckrufWer': props.RueckrufWer,
+            'text': props.text,
+            'geloescht': props.geloescht,
+            'parentID': props.parentID
+          })
+        };
+        console.log(request)
+        const h = await fetch ('http://localhost/Kundenliste/backend/eintragneu.php', request);
+        let i = await h.json();
+        console.log(i)
     }
   useEffect (() => {
     
@@ -33,14 +64,14 @@ const EintragNeu = ({HP, O, sK}) => {
             'Tel':HP.Telefon,
             'Memo':HP.Memo,
             'KategorieText':'muss noch',
-            'MitarbeiterID':document.getElementById('Mitarbeiter').value,
-            'ArtID':document.getElementById('artname').value,
-            'statusErledigt':document.getElementById('erledigt').checked,
-            'statusStart':document.getElementById('date').value,
-            'statusDauer':document.getElementById('seconds').value,
-            'isRueckruf':document.getElementById('rueckruf').checked,
-            'isDatumR':document.getElementById('daterr').value,
-            'RueckrufWer':document.getElementById('rruf').value,
+            //'MitarbeiterID':document.getElementById('Mitarbeiter').value,
+            //'ArtID':document.getElementById('artname').value,
+            //'statusErledigt':document.getElementById('erledigt').checked,
+            //'statusStart':document.getElementById('date').value,
+            //'statusDauer':document.getElementById('seconds').value,
+            //'isRueckruf':document.getElementById('rueckruf').checked,
+            //'isDatumR':document.getElementById('daterr').value,
+            //'RueckrufWer':document.getElementById('rruf').value,
           });
           sK('')
           }} className='hover cursor-pointer mr-1' />
@@ -54,7 +85,7 @@ const EintragNeu = ({HP, O, sK}) => {
    
         <Stammdaten />
    
-        <Status />
+        <Status ST={null}/>
    
         <Rueckruf />
    

@@ -46,7 +46,7 @@ const Stammdaten = () => {
 
     useEffect(()=>{
       
-  }, [dTagesbericht, dHandelspartner])
+  }, [dTagesbericht, dHandelspartner, tdata])
   
 
   return(

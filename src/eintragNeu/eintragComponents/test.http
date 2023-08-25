@@ -1,0 +1,22 @@
+###
+POST https://localhost/Kundenliste/backend/eintragupdate.php
+User-Agent:rest-client
+Content-Type: application/json
+
+{
+  "ID":30241,
+  "Kunde_ID":6361,
+  "Kategorie_ID":1,
+  "Mitarbeiter_ID":3,
+  "Art_ID":2,
+  "Datum":"2023-06-26 13:02:00",
+  "Dauer":"00:02:29",
+  "Rueckruf":1,
+  "text":"aaasssdf\nMedicare Umzug\ner meldet sich sobald der neue Rechner eingerichtet ist.\n-----------------\nwaren maximal 20 Minuten zeitaufwand ",
+  "Erledigt":0,
+  "Kategorie":"Kategorie / Medicare /",
+  "DatumRueckruf":"1900-01-01 00:00:00",
+  "RueckrufWer":4,
+  "geloescht":0,
+  "parentID":0
+  }

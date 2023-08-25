@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-const StammdatenMitarbeiterRR = () =>  {
+const StammdatenMitarbeiterRR = ({T}) =>  {
   const [data, setData] = useState([]);
   
    const datenabruf = async() => {
@@ -26,17 +26,29 @@ const StammdatenMitarbeiterRR = () =>  {
     datenabruf();
   }, [])
   
-  return (
+  if(T == 'N')
+  {return (
       <>
         {
           <>
           {data.map((item, index) => (
-            <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
+            <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
           ))}
           </>
         }
       </>
-  )
+  )}else{
+  return (
+    <>
+      {
+        <>
+        {data.map((item, index) => (
+          <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
+        ))}
+        </>
+      }
+    </>
+)}
 }
 
 export default StammdatenMitarbeiterRR

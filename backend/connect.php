@@ -24,10 +24,14 @@ class Database{
       }else{
           $check=sqlsrv_connect($this->Servername, $this->connection);
           if($check){
+            // echo("Verbindung steht ");
+            // exit();
               $this->conn=$check;
               return $this->conn;
           }else{
               die(print_r(sqlsrv_errors(), true));
+            //   echo("Verbindung falsch ");
+            // exit();
           }
 
       }

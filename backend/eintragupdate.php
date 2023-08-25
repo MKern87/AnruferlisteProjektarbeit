@@ -1,0 +1,76 @@
+<?php  
+
+error_reporting(E_ALL);
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With'); 
+
+include_once('connect.php');
+
+$database = new Database();
+$db = $database->connect();
+
+$data = json_decode(file_get_contents("php://input"));
+
+ 
+$KundenID = htmlspecialchars($data->ID);
+$Kunde = htmlspecialchars($data->Kunde_ID);
+$Kategorie = htmlspecialchars($data->Kategorie_ID);
+$Mitarbeiter = htmlspecialchars($data->Mitarbeiter_ID)?htmlspecialchars($data->Mitarbeiter_ID):null;
+$Art_ID = htmlspecialchars($data->Art_ID)?htmlspecialchars($data->Art_ID):null;
+$Datum = htmlspecialchars($data->Datum);
+$Dauer = htmlspecialchars($data->Dauer);
+$Rueckruf = htmlspecialchars($data->Rueckruf);
+$text = htmlspecialchars($data->text);
+$Erledigt = htmlspecialchars($data->Erledigt);
+$KategorieText = htmlspecialchars($data->Kategorie);
+$DatumRueckruf = htmlspecialchars($data->DatumRueckruf);
+$RR = is_numeric($data->RueckrufWer)? " ,Tagesbericht.RückrufWer = ".$data->RueckrufWer." ":"";
+$geloescht = htmlspecialchars($data->geloescht);
+$parentID = htmlspecialchars($data->parentID);
+//print(json_encode($RR));
+//die();
+// $Datum = str_replace('-', '/', $Datum);
+// $DatumRueckruf = str_replace('-', '/', $DatumRueckruf);
+
+//$Erledigt = ($Erledigt == 'true') ? 1 : 0;
+//$Rueckruf = ($Rueckruf == true) ? 1 : 0;
+
+
+
+//echo json_encode(array('t'=>'UPDATE Tagesbericht SET
+//Kategorie_ID = '.$Kategorie.', Mitarbeiter_ID = '.$Mitarbeiter.', Art_ID = '.$Art_ID.', Datum = now(),
+//          Dauer = "'.$Dauer.'", Rückruf = '.$Rueckruf.', text = "'.$text.'", Erledigt = '.$Erledigt.', Kategorie = "'.$KategorieText.'",
+//          DatumRückruf = "now()", RückrufWer = '.$RueckrufWer.', gelöscht = '.$geloescht.', parentID = '.intval($parentID).' WHERE ID = '.$KundenID.'
+//          '));
+//die();   
+
+/*$tsql1 = "UPDATE Tagesbericht SET
+          Tagesbericht.Kunden_ID = ".$Kunde.", Tagesbericht.Kategorie_ID = ".$Kategorie.", Tagesbericht.Mitarbeiter_ID = ".$Mitarbeiter.", Tagesbericht.Art_ID = ".$Art_ID.", Tagesbericht.Datum = CONVERT(datetime, '', 103),
+          Tagesbericht.Dauer = '".$Dauer."', Tagesbericht.Rückruf = ".$Rueckruf.", Tagesbericht.text = '".$text."', Tagesbericht.Erledigt = ".$Erledigt.", Tagesbericht.Kategorie = '".$KategorieText."',
+          Tagesbericht.DatumRückruf = CONVERT(datetime, '', 103), Tagesbericht.RückrufWer = ".$RueckrufWer.", Tagesbericht.gelöscht = ".$geloescht.", Tagesbericht.parentID = ".$parentID." WHERE Tagesbericht.ID = ".$KundenID."
+          ";*/
+$tsql1 = "UPDATE Tagesbericht SET
+          Tagesbericht.Kunden_ID = ".$Kunde.", Tagesbericht.Kategorie_ID = ".$Kategorie.",Tagesbericht.Rückruf = 0,Tagesbericht.Art_ID =2,Tagesbericht.Datum = CONVERT(datetime, '2023-24-08', 103), Tagesbericht.text = '".$text."', Tagesbericht.Erledigt = ".$Erledigt.", Tagesbericht.DatumRückruf = CONVERT(datetime, '2023-24-08', 103),Tagesbericht.gelöscht = ".$geloescht." ".$RR." WHERE Tagesbericht.ID = 30241
+          ";
+                
+$stmt1 = sqlsrv_query($db, $tsql1); 
+
+
+
+if( $stmt1 === false )  
+{  
+     echo "Error in execution of INSERT.\n";  
+     die( print_r( sqlsrv_errors(), true));  
+}else{
+     echo json_encode(array('data' => true));
+      
+}
+
+sqlsrv_free_stmt($stmt1); 
+sqlsrv_close($database->conn);
+
+
+
+?>  

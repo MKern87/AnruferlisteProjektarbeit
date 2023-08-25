@@ -12,38 +12,33 @@ import Beschreibung from './eintragComponents/Beschreibung';
 const EintragUpdate = ({tD, O, stD}) => {
     
     const updateData = async(props) => {
-      console.log(props.RueckrufWer)
+ console.log((props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer))
       const request = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-  
-          'KundenID': props.KundenID,
-          'Kunde': props.Kunde,
-          'Strasse': props.Strasse,
-          'Plz': props.Plz,
-          'Ort': props.Ort,
-          'Tel': props.Tel,
-          'Memo': props.Memo,
-          'Kategorie': props.Kategorie,
-          'KategorieText': props.Kategorie,
-          'Mitarbeiter': props.Mitarbeiter_ID,
-          'Art_ID': props.Art_ID,
-          'Erledigt': props.Erledigt,
+          'ID': props.ID,
+          'Kunde_ID': props.Kunde_ID,
+          'Kategorie_ID': props.Kategorie_ID,
+          'Mitarbeiter_ID': props.Mitarbeiter_ID,
+          'Art_ID': parseInt(props.Art_ID),
           'Datum': props.Datum,
           'Dauer': props.Dauer,
-          'Rueckruf': props.Rueckruf,
-          'DatumRueckruf': props.DatumRueckruf,
-          'RueckrufWer': props.RueckrufWer,
+          'Rueckruf': (props.Rueckruf == true) ? 1 : 0,
           'text': props.text,
+          'Erledigt': (props.Erledigt == 'true') ? 1 : 0,
+          'Kategorie': props.Kategorie,
+          'DatumRueckruf': props.DatumRueckruf,
+          'RueckrufWer': (props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer),
           'geloescht': props.geloescht,
           'parentID': props.parentID
         })
       };
-      console.log(request)
-      const h = await fetch ('http://localhost/Kundenliste/backend/eintrag.php', request);
+      console.log(JSON.parse(request.body.toString()))
+      const h = await fetch ('http://localhost/Kundenliste/backend/eintragupdate.php', request);
       let i = await h.json();
-      console.log(i)
+      console.log(i);
+      
     }
   useEffect (() => {
     console.log(tD)
@@ -56,24 +51,19 @@ const EintragUpdate = ({tD, O, stD}) => {
       <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
         <div className='w-screen  col-span-6 flex mb-[-100px]'>
           <BsCheckSquareFill onClick={()=>{updateData({
-            'KundenID':tD.ID,
-            'Kunde':tD.Kunden_ID,
-            'Strasse':tD.Strasse,
-            'Plz':tD.Plz,
-            'Ort':tD.Ort,
-            'Tel':tD.Telefon,
-            'Memo':tD.Memo,
-            'Kategorie':tD.Kategorie_kID,
-            'KategorieText':tD.Kategorie,
+            'ID':tD.ID,
+            'Kunde_ID':tD.kid,
+            'Kategorie_ID':tD.Kategorie_kID,
             'Mitarbeiter_ID':tD.Mitarbeiter_ID,
             'Art_ID':document.getElementById('artname').value,
-            'Erledigt':document.getElementById('iserlidgt').value,
-            'Datum':document.getElementById('date').value+'T'+document.getElementById('ttt').value+':00',
+            'Datum':document.getElementById('date').value+' '+document.getElementById('ttt').value+':00',
             'Dauer':document.getElementById('seconds').value,
             'Rueckruf':document.getElementById('rueckruf').checked,
-            'DatumRueckruf':document.getElementById('daterr').value+'T'+document.getElementById('timerr').value+':00',
-            'RueckrufWer':document.getElementById('rruf').value,
             'text':document.getElementById('textArea').value,
+            'Erledigt':document.getElementById('iserlidgt').value,
+            'Kategorie':tD.Kategorie,
+            'DatumRueckruf':document.getElementById('daterr').value+' '+document.getElementById('timerr').value+':00',
+            'RueckrufWer':document.getElementById('rruf').value,
             'geloescht':tD.geloescht,
             'parentID':tD.parentID
           });

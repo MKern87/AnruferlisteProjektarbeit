@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-const StammdatenArt = () => {
+const StammdatenArt = ({T}) => {
 
   const [artData, setArtData] = useState([]);
   
@@ -18,7 +18,7 @@ const StammdatenArt = () => {
     
     const f = await fetch('http://localhost/Kundenliste/backend/art.php', request);
     let g = await f.json();
-    console.log(g);
+    //console.log(g);
 
   if (g.ArtData.length>0) {
     setArtData(g.ArtData)
@@ -30,7 +30,8 @@ const StammdatenArt = () => {
     datenart();
   }, [])
   
-  return (
+  if(T == 'I')
+  {return (
     <>
     {
       <>
@@ -40,7 +41,18 @@ const StammdatenArt = () => {
       </>
     }
     </>
-  )
+  )}else{
+  return (
+    <>
+    {
+      <>
+      {artData.map((item, index) => (
+        <option key={item + index} value={item.Art}>{item.Art}</option>
+      ))}
+      </>
+    }
+    </>
+  )}
 }
 
 export default StammdatenArt

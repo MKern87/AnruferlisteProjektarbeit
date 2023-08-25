@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useState, useEffect} from 'react'
+import Zweig from '../../kategorieBaum/Zweig'
 
-const Baum = () =>{
-    return(<div className=' invisible grid col-span-1 row-span-2 border border-black ml-2'>
-    <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Kategorie</p>
-    <div>
+const Baum = () => {
+
+  const [bData, setbData] = useState([])
+
+  
+  const datenabrufBaum = async() => {
+    const request = {
+      method:'POST',
+      headers: { 'Content-Type': 'aplication/json' },
+      body:JSON.stringify({
+
+      })
+    };
+
+    const x = await fetch ('http://localhost/Kundenliste/backend/baum.php', request);
+    let y = await x.json();
+    console.log(y);
+
+    if (y.bData.length>0){
+      setbData(y.bData)
+      //console.log(bData)
+    }
+  }
+
+  useEffect(() => {
+    datenabrufBaum();
+  }, [])
+
+
+  return (
+    <div className='ml-1'>
+      {bData.map((item) => <Zweig key={item.Parent_ID} item={item} level={0} />)}
     </div>
-  </div>)
+  )
+
+
 }
 
 export default Baum

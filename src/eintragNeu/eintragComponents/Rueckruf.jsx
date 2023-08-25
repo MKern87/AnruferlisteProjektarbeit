@@ -42,7 +42,7 @@ const Rueckruf = (R) =>{
       IsR == 1?
         <select className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
       <option value={R.R.RückrufWer}>{R.R.Mitarbeitername}</option>
-     <StammdatenMitarbeiterRR />
+     <StammdatenMitarbeiterRR  T={'I'} />
       </select>
       :
       <select disabled={true}  className='text-left ml-8 w-[112px] border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>

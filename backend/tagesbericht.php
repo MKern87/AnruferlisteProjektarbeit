@@ -104,10 +104,10 @@ if($abruf==false){ //Kein abruf möglich
                 'Telefon' => $tel,
                 'Memo' => $hMemo,
                 'Dauer' => $dauer,
-          'RückrufWer' => $mID,
-          'Kategorie_kID' => $kID,
-          'Mitarbeiter_ID' => $tmID,
-          'Art_aid' => $aID
+                'RückrufWer' => $mID,
+                'Kategorie_kID' => $kID,
+                'Mitarbeiter_ID' => $tmID,
+                'Art_aid' => $aID
           
           ));   
         }

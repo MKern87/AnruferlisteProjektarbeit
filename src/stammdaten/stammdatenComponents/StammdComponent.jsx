@@ -88,7 +88,7 @@ const StammdComponent = ({setmArbeiter, setArt}) => {
           <option value={'Name'}></option>
           {(data.length>0)?
           <>
-          <StammdatenMitarbeiter Name={data}/>
+          <StammdatenMitarbeiter T={'N'} Name={data}/>
           </>
           :
           <>
@@ -106,7 +106,7 @@ const StammdComponent = ({setmArbeiter, setArt}) => {
           <option value={'Art'}></option>
             {(artData.length>0)?
             <>
-            <StammdatenArt Art={artData}/>
+            <StammdatenArt T={'N'} Art={artData}/>
             </>
             :
             <>

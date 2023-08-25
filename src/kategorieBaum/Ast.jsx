@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-const Ast = ({ item, hasChildren, level, onToggle }) => {
+const Ast = ({ item, hasChildren, level, onToggle, selected }) => {
 
 
 

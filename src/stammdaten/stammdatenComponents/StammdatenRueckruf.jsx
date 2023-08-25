@@ -62,7 +62,7 @@ const StammdatenRueckruf = ({setrrmArbeiter, setrrVlue}) => {
           {<option value={'Name'}></option>}
           {(data.length>0)?
           <>
-          <StammdatenMitarbeiterRR Name={data}/>
+          <StammdatenMitarbeiterRR T={'N'} Name={data}/>
           </>
           :
           <>

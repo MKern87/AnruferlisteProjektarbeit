@@ -14,13 +14,13 @@ const Stammd = ({S}) =>{
           <span className='ml-4 mt-8'>Mitarbeiter:
             <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='Mitarbeiter'>
             <option value={S.Mitarbeiter_ID}>{S.Mitarbeiter}</option>
-              <StammdatenMitarbeiter />
+              <StammdatenMitarbeiter T={'I'} />
             </select>
           </span>
           <span className='ml-4'>Art:
             <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='artname'>
             <option value={S.Art_aid}>{S.Art_ID}</option>
-              <StammdatenArt />
+              <StammdatenArt T={'I'}/>
             </select>
           </span>
         </div>
