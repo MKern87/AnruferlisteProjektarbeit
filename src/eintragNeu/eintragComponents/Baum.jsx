@@ -32,7 +32,7 @@ const Baum = () => {
 
   return (
     <div className='ml-1'>
-      {bData.map((item) => <Zweig key={item.Parent_ID} item={item} level={0} />)}
+      {bData.map((item) => <Zweig key={item.ID} item={item} level={0} />)}
     </div>
   )
 

@@ -46,14 +46,18 @@ $parentID = htmlspecialchars($data->parentID);
 //          '));
 //die();   
 
-/*$tsql1 = "UPDATE Tagesbericht SET
-          Tagesbericht.Kunden_ID = ".$Kunde.", Tagesbericht.Kategorie_ID = ".$Kategorie.", Tagesbericht.Mitarbeiter_ID = ".$Mitarbeiter.", Tagesbericht.Art_ID = ".$Art_ID.", Tagesbericht.Datum = CONVERT(datetime, '', 103),
-          Tagesbericht.Dauer = '".$Dauer."', Tagesbericht.Rückruf = ".$Rueckruf.", Tagesbericht.text = '".$text."', Tagesbericht.Erledigt = ".$Erledigt.", Tagesbericht.Kategorie = '".$KategorieText."',
-          Tagesbericht.DatumRückruf = CONVERT(datetime, '', 103), Tagesbericht.RückrufWer = ".$RueckrufWer.", Tagesbericht.gelöscht = ".$geloescht.", Tagesbericht.parentID = ".$parentID." WHERE Tagesbericht.ID = ".$KundenID."
-          ";*/
 $tsql1 = "UPDATE Tagesbericht SET
-          Tagesbericht.Kunden_ID = ".$Kunde.", Tagesbericht.Kategorie_ID = ".$Kategorie.",Tagesbericht.Rückruf = 0,Tagesbericht.Art_ID =2,Tagesbericht.Datum = CONVERT(datetime, '2023-24-08', 103), Tagesbericht.text = '".$text."', Tagesbericht.Erledigt = ".$Erledigt.", Tagesbericht.DatumRückruf = CONVERT(datetime, '2023-24-08', 103),Tagesbericht.gelöscht = ".$geloescht." ".$RR." WHERE Tagesbericht.ID = 30241
-          ";
+          Tagesbericht.Kunden_ID = ".$Kunde.", 
+          Tagesbericht.Mitarbeiter_ID = ".$Mitarbeiter.", 
+          Tagesbericht.Kategorie_ID = ".$Kategorie.", 
+          Tagesbericht.Rückruf = ".$Rueckruf.",
+          Tagesbericht.Art_ID = ".$Art_ID.",
+          Tagesbericht.Datum = CONVERT(datetime, '2023-24-08', 103), 
+          Tagesbericht.text = '".$text."', 
+          Tagesbericht.Erledigt = ".$Erledigt.", 
+          Tagesbericht.DatumRückruf = CONVERT(datetime, '2023-24-08', 103),
+          Tagesbericht.gelöscht = ".$geloescht." ".$RR." 
+          WHERE Tagesbericht.ID = ".$KundenID." ";
                 
 $stmt1 = sqlsrv_query($db, $tsql1); 
 

@@ -81,13 +81,16 @@ const EintragNeu = ({HP, O, sK}) => {
 
         <Kundeninfo H={HP} />
    
-        <Baum  />
+        {//<Baum />
+        }
    
         <Stammdaten />
    
-        <Status ST={null}/>
-   
-        <Rueckruf />
+        <Status ST={undefined}/>
+        
+           
+        <Rueckruf R={null}/>
+        
    
         <Beschreibung />
          

@@ -54,7 +54,7 @@ const EintragUpdate = ({tD, O, stD}) => {
             'ID':tD.ID,
             'Kunde_ID':tD.kid,
             'Kategorie_ID':tD.Kategorie_kID,
-            'Mitarbeiter_ID':tD.Mitarbeiter_ID,
+            'Mitarbeiter_ID':document.getElementById('Mitarbeiter').value,
             'Art_ID':document.getElementById('artname').value,
             'Datum':document.getElementById('date').value+' '+document.getElementById('ttt').value+':00',
             'Dauer':document.getElementById('seconds').value,
@@ -75,7 +75,8 @@ const EintragUpdate = ({tD, O, stD}) => {
 
         <Kundeninfo H={tD} />
    
-        <Baum />
+        {//<Baum />
+        }
    
         <Stammdaten S={tD}/>
    

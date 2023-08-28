@@ -12,12 +12,13 @@ const getTwoDigits = (value) => value==0? `0${0}`: value < 10 ? `0${value}` : va
 const Rueckruf = (R) =>{
 
   const [IsRueckruef, setIsRueckruef] = useState(false);
-  const [IsR, setIsR] = useState(R.R.Rueckruf);
+  const [IsR, setIsR] = useState(R.R==null?'':R.R.Rueckruf);
 
   useEffect(()=>{
     
   },[])
 
+  if(R.R!=null){
   return( 
   <div className='grid col-start-3 col-span-1 border border-black mt-6 relative ml-2'>
    <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Rückruf</p>
@@ -42,7 +43,7 @@ const Rueckruf = (R) =>{
       IsR == 1?
         <select className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
       <option value={R.R.RückrufWer}>{R.R.Mitarbeitername}</option>
-     <StammdatenMitarbeiterRR  T={'I'} />
+     <StammdatenMitarbeiterRR T={'I'} />
       </select>
       :
       <select disabled={true}  className='text-left ml-8 w-[112px] border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rruf'>
@@ -50,7 +51,44 @@ const Rueckruf = (R) =>{
       </select>
     }
     </span>
-  </div>);
+  </div>
+  )}else{
+    return( 
+      <div className='grid col-start-3 col-span-1 border border-black mt-6 relative ml-2'>
+       <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Rückruf</p>
+        <span className='ml-4 mt-2'>
+        {
+        IsR == 1?
+          <input  type="checkbox" checked onChange={()=>{setIsRueckruef(!IsRueckruef);setIsR(0)}} id='rueckrufn' className='mr-1'  />
+          :
+          <input  type="checkbox" onChange={()=>{setIsRueckruef(!IsRueckruef);setIsR(1)}} id='rueckrufn' className='mr-1'  />
+        }
+        Rückruf
+        </span>
+        <span className='ml-2'>Wann:
+        <input type='date' id='daterrn' 
+          className="h-6 ml-5 border border-black rounded-sm bg-white" defaultValue={''}
+        />
+        <input type='time' id='timerrn' defaultValue={HtmlCount(new Date().getHours(), new Date().getMinutes())} className="h-6 ml-2 border border-black rounded-sm bg-white"/>
+        <input type="checkbox" id='cboxrrn' className='ml-2' defaultChecked=''/> egal
+        </span>
+        <span className='ml-2'>Wer:
+        {
+          IsR == 1?
+            <select className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rrufn'>
+          <option value={''}></option>
+         <StammdatenMitarbeiterRR T={'I'} />
+          </select>
+          :
+          <select disabled={true}  className='text-left ml-8 w-[112px] border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rrufn'>
+            <option value={''}></option>
+            <StammdatenMitarbeiterRR />
+          </select>
+        }
+        </span>
+      </div>
+      )
+  };
 
 }
 

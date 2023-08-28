@@ -25,7 +25,7 @@ const Stammd = ({S}) =>{
           </span>
         </div>
     )
-    ;}else{
+    }else{
       return(
         <div className='grid col-start-1 col-span-1 border border-black mt-6 relative'>
           <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Stammdaten</p>

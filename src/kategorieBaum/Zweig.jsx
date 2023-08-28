@@ -6,11 +6,11 @@ const Zweig = ({ item, Parent_ID }) => {
 
   const [selected, setSelected] = useState(false);
 
-  const hasChildren = item.Parent_ID ? true : false;
+  const hasChildren = item.ID ? item.Parent_ID : +1;
 
   const renderZweige = () => {
     if (hasChildren){
-      const nextLvl = Parent_ID + 1;
+      const nextLvl = item.Parent_ID + 1;
 
       return item.Parent_ID.map((child) => {
         return <Zweig key={child.Parent_ID} item={child} level={nextLvl} />
