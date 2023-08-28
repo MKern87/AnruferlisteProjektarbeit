@@ -94,10 +94,10 @@ const Status = ({ST}) =>{
       />
     </div>
     <div className='flex h-6 ml-4'>Dauer:
-      <p className='border border-black px-1 ml-2 bg-white w-1/4 float-right mr-36'>
-        <span className='' type="time" id='timer' />
-        <HtmlCount  hours={CounterHour} minutes={CounterMin} secs={CounterSec} />
-      </p>
+      <div className='border border-black px-1 ml-2 bg-white w-1/4 float-right mr-36'>
+        <input className='' type="time" id='timer' />
+        {<HtmlCount  hours={CounterHour} minutes={CounterMin} secs={CounterSec} />}
+      </div>
     </div>
     <input type="hidden" id="seconds" value={seccounter} />
     <div className='ml-20 items-center justify-items-center'>
