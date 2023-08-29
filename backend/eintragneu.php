@@ -13,8 +13,28 @@ $db = $database->connect();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$tsql1 = 'INSERT INTO Tagesbericht
-          Values (Kunden_ID, text, Art_ID, Mitarbeiter, Kategorie, now(), Rueckruf, RueckrufWer, now(), Erledigt)';
+$KundenID = htmlspecialchars($data->ID);
+$Kunde = htmlspecialchars($data->Kunde_ID);
+$Kategorie = htmlspecialchars($data->Kategorie_ID);
+$Mitarbeiter = htmlspecialchars($data->Mitarbeiter_ID)?htmlspecialchars($data->Mitarbeiter_ID):null;
+$Art_ID = htmlspecialchars($data->Art_ID)?htmlspecialchars($data->Art_ID):null;
+$Datum = htmlspecialchars($data->Datum);
+$Dauer = htmlspecialchars($data->Dauer);
+$Rueckruf = htmlspecialchars($data->Rueckruf);
+$text = htmlspecialchars($data->text);
+$Erledigt = htmlspecialchars($data->Erledigt);
+$KategorieText = htmlspecialchars($data->Kategorie);
+$DatumRueckruf = htmlspecialchars($data->DatumRueckruf);
+$RR = is_numeric($data->RueckrufWer)? " ,Tagesbericht.RückrufWer = ".$data->RueckrufWer." ":"";
+$geloescht = htmlspecialchars($data->geloescht);
+$parentID = htmlspecialchars($data->parentID);
+
+$tsql1 = "INSERT INTO Tagesbericht
+               (Kunden_ID, Kategorie_ID, Mitarbeiter_ID, Art_ID, 
+               Datum, Dauer, Rückruf, text, Erledigt, rtfText, 
+               Kategorie, DatumRückruf, RückrufWer, gelöscht, parentID)
+          Values('.$KundenID.', '.$Kunde.', '.$Kategorie.', '.$Mitarbeiter.', '.$Art_ID.', '.$Datum.', '.$Dauer.', '.$Rueckruf.', '.$text.',
+               '.$Erledigt.', '', '.$KategorieText.', '.$DatumRueckruf.', '.$RR.', '.$geloescht.', '.$parentID.')";
 
 
 

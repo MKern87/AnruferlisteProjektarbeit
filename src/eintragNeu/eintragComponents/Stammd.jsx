@@ -32,13 +32,13 @@ const Stammd = ({S}) =>{
           <span className='ml-4 mt-2'>Kategorie:</span>
           <div className='ml-4'></div>
           <span className='ml-4 mt-8'>Mitarbeiter:
-            <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='Mitarbeiter'>
+            <select className='text-left ml-2 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='MitarbeiterN'>
             <option value='A'></option>
               <StammdatenMitarbeiter />
             </select>
           </span>
           <span className='ml-4'>Art:
-            <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='artname'>
+            <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='artnameN'>
             <option value='A'></option>
               <StammdatenArt />
             </select>

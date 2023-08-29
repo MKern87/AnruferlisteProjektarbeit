@@ -47,7 +47,7 @@ const StammdatenArt = ({T}) => {
     {
       <>
       {artData.map((item, index) => (
-        <option key={item + index} value={item.Art}>{item.Art}</option>
+        <option key={item + index} value={item.Mitarbeiter_ID}>{item.Art}</option>
       ))}
       </>
     }

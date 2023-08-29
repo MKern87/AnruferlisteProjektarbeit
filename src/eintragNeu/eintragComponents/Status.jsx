@@ -78,28 +78,28 @@ const Status = ({ST}) =>{
     <div className='grid col-start-2 col-span-1 border border-black mt-6 relative ml-2'>
     <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Status</p>
       <span className='ml-4 mt-2'>
-      <input type="checkbox" defaultChecked={false} onChange={()=>setErledigtN(!ErledigtN)}  className='mr-1' id='erledigt' />
+      <input type="checkbox" defaultChecked={false} onChange={()=>setErledigtN(!ErledigtN)}  className='mr-1' id='erledigtN' />
        Erledigt
       </span>
-      <input type="hidden" id="iserlidgt" value={ErledigtN} />
+      <input type="hidden" id="iserlidgtN" value={ErledigtN} />
     <div className='ml-4'>Start:
-      <input type='date' id='date'
+      <input type='date' id='dateN'
       value={new Date().toLocaleDateString('fr-CA', 
       {day: '2-digit', month: '2-digit', year: 'numeric',}
       )}
       className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
       <input type='time' value={getTwoDigits(new Date().getHours()) + ':' + getTwoDigits(new Date().getMinutes()) + ':' + getTwoDigits(new Date().getSeconds())}
-          className="h-6 ml-4 border border-black rounded-sm bg-white"
+          className="h-6 ml-4 border border-black rounded-sm bg-white" id="tttN"
       />
     </div>
     <div className='flex h-6 ml-4'>Dauer:
       <div className='border border-black px-1 ml-2 bg-white w-1/4 float-right mr-36'>
-        <input className='' type="time" id='timer' />
-        {<HtmlCount  hours={CounterHour} minutes={CounterMin} secs={CounterSec} />}
+        <span className='' type="time" id='timerN' />
+        {getTwoDigits(CounterHour)+':'+ getTwoDigits(CounterMin)+':'+ getTwoDigits(CounterSec)}
       </div>
     </div>
-    <input type="hidden" id="seconds" value={seccounter} />
+    <input type="hidden" id="secondsN" value={seccounter} />
     <div className='ml-20 items-center justify-items-center'>
     <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>Stop</button>
     </div>

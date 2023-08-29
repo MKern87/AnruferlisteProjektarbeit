@@ -59,28 +59,28 @@ const Rueckruf = (R) =>{
         <span className='ml-4 mt-2'>
         {
         IsR == 1?
-          <input  type="checkbox" checked onChange={()=>{setIsRueckruef(!IsRueckruef);setIsR(0)}} id='rueckrufn' className='mr-1'  />
+          <input  type="checkbox" checked onChange={()=>{setIsRueckruef(!IsRueckruef);setIsR(0)}} id='rueckrufN' className='mr-1'  />
           :
-          <input  type="checkbox" onChange={()=>{setIsRueckruef(!IsRueckruef);setIsR(1)}} id='rueckrufn' className='mr-1'  />
+          <input  type="checkbox" onChange={()=>{setIsRueckruef(!IsRueckruef);setIsR(1)}} id='rueckrufN' className='mr-1'  />
         }
         Rückruf
         </span>
         <span className='ml-2'>Wann:
-        <input type='date' id='daterrn' 
+        <input type='date' id='daterrN' 
           className="h-6 ml-5 border border-black rounded-sm bg-white" defaultValue={''}
         />
-        <input type='time' id='timerrn' defaultValue={HtmlCount(new Date().getHours(), new Date().getMinutes())} className="h-6 ml-2 border border-black rounded-sm bg-white"/>
-        <input type="checkbox" id='cboxrrn' className='ml-2' defaultChecked=''/> egal
+        <input type='time' id='timerrN' defaultValue={HtmlCount(new Date().getHours(), new Date().getMinutes())} className="h-6 ml-2 border border-black rounded-sm bg-white"/>
+        <input type="checkbox" id='cboxrrN' className='ml-2' defaultChecked={false} /> egal
         </span>
         <span className='ml-2'>Wer:
         {
           IsR == 1?
-            <select className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rrufn'>
+            <select className='text-left ml-8 border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rrufN'>
           <option value={''}></option>
          <StammdatenMitarbeiterRR T={'I'} />
           </select>
           :
-          <select disabled={true}  className='text-left ml-8 w-[112px] border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rrufn'>
+          <select disabled={true}  className='text-left ml-8 w-[112px] border border-solid relative shadow-inner border-black rounded-sm bg-white cursor-pointer' id='rrufN'>
             <option value={''}></option>
             <StammdatenMitarbeiterRR />
           </select>

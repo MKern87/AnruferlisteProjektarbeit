@@ -29,22 +29,7 @@ $DatumRueckruf = htmlspecialchars($data->DatumRueckruf);
 $RR = is_numeric($data->RueckrufWer)? " ,Tagesbericht.RückrufWer = ".$data->RueckrufWer." ":"";
 $geloescht = htmlspecialchars($data->geloescht);
 $parentID = htmlspecialchars($data->parentID);
-//print(json_encode($RR));
-//die();
-// $Datum = str_replace('-', '/', $Datum);
-// $DatumRueckruf = str_replace('-', '/', $DatumRueckruf);
 
-//$Erledigt = ($Erledigt == 'true') ? 1 : 0;
-//$Rueckruf = ($Rueckruf == true) ? 1 : 0;
-
-
-
-//echo json_encode(array('t'=>'UPDATE Tagesbericht SET
-//Kategorie_ID = '.$Kategorie.', Mitarbeiter_ID = '.$Mitarbeiter.', Art_ID = '.$Art_ID.', Datum = now(),
-//          Dauer = "'.$Dauer.'", Rückruf = '.$Rueckruf.', text = "'.$text.'", Erledigt = '.$Erledigt.', Kategorie = "'.$KategorieText.'",
-//          DatumRückruf = "now()", RückrufWer = '.$RueckrufWer.', gelöscht = '.$geloescht.', parentID = '.intval($parentID).' WHERE ID = '.$KundenID.'
-//          '));
-//die();   
 
 $tsql1 = "UPDATE Tagesbericht SET
           Tagesbericht.Kunden_ID = ".$Kunde.", 

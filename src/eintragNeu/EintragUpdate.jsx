@@ -20,7 +20,7 @@ const EintragUpdate = ({tD, O, stD}) => {
           'ID': props.ID,
           'Kunde_ID': props.Kunde_ID,
           'Kategorie_ID': props.Kategorie_ID,
-          'Mitarbeiter_ID': props.Mitarbeiter_ID,
+          'Mitarbeiter_ID': parseInt(props.Mitarbeiter_ID),
           'Art_ID': parseInt(props.Art_ID),
           'Datum': props.Datum,
           'Dauer': props.Dauer,

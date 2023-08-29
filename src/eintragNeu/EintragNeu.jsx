@@ -12,30 +12,25 @@ import Beschreibung from './eintragComponents/Beschreibung';
 const EintragNeu = ({HP, O, sK}) => {
     
     const createData = async(props) => {
-        console.log(props)
+        console.log(props.Mitarbeiter_ID)
         const request = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
     
-            'KundenID': props.KundenID,
-            'Kunde': props.Kunde,
-            'Strasse': props.Strasse,
-            'Plz': props.Plz,
-            'Ort': props.Ort,
-            'Tel': props.Tel,
-            'Memo': props.Memo,
-            'Kategorie': props.Kategorie,
-            'KategorieText': props.Kategorie,
-            'Mitarbeiter': props.Mitarbeiter_ID,
-            'Art_ID': props.Art_ID,
-            'Erledigt': props.Erledigt,
+            'ID': props.ID,
+            'Kunde_ID': props.Kunde_ID,
+            'Kategorie_ID': props.Kategorie_ID,
+            'Mitarbeiter_ID': parseInt(props.Mitarbeiter_ID),
+            'Art_ID': parseInt(props.Art_ID),
             'Datum': props.Datum,
             'Dauer': props.Dauer,
-            'Rueckruf': props.Rueckruf,
-            'DatumRueckruf': props.DatumRueckruf,
-            'RueckrufWer': props.RueckrufWer,
+            'Rueckruf': (props.Rueckruf == true) ? 1 : 0,
             'text': props.text,
+            'Erledigt': (props.Erledigt == 'true') ? 1 : 0,
+            'Kategorie': props.Kategorie,
+            'DatumRueckruf': props.DatumRueckruf,
+            'RueckrufWer': (props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer),
             'geloescht': props.geloescht,
             'parentID': props.parentID
           })
@@ -56,22 +51,21 @@ const EintragNeu = ({HP, O, sK}) => {
       <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
         <div className='w-screen  col-span-6 flex mb-[-100px]'>
           <BsCheckSquareFill onClick={()=>{createData({
-            'KundenID':HP.ID,
-            'Kunde':HP.Name1,
-            'Strasse':HP.Strasse,
-            'Plz':HP.Plz,
-            'Ort':HP.Ort,
-            'Tel':HP.Telefon,
-            'Memo':HP.Memo,
-            'KategorieText':'muss noch',
-            //'MitarbeiterID':document.getElementById('Mitarbeiter').value,
-            //'ArtID':document.getElementById('artname').value,
-            //'statusErledigt':document.getElementById('erledigt').checked,
-            //'statusStart':document.getElementById('date').value,
-            //'statusDauer':document.getElementById('seconds').value,
-            //'isRueckruf':document.getElementById('rueckruf').checked,
-            //'isDatumR':document.getElementById('daterr').value,
-            //'RueckrufWer':document.getElementById('rruf').value,
+            'ID':HP.ID,
+            'Kunde_ID':HP.Name1,
+            'Kategorie_ID':'',
+            'Mitarbeiter_ID':document.getElementById('MitarbeiterN').value,
+            'Art_ID':document.getElementById('artnameN').value,
+            'Datum':document.getElementById('dateN').value+' '+document.getElementById('tttN').value+':00',
+            'Dauer':document.getElementById('secondsN').value,
+            'Rueckruf':document.getElementById('rueckrufN').checked,
+            'text':document.getElementById('textAreaN').value,
+            'Erledigt':document.getElementById('iserlidgtN').value,
+            'Kategorie':'',
+            'DatumRueckruf':document.getElementById('daterrN').value+' '+document.getElementById('timerrN').value+':00',
+            'RueckrufWer':document.getElementById('rrufN').value,
+            'geloescht':'',
+            'parentID':''
           });
           sK('')
           }} className='hover cursor-pointer mr-1' />
@@ -88,10 +82,8 @@ const EintragNeu = ({HP, O, sK}) => {
    
         <Status ST={undefined}/>
         
-           
         <Rueckruf R={null}/>
         
-   
         <Beschreibung />
          
         <div className='grid col-start-5 col-span-2 row-span-4 mt-6 border border-black ml-2'>
