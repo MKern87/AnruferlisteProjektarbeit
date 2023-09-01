@@ -26,7 +26,7 @@ const StammdatenMitarbeiterRR = ({T}) =>  {
     datenabruf();
   }, [])
   
-  if(T == 'N')
+  if(T == "N")
   {return (
       <>
         {
@@ -38,17 +38,17 @@ const StammdatenMitarbeiterRR = ({T}) =>  {
         }
       </>
   )}else{
-  return (
-    <>
-      {
-        <>
-        {data.map((item, index) => (
-          <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
-        ))}
-        </>
-      }
-    </>
-)}
+    return (
+      <>
+        {
+          <>
+          {data.map((item, index) => (
+            <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
+          ))}
+          </>
+        }
+      </>
+    )}
 }
 
 export default StammdatenMitarbeiterRR

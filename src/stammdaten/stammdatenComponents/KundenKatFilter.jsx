@@ -6,10 +6,10 @@ const KundenKatFilter = () => {
       <div className="w-full col-span-1 border border-black relative mt-2 ">
         <p className="mb-2 ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Kunden filtern</p>
         <div  className="flex flex-row items-center md:justify-center justify-center mt-6 mb-4">
-          <label className="flex flex-row items-center justify-center" for="radio-1">
+          <label className="flex flex-row items-center justify-center" htmlFor="radio-1">
           <input id='radio-1' type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
           &nbsp;&nbsp;Ja</label>&nbsp;&nbsp;&nbsp;
-          <label className="flex flex-row items-center justify-center" for="radio-2">
+          <label className="flex flex-row items-center justify-center" htmlFor="radio-2">
           <input id='radio-2' type="radio" name='kunde' className=" text-blue-600 focus:ring-blue-500" />
           &nbsp;&nbsp;Nein </label>
         </div>
@@ -17,10 +17,10 @@ const KundenKatFilter = () => {
       <div className="w-full col-span-1 border border-black relative mt-2">
         <p className="mb-2 ml-4 absolute inset-x -mt-3 bg-gray-200 px-1">Kategorie filtern</p>
         <div className="flex flex-row items-center md:justify-center justify-center mt-6 mb-4">
-          <label className="flex flex-row items-center justify-center" for="default-radio-1">
+          <label className="flex flex-row items-center justify-center" htmlFor="default-radio-1">
           <input id='default-radio-1' type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
           &nbsp;&nbsp;Ja</label>&nbsp;&nbsp;&nbsp;
-          <label className="flex flex-row items-center justify-center" for="default-radio-2">
+          <label className="flex flex-row items-center justify-center" htmlFor="default-radio-2">
           <input id='default-radio-2' type="radio" name='kategorie' className="text-blue-600 focus:ring-blue-500" />
           &nbsp;&nbsp;Nein</label>
         </div>

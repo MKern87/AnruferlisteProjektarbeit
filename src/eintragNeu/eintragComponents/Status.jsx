@@ -29,8 +29,8 @@ const Status = ({ST}) =>{
         setseccounter(seccounter => seccounter + 1);
     }
     useEffect(()=>{
-      //console.log(ST)
-        let interval;
+      let interval;
+      
     if (timerid) {
       interval = setInterval(() => {
         CountdownTimer();
@@ -41,7 +41,7 @@ const Status = ({ST}) =>{
     return () => {
       clearInterval(interval);
     };
-    },[timerid])
+    },[])
     const handleStop = () => {
         settimerid(!timerid);
       };
@@ -81,15 +81,15 @@ const Status = ({ST}) =>{
       <input type="checkbox" defaultChecked={false} onChange={()=>setErledigtN(!ErledigtN)}  className='mr-1' id='erledigtN' />
        Erledigt
       </span>
-      <input type="hidden" id="iserlidgtN" value={ErledigtN} />
+      <input type="hidden" id="iserlidgtN" defaultValue={ErledigtN} />
     <div className='ml-4'>Start:
       <input type='date' id='dateN'
-      value={new Date().toLocaleDateString('fr-CA', 
+      defaultValue={new Date().toLocaleDateString('fr-CA', 
       {day: '2-digit', month: '2-digit', year: 'numeric',}
       )}
       className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
-      <input type='time' value={getTwoDigits(new Date().getHours()) + ':' + getTwoDigits(new Date().getMinutes()) + ':' + getTwoDigits(new Date().getSeconds())}
+      <input type='time' defaultValue={getTwoDigits(new Date().getHours()) + ':' + getTwoDigits(new Date().getMinutes()) + ':' + getTwoDigits(new Date().getSeconds())}
           className="h-6 ml-4 border border-black rounded-sm bg-white" id="tttN"
       />
     </div>
@@ -99,7 +99,7 @@ const Status = ({ST}) =>{
         {getTwoDigits(CounterHour)+':'+ getTwoDigits(CounterMin)+':'+ getTwoDigits(CounterSec)}
       </div>
     </div>
-    <input type="hidden" id="secondsN" value={seccounter} />
+    <input type="hidden" id="secondsN" defaultValue={seccounter} />
     <div className='ml-20 items-center justify-items-center'>
     <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>Stop</button>
     </div>

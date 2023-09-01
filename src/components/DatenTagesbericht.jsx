@@ -124,7 +124,7 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
               || item.Kunden_ID.toLowerCase().includes(searchd.toLowerCase())
               )
           }).map((item, index) =>(
-            <RowColor key={item+index} ITEM={item} popUp={popUp} dTagesbericht={tagesbDaten} T={T}/>
+            <RowColor key={item+index} ITEM={item} popUp={popUp} dTagesbericht={tagesbDaten} T={localStorage.getItem('T')}/>
           ))
         }
        </>

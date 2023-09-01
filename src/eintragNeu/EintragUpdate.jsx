@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Baum from './eintragComponents/Baum'
+//import Baum from './eintragComponents/Baum'
 import {GiCancel} from 'react-icons/gi'
 import { BsCheckSquareFill } from 'react-icons/bs';
 import { RiEditBoxLine } from 'react-icons/ri';
@@ -10,9 +10,11 @@ import Rueckruf from './eintragComponents/Rueckruf';
 import Beschreibung from './eintragComponents/Beschreibung';
 
 const EintragUpdate = ({tD, O, stD}) => {
+
+    const [isUpdated, setisUpdated] = useState(false);
     
     const updateData = async(props) => {
- console.log((props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer))
+ //console.log((props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer))
       const request = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -39,7 +41,15 @@ const EintragUpdate = ({tD, O, stD}) => {
       let i = await h.json();
       console.log(i);
       
-    }
+      if(true){
+        setisUpdated(true);
+        setTimeout(() => {
+          setisUpdated(false);
+          O(false);
+          location.reload();
+        },2000);
+      }
+}
   useEffect (() => {
     console.log(tD)
      

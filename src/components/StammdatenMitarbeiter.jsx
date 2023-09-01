@@ -32,11 +32,11 @@ const StammdatenMitarbeiter = ({T}) =>  {
             <option key={item + index} value={item.Mitarbeiter}>{item.Mitarbeiter}</option>
           ))
   )}else{
-  return (
-          data.map((item, index) => (
-            <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
-          ))
-  )}
+    return (
+            data.map((item, index) => (
+              <option key={item + index} value={item.Mitarbeiter_ID}>{item.Mitarbeiter}</option>
+            ))
+    )}
 }
 
 export default StammdatenMitarbeiter

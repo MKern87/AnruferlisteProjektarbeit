@@ -45,9 +45,6 @@ $tsql1 = "UPDATE Tagesbericht SET
           WHERE Tagesbericht.ID = ".$KundenID." ";
                 
 $stmt1 = sqlsrv_query($db, $tsql1); 
-
-
-
 if( $stmt1 === false )  
 {  
      echo "Error in execution of INSERT.\n";  

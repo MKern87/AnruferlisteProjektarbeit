@@ -30,28 +30,20 @@ const StammdatenArt = ({T}) => {
     datenart();
   }, [])
   
-  if(T == 'I')
+  if(T.toString() == 'I')
   {return (
-    <>
-    {
       <>
       {artData.map((item, index) => (
         <option key={item + index} value={item.Mitarbeiter_ID}>{item.Art}</option>
       ))}
       </>
-    }
-    </>
   )}else{
   return (
-    <>
-    {
       <>
       {artData.map((item, index) => (
-        <option key={item + index} value={item.Mitarbeiter_ID}>{item.Art}</option>
+        <option key={item + index} value={item.Art}>{item.Art}</option>
       ))}
       </>
-    }
-    </>
   )}
 }
 

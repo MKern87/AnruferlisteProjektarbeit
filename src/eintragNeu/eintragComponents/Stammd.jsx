@@ -20,7 +20,7 @@ const Stammd = ({S}) =>{
           <span className='ml-4'>Art:
             <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='artname'>
             <option value={S.Art_aid}>{S.Art_ID}</option>
-              <StammdatenArt T={'I'}/>
+              <StammdatenArt T={'N'}/>
             </select>
           </span>
         </div>
@@ -40,7 +40,7 @@ const Stammd = ({S}) =>{
           <span className='ml-4'>Art:
             <select className='text-left ml-14 border border-solid relative border-black rounded-sm bg-white cursor-pointer' id='artnameN'>
             <option value='A'></option>
-              <StammdatenArt />
+              <StammdatenArt T={'I'}/>
             </select>
           </span>
         </div>

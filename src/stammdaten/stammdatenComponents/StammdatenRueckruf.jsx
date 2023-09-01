@@ -46,13 +46,13 @@ const StammdatenRueckruf = ({setrrmArbeiter, setrrVlue}) => {
     <div className="md:block hidden mtoggle w-full col-span-2 md:mt-0 mt-8 border border-black h-full text-sm relative">
       <p className="ml-4 mb-4 absolute inset-x -mt-3 bg-gray-200 px-1">Rückruf</p>
       <div className="flex flex-row items-stretch justify-center mt-6">
-        <label className="mr-6 ml-6" for="default-radio-1">
+        <label className="mr-6 ml-6" htmlFor="default-radio-1">
         <input type="radio" id='rückruf' name='rückruf' value={1} onChange={() => setrrVlue(1)} className="text-blue-600 focus:ring-blue-500" />
         Ja </label>
-        <label className="mr-6" for="default-radio-2">
+        <label className="mr-6" htmlFor="default-radio-2">
         <input type="radio" id='rückruf' name='rückruf' value={0} onChange={() => setrrVlue(0)} className="text-blue-600 focus:ring-blue-500" />
         Nein </label>
-        <label for="default-radio-3">
+        <label htmlFor="default-radio-3">
         <input type="radio" id='rückruf' name='rückruf' value={2} onChange={() => setrrVlue(2)} className="text-blue-600 focus:ring-blue-500" />
         Alle </label>
       </div>

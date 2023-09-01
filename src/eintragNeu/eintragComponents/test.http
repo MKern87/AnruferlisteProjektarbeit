@@ -1,10 +1,9 @@
 ###
-POST https://localhost/Kundenliste/backend/eintragupdate.php
+POST https://localhost/Kundenliste/backend/eintragneu.php
 User-Agent:rest-client
 Content-Type: application/json
 
 {
-  "ID":30241,
   "Kunde_ID":6361,
   "Kategorie_ID":1,
   "Mitarbeiter_ID":3,

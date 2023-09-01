@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 
 const Textsuche = ({setSearchd}) => {
 
-  //const [searchd, setSearchd] = useState('');
 
   return (
     <div className="w-full mb-2 md:col-span-4 col-span-4 relative border h-full border-black px-2">

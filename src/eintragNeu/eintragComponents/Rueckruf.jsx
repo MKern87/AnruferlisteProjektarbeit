@@ -14,9 +14,7 @@ const Rueckruf = (R) =>{
   const [IsRueckruef, setIsRueckruef] = useState(false);
   const [IsR, setIsR] = useState(R.R==null?'':R.R.Rueckruf);
 
-  useEffect(()=>{
-    
-  },[])
+   
 
   if(R.R!=null){
   return( 

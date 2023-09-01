@@ -12,7 +12,7 @@ import StammdatenRueckruf from './stammdatenComponents/StammdatenRueckruf'
 import StammdatenErledigt from './stammdatenComponents/StammdatenErledigt'
 
 const Stammdaten = () => {
-
+  
   const [tdata, setTdata] = useState([]);
   const [HpData, setHpdata] = useState([]);
   const [search, setSearch] = useState('');
@@ -27,10 +27,8 @@ const Stammdaten = () => {
   const [open, setOpen] = useState(false);
   const [dTagesbericht, setdTagesbericht] = useState();
   const [dHandelspartner, setdHandelspartner] = useState();
-  const [T, setT] = useState('');
   const [aktuelleBerichte, setaktuelleBerichte] = useState(false);
   
-
   const mtoogler = ({m}) => {
     if(m[0].style.display=="block"){
       m.forEach(e => {
@@ -63,7 +61,7 @@ const Stammdaten = () => {
           <div className='py-1 border-x border-gray-500 bg-gray-400 w-full col-span-3 pl-2 md:block hidden'>Adresse</div>
           <div className='py-1 md:border-0 border-t border-gray-500 bg-gray-400 w-full md:col-span-2 col-span-3 pl-2'>Telefon</div>
         </div>
-          <DatenHandelspartner daten={setHpdata} HandelspartnerDaten={setdHandelspartner} search={search} popUp={setOpen} T={setT} />
+          <DatenHandelspartner daten={setHpdata} HandelspartnerDaten={setdHandelspartner} search={search} popUp={setOpen} />
       </div>
     </div>
       <div className="w-full md:col-span-3 col-span-1 p-2">
@@ -81,7 +79,9 @@ const Stammdaten = () => {
           <KundenKatFilter />
 
           </div>
-            <div onClick={()=>mtoogler({m:document.querySelectorAll('.mtoggle')})} className="cursor-pointer w-full md:hidden col-span-2 text-center flex flex-col h-full border border-black -mt-4 pb-6 bg-[rgba(0,0,0,0.3)] py-2">Mehr Filter anzeigen
+            
+            <div 
+              onClick={()=>mtoogler({m:document.querySelectorAll('.mtoggle')})} className="cursor-pointer w-full md:hidden col-span-2 text-center flex flex-col h-full border border-black -mt-4 pb-6 bg-[rgba(0,0,0,0.3)] py-2">Mehr Filter anzeigen
             </div>
               
           <StammdComponent setmArbeiter={setmArbeiter} setArt={setArt}/>
@@ -106,7 +106,7 @@ const Stammdaten = () => {
             </div>
             
             <div className="w-full md:col-span-12 h-[550px] bg-white inline-block col-span-2 divide-y divide-slate-300 md:max-h-[550px] max-h-[550px] overflow-y-scroll overflow-x-hidden md:text-sm text-xs border border-slate-400">
-            <DatenTagesbericht daten={setTdata} T={setT} tagesbDaten={setdTagesbericht} popUp={setOpen} searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art} rrmA={rrmArbeiter}/>
+            <DatenTagesbericht daten={setTdata} tagesbDaten={setdTagesbericht} popUp={setOpen} searchd={searchd} werte={vlue} werterr={rrvlue} sDate={startDate} eDate={endDate} mA={mArbeiter} stammdatenArt={art} rrmA={rrmArbeiter}/>
             </div>
           
           </div>
@@ -114,7 +114,7 @@ const Stammdaten = () => {
     </div>
     
     <div>
-      {open ? <Eintrag Typ={T} tdata={dTagesbericht} HpData={dHandelspartner} Opener={setOpen} /> : null}
+      {open ? <Eintrag Typ={localStorage.getItem('T')} tdata={dTagesbericht} HpData={dHandelspartner} Opener={setOpen} /> : null}
     </div>
     </>
   )
