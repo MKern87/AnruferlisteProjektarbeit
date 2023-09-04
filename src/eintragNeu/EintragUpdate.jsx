@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-//import Baum from './eintragComponents/Baum'
+import Baum from './eintragComponents/Baum'
 import {GiCancel} from 'react-icons/gi'
 import { BsCheckSquareFill } from 'react-icons/bs';
 import { RiEditBoxLine } from 'react-icons/ri';
@@ -85,8 +85,7 @@ const EintragUpdate = ({tD, O, stD}) => {
 
         <Kundeninfo H={tD} />
    
-        {//<Baum />
-        }
+        <Baum />
    
         <Stammdaten S={tD}/>
    

@@ -84,8 +84,7 @@ const EintragNeu = ({HP, O, sK}) => {
 
         <Kundeninfo H={HP} />
    
-        {//<Baum />
-        }
+        <Baum />
    
         <Stammdaten />
    

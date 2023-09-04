@@ -41,7 +41,7 @@ if($abruf==false){ //Kein abruf möglich
           'ID' => $id,
           'Aktiv' => $aktiv,
           'Parent_ID' => $pid
-          ));   
+          ));
         }
         sqlsrv_free_stmt($abruf); //löst den Abruf auf
         sqlsrv_close($db); //Beendet die Verbindung
