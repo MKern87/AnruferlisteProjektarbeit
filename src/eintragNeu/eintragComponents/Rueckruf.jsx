@@ -13,7 +13,6 @@ const Rueckruf = (R) =>{
 
   const [IsRueckruef, setIsRueckruef] = useState(false);
   const [IsR, setIsR] = useState(R.R==null?'':R.R.Rueckruf);
-
    
 
   if(R.R!=null){
@@ -67,7 +66,7 @@ const Rueckruf = (R) =>{
         <input type='date' id='daterrN' 
           className="h-6 ml-5 border border-black rounded-sm bg-white" defaultValue={''}
         />
-        <input type='time' id='timerrN' defaultValue={HtmlCount(new Date().getHours(), new Date().getMinutes())} className="h-6 ml-2 border border-black rounded-sm bg-white"/>
+        <input type='time' id='timerrN' defaultValue={''/*HtmlCount(new Date().getHours(), new Date().getMinutes())*/} className="h-6 ml-2 border border-black rounded-sm bg-white"/>
         <input type="checkbox" id='cboxrrN' className='ml-2' defaultChecked={false} /> egal
         </span>
         <span className='ml-2'>Wer:

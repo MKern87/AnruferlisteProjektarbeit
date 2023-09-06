@@ -8,13 +8,27 @@ import Stammdaten from './eintragComponents/Stammd';
 import Status from './eintragComponents/Status';
 import Rueckruf from './eintragComponents/Rueckruf';
 import Beschreibung from './eintragComponents/Beschreibung';
+import FetcherO from './eintragComponents/FetcherO';
 
 const EintragNeu = ({HP, O, sK}) => {
 
   const [isUpdated, setisUpdated] = useState(false);
+
+    async function names(props){
+      console.log(props)
+      let Katstring;   
+      for (let i=0; i<props.length; i++){
+        const b= await FetcherO(props[i]);
+            Katstring +=(b==undefined)?'':b+' / '; 
+      };
+      
+      return Katstring;
+    }
     
     const createData = async(props) => {
-         //console.log(props.ID)
+      console.log(props)
+        const T=await names(props.Kategorie);
+        console.log(T.replace('undefined',''));
         const request = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -30,7 +44,7 @@ const EintragNeu = ({HP, O, sK}) => {
             'Rueckruf': (props.Rueckruf == true) ? 1 : 0,
             'text': props.text,
             'Erledigt': (props.Erledigt == 'true') ? 1 : 0,
-            'Kategorie': props.Kategorie,
+            'Kategorie': await T.replace('undefined',''),
             'DatumRueckruf': props.DatumRueckruf,
             'RueckrufWer': (props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer),
             'geloescht': props.geloescht,
@@ -51,8 +65,9 @@ const EintragNeu = ({HP, O, sK}) => {
           },2000);
         }
     }
+    
     useEffect(() => {
-
+      
     },[])
   
  
@@ -60,9 +75,14 @@ const EintragNeu = ({HP, O, sK}) => {
       <>
       <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
         <div className='w-screen  col-span-6 flex mb-[-100px]'>
-          <BsCheckSquareFill onClick={() => {createData({
+          <BsCheckSquareFill onClick={() => {let N=Array(); 
+          (document.getElementById('ebene1'))?N.push(document.getElementById('ebene1').value):'';
+          (document.getElementById('ebene2'))?N.push(document.getElementById('ebene2').value):'';
+          (document.getElementById('ebene3'))?N.push(document.getElementById('ebene3').value):'';
+          console.log(N);
+           createData({
             'ID':HP.ID,
-            'Kategorie_ID':'',
+            'Kategorie_ID':document.getElementById('ebene1').value,
             'Mitarbeiter_ID':document.getElementById('MitarbeiterN').value,
             'Art_ID':document.getElementById('artnameN').value,
             'Datum':document.getElementById('dateN').value+' '+document.getElementById('tttN').value+':00',
@@ -70,7 +90,7 @@ const EintragNeu = ({HP, O, sK}) => {
             'Rueckruf':document.getElementById('rueckrufN').checked,
             'text':document.getElementById('textAreaN').value,
             'Erledigt':document.getElementById('iserlidgtN').value,
-            'Kategorie':'',
+            'Kategorie':N,
             'DatumRueckruf':document.getElementById('daterrN').value+' '+document.getElementById('timerrN').value+':00',
             'RueckrufWer':document.getElementById('rrufN').value,
             'geloescht':'',

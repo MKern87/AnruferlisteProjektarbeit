@@ -14,7 +14,7 @@ const EintragUpdate = ({tD, O, stD}) => {
     const [isUpdated, setisUpdated] = useState(false);
     
     const updateData = async(props) => {
- //console.log((props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer))
+ console.log(props.Kategorie)
       const request = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -71,7 +71,7 @@ const EintragUpdate = ({tD, O, stD}) => {
             'Rueckruf':document.getElementById('rueckruf').checked,
             'text':document.getElementById('textArea').value,
             'Erledigt':document.getElementById('iserlidgt').value,
-            'Kategorie':tD.Kategorie,
+            'Kategorie':tD.Kategorie_ID,
             'DatumRueckruf':document.getElementById('daterr').value+' '+document.getElementById('timerr').value+':00',
             'RueckrufWer':document.getElementById('rruf').value,
             'geloescht':tD.geloescht,
@@ -85,7 +85,8 @@ const EintragUpdate = ({tD, O, stD}) => {
 
         <Kundeninfo H={tD} />
    
-        <Baum />
+        {//<Baum />
+        }
    
         <Stammdaten S={tD}/>
    

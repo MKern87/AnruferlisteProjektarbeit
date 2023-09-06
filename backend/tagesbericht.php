@@ -73,7 +73,28 @@ if($abruf==false){ //Kein abruf möglich
         $ort = $row['Ort'];
         $tel = $row['Telefon'];
         $hMemo = $row['Memo'];
-        $dauer = $row['Dauer'];
+        $dauer=$row['Dauer'];
+        $Dauergespraech;
+        $Rest;
+        if(is_integer($dauer))
+        {
+        $Hour=($dauer/60)/60;
+        if ($Hour > 0){
+                $Rest=$dauer-$Hour * 60 * 60;
+        }else{
+                $Rest=$dauer;
+        }
+        $minuten=($Rest/60);
+        if($minuten>0){
+                $Rest=$Rest-$minuten*60;
+        }else{
+                $Rest=$Rest;
+        }
+        $secunden = $Rest;
+        $Dauergespraech= $Hour.':'.$minuten.':'.$secunden;
+        }else{
+        $Dauergespraech=$row['Dauer'];
+        };
           $mID = $row['mID'];
           $kID = $row['kID'];
           $tmID = $row['tmID'];

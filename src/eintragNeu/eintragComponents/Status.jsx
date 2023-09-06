@@ -12,12 +12,13 @@ const HtmlCount = ( hours, minutes ) => {
 const Status = ({ST}) =>{
     const [Now, setNow] = useState(new Date().getTime());
     const [timerid, settimerid] = useState(true)
-    const [seccounter, setseccounter] = useState(0)
+    //const [seccounter, setseccounter] = useState(0)
     const [CounterHour, setCounterHour] = useState('0');
     const [CounterMin, setCounterMin] = useState('0');
     const [CounterSec, setCounterSec] = useState('0');
     const [Erledigt, setErledigt] = useState(ST==undefined?'':(ST.Erledigt == 1) ? true : false)
     const [ErledigtN, setErledigtN] = useState(false)
+    const [isRunning, setIsRunning] = useState(false)
 
     function CountdownTimer() {
         let now = Now;
@@ -26,7 +27,7 @@ const Status = ({ST}) =>{
         setCounterHour(Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
         setCounterMin(Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60)));
         setCounterSec(Math.floor((timeleft % (1000 * 60)) / 1000));
-        setseccounter(seccounter => seccounter + 1);
+        //setseccounter(seccounter => seccounter + 1);
     }
     useEffect(()=>{
       let interval;
@@ -70,7 +71,7 @@ const Status = ({ST}) =>{
     </div>
     <input type="hidden" id="seconds" value={ST.Dauer} />
     <div className='ml-20 items-center justify-items-center'>
-    <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>Stop</button>
+    <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>{!isRunning ? 'Start' : 'Stop'}</button>
     </div>
   </div>)
   }else{
@@ -99,9 +100,9 @@ const Status = ({ST}) =>{
         {getTwoDigits(CounterHour)+':'+ getTwoDigits(CounterMin)+':'+ getTwoDigits(CounterSec)}
       </div>
     </div>
-    <input type="hidden" id="secondsN" defaultValue={seccounter} />
+    <input type="hidden" id="secondsN" defaultValue={getTwoDigits(CounterHour)+':'+ getTwoDigits(CounterMin)+':'+ getTwoDigits(CounterSec)} />
     <div className='ml-20 items-center justify-items-center'>
-    <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>Stop</button>
+    <button onClick={() => handleStop()} className='border shadow px-1 shadow-black text-sm border-b-slate-300 border-r-slate-300 bg-slate-100'>{isRunning ? 'Start' : 'Stop'}</button>
     </div>
   </div>)
   }
