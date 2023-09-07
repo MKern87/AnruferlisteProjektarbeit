@@ -7,7 +7,8 @@ const Baum = () => {
   const [secsel,setsecsel] = useState(true);
   const [ebene1,setebene1] = useState(0);
   const [thirdsel,setthirdsel] = useState(true);
-  const [ebene2,setebene2] = useState(0);
+  const [ebene2,setebene2] = useState('');
+  const [ebene3, setebene3] = useState('');
 
   const datenabrufBaum = async() => {
     const request = {
@@ -36,6 +37,7 @@ const Baum = () => {
   return (
     <div className='ml-1 border border-black w-2/3'>
       <select className='w-full bg-slate-100' id='ebene1' onChange={()=>{setebene1(document.getElementById('ebene1').value);setsecsel(false);}}>
+      <option></option>
       {bData.map((item) => (
         item.Parent_ID == 0 ?
         <option value={item.ID}>{item.Kategorie}</option>
@@ -49,6 +51,7 @@ const Baum = () => {
         ''
         :
           <select className='w-full bg-slate-100' id='ebene2' onChange={() => {setebene2(document.getElementById('ebene2').value);setthirdsel(false);}}>
+          <option></option>
           {bData.map((item) => (
             item.Parent_ID == ebene1 ?
             <option value={item.ID}>{item.Kategorie}</option>
@@ -62,7 +65,8 @@ const Baum = () => {
         thirdsel?
         ''
         :
-          <select className='w-full bg-slate-100' id='ebene3' onChange={() => {setebene2(document.getElementById('ebene3').value);setthirdsel(false);}}>
+          <select className='w-full bg-slate-100' id='ebene3' onChange={() => {setebene3(document.getElementById('ebene3').value);setthirdsel(false);}}>
+          <option></option>
           {bData.map((item) => (
             item.Parent_ID == ebene2 ?
             <option value={item.ID}>{item.Kategorie}</option>

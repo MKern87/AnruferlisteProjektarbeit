@@ -47,23 +47,23 @@ const Status = ({ST}) =>{
         settimerid(!timerid);
       };
     if(ST!=undefined){
-    return (<div className='grid col-start-2 col-span-1 border border-black mt-6 relative ml-2'>
+    return (<div className='grid md:col-start-2 md:col-span-1 col-span-6 border border-black md:mt-6 mt-4 md:mx-0 mx-4 md:pb-0 pb-4 relative md:ml-2'>
     <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Status</p>
       <span className='ml-4 mt-2'>
       <input type="checkbox" defaultChecked={(ST.Erledigt == 1) ? true : false} onChange={()=>setErledigt(!Erledigt)}  className='mr-1' id='erledigt' />
        Erledigt
       </span>
       <input type="hidden" id="iserlidgt" value={Erledigt} />
-    <div className='ml-4'>Start:
+    <div className='md:ml-4 ml-4 md:mt-0 mt-2'>Start:
       <input type='date' id='date'
       defaultValue={dateinput(ST.Datum.date)}
       className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
-      <input type='time' value={HtmlCount(new Date(ST.DatumZeit.date.toString()).getHours(), new Date(ST.DatumZeit.date.toString()).getMinutes())}
+      <input type='time' defaultValue={HtmlCount(new Date(ST.DatumZeit.date.toString()).getHours(), new Date(ST.DatumZeit.date.toString()).getMinutes())}
         id="ttt"  className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
     </div>
-    <div className='flex h-6 ml-4'>Dauer:
+    <div className='flex md:h-6 md:ml-4 ml-4 md:my-0 my-4'>Dauer:
       <p className='border border-black px-1 ml-2 bg-white w-1/4 float-right mr-36'>
         <span className='' type="time" id='timer' />
         {ST.Dauer}

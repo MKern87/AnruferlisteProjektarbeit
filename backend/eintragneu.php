@@ -16,47 +16,43 @@ $KundenID = htmlspecialchars($data->ID);
 $Kategorie = htmlspecialchars($data->Kategorie_ID);
 $Mitarbeiter = htmlspecialchars($data->Mitarbeiter_ID)?htmlspecialchars($data->Mitarbeiter_ID):null;
 $Art_ID = htmlspecialchars($data->Art_ID)?htmlspecialchars($data->Art_ID):null;
-//$Datum = htmlspecialchars($data->Datum);
+$Datum = htmlspecialchars($data->Datum);
 $Dauer = htmlspecialchars($data->Dauer);
 $Rueckruf = htmlspecialchars($data->Rueckruf);
 $text = htmlspecialchars($data->text);
 $Erledigt = htmlspecialchars($data->Erledigt);
 $KategorieText =htmlspecialchars($data->Kategorie);
-//$DatumRueckruf = htmlspecialchars($data->DatumRueckruf);
+$DatumRueckruf = htmlspecialchars($data->DatumRueckruf);
 $RueckrufWer = htmlspecialchars($data->RueckrufWer)?htmlspecialchars($data->RueckrufWer):null;
 //$geloescht = htmlspecialchars($data->geloescht);
 //$parentID = htmlspecialchars($data->parentID);
 //echo json_encode($data);
 //die();
-//$kattext;
-//foreach ($KategorieText as $value){
-//     $tsql1 = "SELECT Kategorie FROM Baum
-//     WHERE ID = '".$value."'";
-//     $stmt1 = sqlsrv_query($db, $tsql1); 
-//     
-//     while($row=sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC)){
-//          $kattext.=$row['Kategorie'];
-//        }
-//} 
-//echo json_encode($kattext);
+$Darray = explode(" ", $Datum );
+$RDarray = explode(" ", $DatumRueckruf );
+$DatumD=explode("-",$Darray[0]);
+$DatumD=$DatumD[0].'-'.$DatumD[2].'-'.$DatumD[1];
+$RDatumD=explode("-",$RDarray[0]);
+$RDatumD=$RDatumD[0].'-'.$RDatumD[2].'-'.$RDatumD[1];
+//echo json_encode($data);
 //die();
 $tsql1 = "INSERT INTO [Tagesbericht]
                ([Kunden_ID], [Kategorie_ID], [Mitarbeiter_ID], [Art_ID], 
                [Datum], [Dauer], [Rückruf], [text], [Erledigt], [rtfText], 
                [Kategorie], [DatumRückruf], [RückrufWer], [gelöscht], [parentID])
-          Values ($KundenID, 
-               $Kategorie, 
-               $Mitarbeiter, 
-               $Art_ID, 
-               CONVERT(datetime, '2023-24-08', 103), 
-               '$Dauer', 
-               $Rueckruf, 
-               '$text',
-               $Erledigt, 
+          Values (".$KundenID.", 
+               ".$Kategorie.", 
+               ".$Mitarbeiter.", 
+               ".$Art_ID.", 
+               CONVERT(datetime, '".$DatumD."',105)+CONVERT(datetime, '".$Darray[1]."',103), 
+               '".$Dauer."', 
+               ".$Rueckruf.", 
+               '".$text."',
+               ".$Erledigt.", 
                '', 
-               '$KategorieText', 
-               CONVERT(datetime, '2023-24-08', 103), 
-               '$RueckrufWer', 
+               '".$KategorieText."', 
+               CONVERT(datetime, '".$RDatumD."',105)+CONVERT(datetime, '".$RDarray[1]."',103), 
+               '".$RueckrufWer."', 
                0, 
                0)";
 

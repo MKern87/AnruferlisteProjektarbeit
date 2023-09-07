@@ -8,9 +8,9 @@ const Kundeninfo = ({H}) =>{
   },[H])
   
   return(
-        <div className='grid col-span-3 border border-black'>
+        <div className='grid md:col-span-3 col-span-6 md:mx-0 mx-4 border border-black'>
           <p className='inset-x -mt-3 ml-4 bg-gray-100 px-1 w-20'>Kundeninfo</p>
-            <div className='w-full grid grid-cols-2 items-center justify-items-center'>
+            <div className='w-full grid md:grid-cols-2 grid-cols-1 items-center justify-items-center'>
               <div className='w-full h-full ml-2'>
                 <div className='w-5/6 mb-1 float-left'>ID: <div className='w-3/4 float-right'>{H.ID}</div></div>
                 <div className='w-5/6 my-1 float-left'>Kunde: <div className='w-3/4 float-right'>{(H.hasOwnProperty('Name1')) ? H.Name1 : H.Kunden_ID}</div></div>

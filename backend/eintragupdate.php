@@ -29,7 +29,15 @@ $DatumRueckruf = htmlspecialchars($data->DatumRueckruf);
 $RR = is_numeric($data->RueckrufWer)? " ,Tagesbericht.RückrufWer = ".$data->RueckrufWer." ":"";
 $geloescht = htmlspecialchars($data->geloescht);
 $parentID = htmlspecialchars($data->parentID);
-
+$Darray = explode(" ", $Datum );
+$RDarray = explode(" ", $DatumRueckruf );
+$DatumD=explode("-",$Darray[0]);
+$DatumD=$DatumD[0].'-'.$DatumD[2].'-'.$DatumD[1];
+$RDatumD=explode("-",$RDarray[0]);
+$RDatumD=$RDatumD[0].'-'.$RDatumD[2].'-'.$RDatumD[1];
+//    echo json_encode($RDatumD);
+//     die();
+//cast(@Date as datetime) + cast(@Time as datetime)
 
 $tsql1 = "UPDATE Tagesbericht SET
           Tagesbericht.Kunden_ID = ".$Kunde.", 
@@ -37,11 +45,11 @@ $tsql1 = "UPDATE Tagesbericht SET
           Tagesbericht.Kategorie_ID = ".$Kategorie.", 
           Tagesbericht.Rückruf = ".$Rueckruf.",
           Tagesbericht.Art_ID = ".$Art_ID.",
-          Tagesbericht.Datum = CONVERT(datetime, '2023-24-08', 103), 
+          Tagesbericht.Datum = CONVERT(datetime, '".$DatumD."',105)+CONVERT(datetime, '".$Darray[1]."',103), 
           Tagesbericht.text = '".$text."', 
           Tagesbericht.Erledigt = ".$Erledigt.",
           Tagesbericht.Kategorie ='".$Kategorie_ID."',
-          Tagesbericht.DatumRückruf = CONVERT(datetime, '2023-24-08', 103),
+          Tagesbericht.DatumRückruf = CONVERT(datetime, '".$RDatumD."',105)+CONVERT(datetime, '".$RDarray[1]."',103),
           Tagesbericht.gelöscht = ".$geloescht." ".$RR." 
           WHERE Tagesbericht.ID = ".$KundenID." ";
                 

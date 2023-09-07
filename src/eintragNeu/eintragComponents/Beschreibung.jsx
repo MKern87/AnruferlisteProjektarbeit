@@ -5,7 +5,7 @@ const Beschreibung = ({T}) =>{
 
   if(T){
   return(
-    <div className='grid col-span-4 row-span-4 mt-6 border border-black relative'>
+    <div className='grid md:col-span-4 col-span-6 md:row-span-4 row-span-4 md:mt-6 mt-4 md:mx-0 mx-4 border border-black relative'>
       <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Beschreibung</p>
       {//<BeschreibungWord />
       }

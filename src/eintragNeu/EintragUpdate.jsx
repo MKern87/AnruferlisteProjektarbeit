@@ -14,7 +14,8 @@ const EintragUpdate = ({tD, O, stD}) => {
     const [isUpdated, setisUpdated] = useState(false);
     
     const updateData = async(props) => {
- console.log(props.Kategorie)
+ console.log(props.ID)
+ console.log(props.Kunde_ID)
       const request = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,7 +30,7 @@ const EintragUpdate = ({tD, O, stD}) => {
           'Rueckruf': (props.Rueckruf == true) ? 1 : 0,
           'text': props.text,
           'Erledigt': (props.Erledigt == 'true') ? 1 : 0,
-          'Kategorie': props.Kategorie,
+          'Kategorie': props.Kategorie.trim(),
           'DatumRueckruf': props.DatumRueckruf,
           'RueckrufWer': (props.RueckrufWer==""||null)?"":parseInt(props.RueckrufWer),
           'geloescht': props.geloescht,
@@ -66,13 +67,13 @@ const EintragUpdate = ({tD, O, stD}) => {
             'Kategorie_ID':tD.Kategorie_kID,
             'Mitarbeiter_ID':document.getElementById('Mitarbeiter').value,
             'Art_ID':document.getElementById('artname').value,
-            'Datum':document.getElementById('date').value+' '+document.getElementById('ttt').value+':00',
+            'Datum':document.getElementById('date').value+' '+document.getElementById('ttt').value,
             'Dauer':document.getElementById('seconds').value,
             'Rueckruf':document.getElementById('rueckruf').checked,
             'text':document.getElementById('textArea').value,
             'Erledigt':document.getElementById('iserlidgt').value,
             'Kategorie':tD.Kategorie_ID,
-            'DatumRueckruf':document.getElementById('daterr').value+' '+document.getElementById('timerr').value+':00',
+            'DatumRueckruf':document.getElementById('daterr').value+' '+document.getElementById('timerr').value,
             'RueckrufWer':document.getElementById('rruf').value,
             'geloescht':tD.geloescht,
             'parentID':tD.parentID
@@ -96,9 +97,10 @@ const EintragUpdate = ({tD, O, stD}) => {
    
         <Beschreibung T={tD}/>
          
-        <div className='grid col-start-5 col-span-2 row-span-4 mt-6 border border-black ml-2'>
-          <input type="text" id='tArea' />
-        </div>
+        {//<div className='grid col-start-5 col-span-2 row-span-4 mt-6 border border-black ml-2'>
+         // <input type="text" id='tArea' />
+         // </div>
+        }
       </div>
       </>
       )
