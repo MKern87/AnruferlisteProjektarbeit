@@ -107,7 +107,8 @@ const DatenTagesbericht = ({searchd, werte, werterr, sDate, eDate, mA, stammdate
   }, [werte, werterr, sDate, eDate, mA, stammdatenArt, rrmA])
 
 
-//////// Filter Textsuche ////////  
+//////// Filter Textsuche ////////
+
   return (
     <>
     {tdata.length>0 ?

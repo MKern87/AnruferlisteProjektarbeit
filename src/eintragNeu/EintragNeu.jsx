@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Baum from './eintragComponents/Baum'
 import {GiCancel} from 'react-icons/gi'
 import { BsCheckSquareFill } from 'react-icons/bs';
-import { RiEditBoxLine } from 'react-icons/ri';
+//import { RiEditBoxLine } from 'react-icons/ri';
 import Kundeninfo from './eintragComponents/Kundeninfo';
 import Stammdaten from './eintragComponents/Stammd';
 import Status from './eintragComponents/Status';
@@ -72,7 +72,7 @@ const EintragNeu = ({HP, O, sK}) => {
  
     return (
       <>
-      <div className='fixed top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
+      <div className='fixed md:overflow-hidden overflow-scroll top-0 left-0 text-sm w-screen bg-gray-100 grid grid-cols-6 h-screen border border-black px-2 py-2'>
         <div className='w-screen  col-span-6 flex mb-[-100px]'>
           <BsCheckSquareFill onClick={() => {let N=Array(); 
           (document.getElementById('ebene1'))?N.push(document.getElementById('ebene1').value):'';
@@ -96,8 +96,9 @@ const EintragNeu = ({HP, O, sK}) => {
             'parentID':''
           });
           sK('');
-          }} className='hover cursor-pointer mr-1' />
-          <RiEditBoxLine className='hover cursor-pointer mr-1' />
+          }} className='text-3xl hover cursor-pointer mr-1' />
+          {//<RiEditBoxLine className='hover cursor-pointer mr-1' />
+          }
           <GiCancel onClick={() => O (false)} className='hover text-3xl cursor-pointer' />
         </div>
 

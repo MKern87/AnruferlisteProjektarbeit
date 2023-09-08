@@ -28,7 +28,7 @@ const Stammd = ({S}) =>{
     )
     }else{
       return(
-        <div className='grid col-start-1 col-span-1 border border-black mt-6 relative'>
+        <div className='grid md:col-start-1 md:col-span-1 col-span-6 border border-black md:mt-6 md:mx-0 mx-4 md:pb-0 pb-4 relative'>
           <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Stammdaten</p>
           <span className='ml-4 mt-2'>Kategorie:</span>
           <div className='ml-4'></div>

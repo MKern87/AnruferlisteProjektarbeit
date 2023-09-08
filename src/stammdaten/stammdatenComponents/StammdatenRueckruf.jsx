@@ -58,8 +58,8 @@ const StammdatenRueckruf = ({setrrmArbeiter, setrrVlue}) => {
       </div>
       <span className="w-full flex md:flex-col flex-row items-center justify-center mt-4 ">
         <p className='pr-1'>Mitarbeiter:</p>
-        <select id='itarbeiter' onChange={() => setrrmArbeiter(document.getElementById('itarbeiter').value)} className='w-2/3 text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' >
-          {<option value={'Name'}></option>}
+        <select id='itarbeiter' onChange={() => (document.getElementById('itarbeiter').value)?setrrmArbeiter(document.getElementById('itarbeiter').value):mitarbeiterAktuellRR({maakrr: false})} className='w-2/3 text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' >
+          <option></option>
           {(data.length>0)?
           <>
           <StammdatenMitarbeiterRR T={'N'} Name={data}/>
@@ -70,7 +70,7 @@ const StammdatenRueckruf = ({setrrmArbeiter, setrrVlue}) => {
           }
         </select>
       </span>
-      <div className="flex flex-row items-center justify-center mt-4"><input defaultChecked={false} onChange={() => mitarbeiterAktuellRR({maakrr: rrmArbeiterAktuell})} className="inline mr-2" type="checkbox" /> <a className='inline'>Alle</a></div>
+      <div className="flex flex-row items-center justify-center mt-4"><input defaultChecked={false} onChange={() => mitarbeiterAktuellRR({maakrr: false})} className="inline mr-2" type="checkbox" /> <a className='inline'>Alle</a></div>
     </div>
   )
 }

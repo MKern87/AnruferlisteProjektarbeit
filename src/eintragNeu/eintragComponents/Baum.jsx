@@ -35,9 +35,9 @@ const Baum = () => {
 
 
   return (
-    <div className='ml-1 border border-black w-2/3'>
+    <div className='border border-black md:w-2/3 w-52 md:h-auto h-20 md:-mt-10 mt-4 relative md:ml-1 md:mx-0 mx-4'>
       <select className='w-full bg-slate-100' id='ebene1' onChange={()=>{setebene1(document.getElementById('ebene1').value);setsecsel(false);}}>
-      <option></option>
+      <option>Kategorie wählen</option>
       {bData.map((item) => (
         item.Parent_ID == 0 ?
         <option value={item.ID}>{item.Kategorie}</option>

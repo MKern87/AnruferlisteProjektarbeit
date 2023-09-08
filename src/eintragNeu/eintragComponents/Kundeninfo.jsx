@@ -8,7 +8,7 @@ const Kundeninfo = ({H}) =>{
   },[H])
   
   return(
-        <div className='grid md:col-span-3 col-span-6 md:mx-0 mx-4 border border-black'>
+        <div className='grid md:col-span-3 md:-mt-10 mt-8 col-span-6 md:mx-0 mx-4 border border-black'>
           <p className='inset-x -mt-3 ml-4 bg-gray-100 px-1 w-20'>Kundeninfo</p>
             <div className='w-full grid md:grid-cols-2 grid-cols-1 items-center justify-items-center'>
               <div className='w-full h-full ml-2'>

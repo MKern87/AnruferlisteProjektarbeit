@@ -55,7 +55,7 @@ const Rueckruf = (R) =>{
   </div>
   )}else{
     return( 
-      <div className='grid col-start-3 col-span-1 border border-black mt-6 relative ml-2'>
+      <div className='grid md:col-start-3 md:col-span-1 col-span-6 border border-black md:mt-6 mt-4 relative md:ml-2 md:mx-0 mx-4'>
        <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Rückruf</p>
         <span className='ml-4 mt-2'>
         {

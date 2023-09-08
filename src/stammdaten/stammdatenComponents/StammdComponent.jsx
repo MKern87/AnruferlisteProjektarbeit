@@ -84,8 +84,8 @@ const StammdComponent = ({setmArbeiter, setArt}) => {
       <p className="ml-4 text-sm absolute inset-x -mt-5 bg-gray-200 px-1">Stammdaten</p>
       <span className="w-full grid md:grid-cols-1 grid-cols-4 mt-2 gap-1 text-sm items-start justify-items-center">
         <div className='w-full md:col-span-1 col-span-3 flex md:flex-col flex-row px-2 overflow-hidden'><p className='pr-1'>Mitarbeiter:</p>
-        <select onChange={() => setmArbeiter(document.getElementById('mitarbeiter').value)} className='w-full text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='mitarbeiter'>
-          <option value={'Name'}></option>
+        <select onChange={() => (document.getElementById('mitarbeiter').value)?setmArbeiter(document.getElementById('mitarbeiter').value):mitarbeiterAktuell({maak: false})} className='w-full text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='mitarbeiter'>
+          <option></option>
           {(data.length>0)?
           <>
           <StammdatenMitarbeiter T={'N'} Name={data}/>
@@ -97,13 +97,13 @@ const StammdComponent = ({setmArbeiter, setArt}) => {
         </select>
         </div>
         <div className='w-full col-span-1 flex flex-row pl-2 overflow-hidden'>
-      <input defaultChecked={false} id='mitarbeiter' onChange={() => mitarbeiterAktuell({maak: mAaktuell})} className="items-center justify-items-center ml-1" type="checkbox" />
+      <input defaultChecked={false} id='mitarbeiter' onChange={() => mitarbeiterAktuell({maak: false})} className="items-center justify-items-center ml-1" type="checkbox" />
       <p className="pl-[1px]">Alle</p>
       </div>
       <div className='w-full  md:col-span-1 col-span-3 flex md:flex-col flex-row px-2 overflow-hidden'>
       <p className='mr-5 pr-1'>Art:</p>
-        <select onChange={() => setArt(document.getElementById('Art').value)} className='w-full text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
-          <option value={'Art'}></option>
+        <select onChange={() => (document.getElementById('Art').value)?setArt(document.getElementById('Art').value):aktuelleArt({aa: false})} className='w-full text-left border border-solid relative border-black rounded-sm bg-slate-100 cursor-pointer' id='Art'>
+          <option></option>
             {(artData.length>0)?
             <>
             <StammdatenArt T={'N'} Art={artData}/>
@@ -115,7 +115,7 @@ const StammdComponent = ({setmArbeiter, setArt}) => {
         </select>
       </div>
       <div className='w-full col-span-1 flex flex-row pl-2 overflow-hidden'>
-      <input defaultChecked={false} onChange={() => aktuelleArt({aa: artAktuell})} className="items-center justify-items-center ml-1" type="checkbox" />
+      <input defaultChecked={false} onChange={() => aktuelleArt({aa: false})} className="items-center justify-items-center ml-1" type="checkbox" />
       <p className="pl-1">Alle</p>
       </div>
        </span>

@@ -79,8 +79,9 @@ const EintragUpdate = ({tD, O, stD}) => {
             'parentID':tD.parentID
           });
           stD('')
-          }} className='hover cursor-pointer mr-1' />
-          <RiEditBoxLine className='hover cursor-pointer mr-1' />
+          }} className='hover text-3xl cursor-pointer mr-1' />
+          {//<RiEditBoxLine className='hover cursor-pointer mr-1' />
+          }
           <GiCancel onClick={() => O (false)} className='hover text-3xl cursor-pointer' />
         </div>
 

@@ -43,9 +43,11 @@ const Status = ({ST}) =>{
       clearInterval(interval);
     };
     },[])
+
     const handleStop = () => {
         settimerid(!timerid);
       };
+
     if(ST!=undefined){
     return (<div className='grid md:col-start-2 md:col-span-1 col-span-6 border border-black md:mt-6 mt-4 md:mx-0 mx-4 md:pb-0 pb-4 relative md:ml-2'>
     <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Status</p>
@@ -60,7 +62,7 @@ const Status = ({ST}) =>{
       className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
       <input type='time' defaultValue={HtmlCount(new Date(ST.DatumZeit.date.toString()).getHours(), new Date(ST.DatumZeit.date.toString()).getMinutes())}
-        id="ttt"  className="h-6 ml-4 border border-black rounded-sm bg-white"
+        id="ttt" className="h-6 ml-4 border border-black rounded-sm bg-white"
       />
     </div>
     <div className='flex md:h-6 md:ml-4 ml-4 md:my-0 my-4'>Dauer:
@@ -76,7 +78,7 @@ const Status = ({ST}) =>{
   </div>)
   }else{
     return (
-    <div className='grid col-start-2 col-span-1 border border-black mt-6 relative ml-2'>
+    <div className='grid md:col-start-2 md:col-span-1 col-span-6 border border-black md:mt-6 mt-4 md:mx-0 mx-4 md:pb-0 pb-4 relative md:ml-2'>
     <p className='absolute inset-x -mt-3 ml-4 bg-gray-100 px-1'>Status</p>
       <span className='ml-4 mt-2'>
       <input type="checkbox" defaultChecked={false} onChange={()=>setErledigtN(!ErledigtN)}  className='mr-1' id='erledigtN' />
